@@ -10,8 +10,9 @@
 
 @theme {
   --color-primary: #007BFF;
-  --color-bg: #0A0A0B;
-  --color-fg: #F4F4F0;
+  --color-bg: #FFFFFF;
+  --color-fg: #000C1A;
+  --color-muted: #526171;
   --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
@@ -22,4 +23,8 @@
 }
 .editor-styles-wrapper a {
   color: var(--color-primary);
+}
+.editor-styles-wrapper p,
+.editor-styles-wrapper li {
+  color: var(--color-muted);
 }

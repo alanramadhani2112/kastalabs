@@ -1,24 +1,15 @@
 /**
- * Home page GSAP orchestrator — ENHANCED.
+ * Home page interaction orchestrator.
  *
  * Loaded lazily via PAGE_LOADERS['home'] in app.js.
- * Premium interactions:
- *   - Pinned hero with horizontal text reveal
- *   - Text scramble on eyebrows
- *   - Parallax depth layers
- *   - Velocity-based marquee
- *   - Services stagger per-viewport-position
- *   - Work grid clip-path reveals + hover distortion
- *   - Counter animation on about stats
- *   - CTA scale-in
- *   - Scroll progress bar
+ * Keep motion subtle and useful. The site direction is a calm company profile,
+ * not an animation-heavy portfolio presentation.
  */
 
 import { gsap, ScrollTrigger } from '../lib/gsap-init.js';
 import { splitText } from '../components/text-split.js';
 import { initMagnetic } from '../components/magnetic.js';
 import { initMarquee } from '../components/marquee.js';
-import { initCursor } from '../components/cursor.js';
 import { initSmoothScroll } from '../lib/smooth-scroll.js';
 import { initScrollProgress } from '../components/scroll-progress.js';
 import { initCounters } from '../components/counter.js';
@@ -26,7 +17,6 @@ import { scrambleText } from '../components/text-scramble.js';
 
 export default function initHome() {
   initSmoothScroll();
-  initCursor();
   initScrollProgress();
 
   heroAnimation();
@@ -43,7 +33,7 @@ export default function initHome() {
 }
 
 /* --------------------------------------------------------------------------
- * Hero — pinned section with split text + multi-layer parallax
+ * Hero — simple entrance with restrained parallax
  * -------------------------------------------------------------------------- */
 function heroAnimation() {
   const hero = document.querySelector('[data-hero]');
@@ -55,61 +45,43 @@ function heroAnimation() {
   const eyebrow = hero.querySelector('[data-hero-eyebrow]');
   const layers = hero.querySelectorAll('[data-hero-layer]');
 
-  // Pin hero for dramatic entrance
-  ScrollTrigger.create({
-    trigger: hero,
-    start: 'top top',
-    end: '+=50%',
-    pin: true,
-    pinSpacing: true,
-  });
-
-  // Entrance timeline
   const tl = gsap.timeline({
     defaults: { ease: 'power3.out' },
-    delay: 0.3,
+    delay: 0.15,
   });
 
-  // Eyebrow scramble + fade
   if (eyebrow) {
-    tl.from(eyebrow, { opacity: 0, y: 20, duration: 0.6 });
+    tl.from(eyebrow, { opacity: 0, y: 14, duration: 0.45 });
   }
 
-  // Headline split-text with perspective
   if (headline) {
-    headline.style.perspective = '1000px';
     const split = splitText(headline, { type: 'chars' });
     tl.from(split.chars, {
-      y: '120%',
-      rotateX: -90,
+      y: '70%',
       opacity: 0,
-      stagger: 0.018,
-      duration: 1,
-      ease: 'power4.out',
+      stagger: 0.012,
+      duration: 0.72,
+      ease: 'power3.out',
     }, '-=0.2');
   }
 
-  // Subtitle slide up
   if (subtitle) {
-    tl.from(subtitle, { opacity: 0, y: 40, duration: 1, ease: 'power3.out' }, '-=0.6');
+    tl.from(subtitle, { opacity: 0, y: 24, duration: 0.7, ease: 'power3.out' }, '-=0.45');
   }
 
-  // CTA buttons pop in
   if (ctas) {
     tl.from(ctas.children, {
       opacity: 0,
-      y: 30,
-      scale: 0.9,
-      stagger: 0.12,
-      duration: 0.7,
+      y: 18,
+      stagger: 0.08,
+      duration: 0.55,
     }, '-=0.5');
   }
 
-  // Multi-layer parallax on scroll (after pin releases)
   layers.forEach((layer) => {
     const depth = parseFloat(layer.dataset.heroLayer || '1');
     gsap.to(layer, {
-      yPercent: 30 * depth,
+      yPercent: 10 * depth,
       ease: 'none',
       scrollTrigger: {
         trigger: hero,
@@ -119,21 +91,6 @@ function heroAnimation() {
       },
     });
   });
-
-  // Fallback: if no layers, parallax the bg
-  const bg = hero.querySelector('[data-hero-bg]');
-  if (bg && !layers.length) {
-    gsap.to(bg, {
-      yPercent: 40,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: hero,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      },
-    });
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -183,11 +140,9 @@ function servicesAnimation() {
   // Each card triggers independently based on its own position
   cards.forEach((card, i) => {
     gsap.from(card, {
-      y: 80,
+      y: 36,
       opacity: 0,
-      rotateX: -15,
-      scale: 0.95,
-      duration: 0.9,
+      duration: 0.65,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: card,
@@ -196,38 +151,6 @@ function servicesAnimation() {
       },
     });
 
-    // Glow line on top of card
-    const glow = document.createElement('div');
-    glow.className = 'service-card-glow';
-    glow.setAttribute('aria-hidden', 'true');
-    card.style.position = 'relative';
-    card.appendChild(glow);
-  });
-
-  // 3D tilt on hover
-  cards.forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-      gsap.to(card, {
-        rotateY: x * 12,
-        rotateX: -y * 12,
-        transformPerspective: 800,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    });
-
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, {
-        rotateY: 0,
-        rotateX: 0,
-        duration: 0.7,
-        ease: 'elastic.out(1, 0.4)',
-      });
-    });
   });
 }
 
@@ -283,11 +206,9 @@ function workGridAnimation() {
       });
     }
 
-    // Hover distortion (skew + scale)
     item.addEventListener('mouseenter', () => {
       gsap.to(item, {
-        scale: 0.98,
-        skewY: -1,
+        scale: 0.99,
         duration: 0.4,
         ease: 'power2.out',
       });
@@ -299,9 +220,8 @@ function workGridAnimation() {
     item.addEventListener('mouseleave', () => {
       gsap.to(item, {
         scale: 1,
-        skewY: 0,
-        duration: 0.6,
-        ease: 'elastic.out(1, 0.5)',
+        duration: 0.45,
+        ease: 'power2.out',
       });
       if (img) {
         gsap.to(img, { scale: 1.05, duration: 0.6, ease: 'power2.out' });

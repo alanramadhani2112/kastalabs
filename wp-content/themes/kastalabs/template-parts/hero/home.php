@@ -1,13 +1,6 @@
 <?php
 /**
- * Home Hero section — ENHANCED.
- *
- * Pinned full-viewport hero with:
- * - Multi-layer parallax depth
- * - Split-text headline with perspective
- * - Text scramble eyebrow
- * - Magnetic CTA buttons
- * - Animated scroll indicator
+ * Home hero section.
  *
  * @package KastaLabs
  */
@@ -15,28 +8,15 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<section class="relative min-h-screen flex items-center overflow-hidden" data-hero>
+<section class="relative min-h-[86vh] flex items-center overflow-hidden border-b border-hairline bg-bg" data-hero>
 	<!-- Parallax depth layers -->
 	<div class="absolute inset-0 pointer-events-none" data-hero-bg aria-hidden="true">
-		<!-- Layer 0: deep background gradient -->
-		<div class="absolute inset-0 bg-gradient-to-b from-primary-950/50 via-bg to-bg" data-hero-layer="0.3"></div>
-
-		<!-- Layer 1: large ambient glow -->
-		<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-primary-500/8 blur-[150px]" data-hero-layer="0.6"></div>
-
-		<!-- Layer 2: secondary glow -->
-		<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-primary-700/6 blur-[100px]" data-hero-layer="0.9"></div>
-
-		<!-- Layer 3: accent dot grid (subtle) -->
-		<div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, var(--color-fg) 1px, transparent 1px); background-size: 40px 40px;" data-hero-layer="1.2"></div>
-
-		<!-- Layer 4: floating geometric shapes -->
-		<div class="absolute top-[15%] right-[10%] w-24 h-24 border border-primary-500/20 rounded-full" data-hero-layer="1.5"></div>
-		<div class="absolute bottom-[20%] left-[8%] w-16 h-16 border border-white/10 rotate-45" data-hero-layer="1.8"></div>
-		<div class="absolute top-[60%] right-[25%] w-3 h-3 bg-primary-400/40 rounded-full" data-hero-layer="2.0"></div>
+		<div class="absolute inset-x-0 top-0 h-px bg-hairline" data-hero-layer="0.3"></div>
+		<div class="absolute right-0 top-0 h-full w-1/3 bg-surface/60" data-hero-layer="0.4"></div>
+		<div class="absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(var(--color-fg) 1px, transparent 1px), linear-gradient(90deg, var(--color-fg) 1px, transparent 1px); background-size: 56px 56px;" data-hero-layer="0.7"></div>
 	</div>
 
-	<div class="container-x py-32 md:py-40 lg:py-48 relative z-10">
+	<div class="container-x py-28 md:py-36 lg:py-40 relative z-10">
 		<div data-hero-eyebrow>
 			<?php kasta_eyebrow( __( 'Studio kreatif berbasis di Indonesia', 'kastalabs' ) ); ?>
 		</div>
@@ -65,21 +45,21 @@ defined( 'ABSPATH' ) || exit;
 				<?php esc_html_e( 'Mulai proyek', 'kastalabs' ); ?>
 			</a>
 			<a
-				href="<?php echo esc_url( home_url( '/work' ) ); ?>"
+				href="<?php echo esc_url( home_url( '/portfolio/' ) ); ?>"
 				class="btn-ghost"
 				data-magnetic
 				data-cursor="grow"
 			>
-				<?php esc_html_e( 'Lihat karya', 'kastalabs' ); ?>
+				<?php esc_html_e( 'Lihat portfolio', 'kastalabs' ); ?>
 			</a>
 		</div>
 	</div>
 
 	<!-- Scroll indicator -->
-	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted z-10">
+	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden flex-col items-center gap-2 text-muted z-10 md:flex">
 		<span class="text-xs font-mono uppercase tracking-widest"><?php esc_html_e( 'Scroll', 'kastalabs' ); ?></span>
 		<div class="w-px h-16 relative overflow-hidden">
-			<div class="absolute inset-0 bg-gradient-to-b from-white/60 to-transparent animate-[scrollDown_2s_ease-in-out_infinite]"></div>
+			<div class="absolute inset-0 bg-primary-500 animate-[scrollDown_2s_ease-in-out_infinite]"></div>
 		</div>
 	</div>
 </section>

@@ -342,10 +342,10 @@ Goal:
 - Align visual foundation with the Visual Direction document.
 
 Tasks:
-- Update Tailwind tokens to new palette.
-- Convert base layout from dark-first to light-first.
-- Rebuild component classes for buttons, cards, forms, nav, sections.
-- Remove or tone down noisy visual effects.
+- Update Tailwind tokens to new palette. Started 2026-06-04; base CSS now uses `#007BFF`, `#E5F2FF`, `#FFFFFF`, and `#000C1A`.
+- Convert base layout from dark-first to light-first. Started 2026-06-04; global body/editor surfaces now default to a light visual system.
+- Rebuild component classes for buttons, cards, forms, nav, sections. Started 2026-06-04; buttons, hairlines, prose, filters, forms, and header received first light-system pass.
+- Remove or tone down noisy visual effects. Started 2026-06-04; custom cursor, hero glow/orbs, pinned hero, 3D service card tilt, and heavy hero motion were removed or toned down.
 - Self-host fonts.
 - Keep motion subtle.
 

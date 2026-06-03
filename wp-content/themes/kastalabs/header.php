@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 
 <a class="skip-link" href="#main"><?php esc_html_e( 'Lewati ke konten', 'kastalabs' ); ?></a>
 
-<header class="site-header border-b border-white/10" role="banner">
+<header class="site-header border-b border-hairline bg-bg/95 backdrop-blur-sm" role="banner">
 	<div class="container-x flex items-center justify-between py-6">
 		<div class="site-branding">
 			<?php echo kasta_site_logo(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- output sudah aman dari helper. ?>
