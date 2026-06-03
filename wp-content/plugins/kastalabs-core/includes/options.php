@@ -31,6 +31,7 @@ function kastalabs_default_options(): array {
 		'instagram_url'       => '',
 		'linkedin_url'        => '',
 		'behance_url'         => '',
+		'analytics_id'        => '',
 	);
 }
 
@@ -84,6 +85,11 @@ function kastalabs_sanitize_options( mixed $input ): array {
 
 		if ( 'contact_email' === $key ) {
 			$output[ $key ] = sanitize_email( (string) $value );
+			continue;
+		}
+
+		if ( 'analytics_id' === $key ) {
+			$output[ $key ] = preg_replace( '/[^A-Za-z0-9_-]/', '', (string) $value );
 			continue;
 		}
 

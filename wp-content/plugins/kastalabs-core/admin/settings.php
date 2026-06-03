@@ -86,6 +86,11 @@ function kastalabs_render_settings_page(): void {
 				<?php kastalabs_render_url_field( $options, 'behance_url', __( 'Behance URL', 'kastalabs' ) ); ?>
 			</table>
 
+			<h2><?php esc_html_e( 'Analytics', 'kastalabs' ); ?></h2>
+			<table class="form-table" role="presentation">
+				<?php kastalabs_render_text_field( $options, 'analytics_id', __( 'Google Analytics Measurement ID', 'kastalabs' ) ); ?>
+			</table>
+
 			<?php submit_button(); ?>
 		</form>
 	</div>

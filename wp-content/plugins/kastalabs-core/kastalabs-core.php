@@ -32,6 +32,7 @@ require_once KASTALABS_CORE_PATH . '/taxonomies/portfolio.php';
 require_once KASTALABS_CORE_PATH . '/taxonomies/insight.php';
 require_once KASTALABS_CORE_PATH . '/includes/meta.php';
 require_once KASTALABS_CORE_PATH . '/includes/contact.php';
+require_once KASTALABS_CORE_PATH . '/includes/security.php';
 require_once KASTALABS_CORE_PATH . '/acf/field-groups.php';
 require_once KASTALABS_CORE_PATH . '/admin/settings.php';
 require_once KASTALABS_CORE_PATH . '/admin/seed.php';

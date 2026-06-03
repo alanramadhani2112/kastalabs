@@ -27,6 +27,11 @@ function kastalabs_handle_contact_form(): void {
 		exit;
 	}
 
+	if ( ! kastalabs_contact_rate_limit_allows_request() ) {
+		wp_safe_redirect( add_query_arg( 'contact_status', 'error', $redirect ) );
+		exit;
+	}
+
 	$name         = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
 	$email        = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
 	$company      = isset( $_POST['company'] ) ? sanitize_text_field( wp_unslash( $_POST['company'] ) ) : '';
@@ -61,4 +66,24 @@ function kastalabs_handle_contact_form(): void {
 
 	wp_safe_redirect( add_query_arg( 'contact_status', $sent ? 'sent' : 'error', $redirect ) );
 	exit;
+}
+
+/**
+ * Lightweight IP-based contact submission throttle.
+ */
+function kastalabs_contact_rate_limit_allows_request(): bool {
+	$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+	if ( '' === $ip ) {
+		return true;
+	}
+
+	$key      = 'kastalabs_contact_' . md5( $ip );
+	$attempts = (int) get_transient( $key );
+
+	if ( $attempts >= 5 ) {
+		return false;
+	}
+
+	set_transient( $key, $attempts + 1, HOUR_IN_SECONDS );
+	return true;
 }

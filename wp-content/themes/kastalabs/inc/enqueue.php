@@ -2,7 +2,7 @@
 /**
  * Enqueue: stylesheet + JS module dari Vite manifest, plus font preconnect.
  *
- * @package KastaLabs
+ * @package Kastalabs
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -106,6 +106,26 @@ add_action(
 			);
 		}
 	}
+);
+
+/**
+ * Preload the main built stylesheet early when a manifest is available.
+ */
+add_action(
+	'wp_head',
+	function (): void {
+		if ( KASTA_VITE_DEV ) {
+			return;
+		}
+
+		foreach ( kasta_vite_css( 'src/js/app.js' ) as $href ) {
+			printf(
+				"<link rel=\"preload\" href=\"%s\" as=\"style\">\n",
+				esc_url( $href )
+			);
+		}
+	},
+	1
 );
 
 /**

@@ -397,12 +397,13 @@ Goal:
 
 Tasks:
 - Install/configure one SEO plugin: Rank Math or Yoast.
-- Add schema for Organization, Portfolio/CreativeWork, Articles.
-- Validate contact form nonce/sanitization.
-- Add analytics placeholder/integration.
+- Add schema for Organization, Portfolio/CreativeWork, Articles. Started 2026-06-04; theme now outputs Organization, WebSite, CreativeWork, and Article JSON-LD baseline.
+- Validate contact form nonce/sanitization. Started 2026-06-04; contact form uses nonce, honeypot, sanitization, and lightweight IP throttling.
+- Add analytics placeholder/integration. Started 2026-06-04; Google Analytics Measurement ID can be set from Kastalabs Settings and only loads when configured.
 - Optimize image sizes and WebP workflow.
 - Run Lighthouse checks.
 - Run accessibility checks.
+- Add production QA checklist. Started 2026-06-04; see `docs/PRODUCTION-QA-CHECKLIST.md`.
 
 Definition of done:
 - Lighthouse target: 90+ where realistic.
