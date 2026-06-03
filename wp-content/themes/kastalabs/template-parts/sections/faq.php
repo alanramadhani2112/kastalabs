@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 $faqs = array(
 	array(
-		'q' => __( 'KastaLabs cocok untuk proyek seperti apa?', 'kastalabs' ),
+		'q' => __( 'Kastalabs cocok untuk proyek seperti apa?', 'kastalabs' ),
 		'a' => __( 'Kami cocok untuk brand yang membutuhkan identitas visual, website, struktur konten, atau pengalaman digital yang lebih jelas dan siap dieksekusi.', 'kastalabs' ),
 	),
 	array(

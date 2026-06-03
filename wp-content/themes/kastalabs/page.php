@@ -2,7 +2,7 @@
 /**
  * Generic single page template (fallback).
  *
- * @package KastaLabs
+ * @package Kastalabs
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,7 +17,7 @@ get_header(); ?>
 					<?php the_title(); ?>
 				</h1>
 			</header>
-			<div class="prose prose-invert max-w-none" data-reveal data-reveal-delay="0.1">
+			<div class="prose max-w-none" data-reveal data-reveal-delay="0.1">
 				<?php the_content(); ?>
 			</div>
 		</article>

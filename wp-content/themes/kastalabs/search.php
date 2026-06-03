@@ -2,7 +2,7 @@
 /**
  * Search results template.
  *
- * @package KastaLabs
+ * @package Kastalabs
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -26,7 +26,7 @@ get_header(); ?>
 	<?php if ( have_posts() ) : ?>
 		<div class="grid gap-8">
 			<?php while ( have_posts() ) : the_post(); ?>
-				<article class="border-b border-white/10 pb-8">
+				<article class="border-b border-hairline pb-8">
 					<h2 class="text-2xl font-semibold">
 						<a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
 					</h2>

@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="container-x">
 		<div class="grid gap-12 md:grid-cols-12 items-center">
 			<div class="md:col-span-7">
-				<?php kasta_eyebrow( __( 'Tentang KastaLabs', 'kastalabs' ) ); ?>
+				<?php kasta_eyebrow( __( 'Tentang Kastalabs', 'kastalabs' ) ); ?>
 				<h2
 					class="text-3xl md:text-4xl lg:text-5xl font-bold leading-snug mt-6"
 					data-about-heading
@@ -46,7 +46,7 @@ defined( 'ABSPATH' ) || exit;
 					data-reveal
 					data-reveal-delay="0.2"
 				>
-					<?php esc_html_e( 'Kenali KastaLabs', 'kastalabs' ); ?>
+					<?php esc_html_e( 'Kenali Kastalabs', 'kastalabs' ); ?>
 				</a>
 			</div>
 		</div>

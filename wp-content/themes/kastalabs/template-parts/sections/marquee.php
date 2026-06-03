@@ -21,7 +21,7 @@ $items = array(
 );
 ?>
 
-<section class="py-12 border-y border-hairline bg-bg overflow-hidden" aria-label="<?php esc_attr_e( 'Kapabilitas KastaLabs', 'kastalabs' ); ?>">
+<section class="py-12 border-y border-hairline bg-bg overflow-hidden" aria-label="<?php esc_attr_e( 'Kapabilitas Kastalabs', 'kastalabs' ); ?>">
 	<div data-marquee data-marquee-speed="40" data-marquee-pause-hover>
 		<div data-marquee-track class="flex items-center gap-12">
 			<?php foreach ( $items as $item ) : ?>

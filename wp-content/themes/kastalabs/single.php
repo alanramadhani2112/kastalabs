@@ -2,7 +2,7 @@
 /**
  * Single blog post template.
  *
- * @package KastaLabs
+ * @package Kastalabs
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -30,7 +30,7 @@ get_header(); ?>
 						<?php endif; ?>
 					</div>
 
-					<aside class="border-l border-white/10 pl-6 text-sm text-muted" data-reveal data-reveal-delay="0.15">
+					<aside class="border-l border-hairline pl-6 text-sm text-muted" data-reveal data-reveal-delay="0.15">
 						<p class="eyebrow mb-3"><?php esc_html_e( 'Written by', 'kastalabs' ); ?></p>
 						<p class="text-fg font-semibold"><?php echo esc_html( get_the_author() ); ?></p>
 						<?php
@@ -41,7 +41,7 @@ get_header(); ?>
 								<p class="eyebrow mb-3"><?php esc_html_e( 'Filed under', 'kastalabs' ); ?></p>
 								<div class="flex flex-wrap gap-2">
 									<?php foreach ( $categories as $category ) : ?>
-										<a class="rounded-full border border-white/10 px-3 py-1 hover:border-primary-500 hover:text-primary-400" href="<?php echo esc_url( get_category_link( $category ) ); ?>">
+										<a class="rounded-md border border-hairline px-3 py-1 hover:border-primary-500 hover:text-primary-600" href="<?php echo esc_url( get_category_link( $category ) ); ?>">
 											<?php echo esc_html( $category->name ); ?>
 										</a>
 									<?php endforeach; ?>
@@ -54,7 +54,7 @@ get_header(); ?>
 
 			<?php if ( has_post_thumbnail() ) : ?>
 				<figure class="container-x" data-reveal data-reveal-delay="0.1">
-					<div class="overflow-hidden rounded border border-white/10 bg-surface">
+					<div class="overflow-hidden rounded-lg border border-hairline bg-surface">
 						<?php the_post_thumbnail( 'kasta-cover', array( 'class' => 'w-full h-auto object-cover' ) ); ?>
 					</div>
 				</figure>
@@ -63,7 +63,7 @@ get_header(); ?>
 			<section class="container-x py-16 md:py-24">
 				<div class="grid gap-12 lg:grid-cols-[16rem_minmax(0,44rem)]">
 					<aside class="lg:sticky lg:top-28 self-start" data-reveal>
-						<a class="eyebrow inline-flex hover:text-primary-400" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>">
+						<a class="eyebrow inline-flex hover:text-primary-600" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>">
 							<?php esc_html_e( 'Back to journal', 'kastalabs' ); ?>
 						</a>
 						<?php
@@ -74,7 +74,7 @@ get_header(); ?>
 								<h2 class="eyebrow"><?php esc_html_e( 'Topics', 'kastalabs' ); ?></h2>
 								<div class="mt-4 flex flex-wrap gap-2">
 									<?php foreach ( $tags as $tag ) : ?>
-										<a class="rounded-full bg-white/5 px-3 py-1 text-sm text-muted hover:bg-primary-500 hover:text-bg" href="<?php echo esc_url( get_tag_link( $tag ) ); ?>">
+										<a class="rounded-md bg-surface px-3 py-1 text-sm text-muted hover:bg-primary-500 hover:text-white" href="<?php echo esc_url( get_tag_link( $tag ) ); ?>">
 											<?php echo esc_html( $tag->name ); ?>
 										</a>
 									<?php endforeach; ?>
@@ -83,13 +83,13 @@ get_header(); ?>
 						<?php endif; ?>
 					</aside>
 
-					<div class="prose prose-invert" data-reveal data-reveal-delay="0.15">
+					<div class="prose" data-reveal data-reveal-delay="0.15">
 						<?php the_content(); ?>
 					</div>
 				</div>
 			</section>
 
-			<nav class="container-x border-t border-white/10 py-12" aria-label="<?php esc_attr_e( 'Adjacent posts', 'kastalabs' ); ?>">
+			<nav class="container-x border-t border-hairline py-12" aria-label="<?php esc_attr_e( 'Adjacent posts', 'kastalabs' ); ?>">
 				<div class="grid gap-4 md:grid-cols-2">
 					<div>
 						<?php previous_post_link( '%link', '<span class="eyebrow">' . esc_html__( 'Previous', 'kastalabs' ) . '</span><span class="mt-2 block text-xl font-semibold">%title</span>' ); ?>

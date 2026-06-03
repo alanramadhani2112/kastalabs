@@ -377,14 +377,15 @@ Goal:
 - Complete required pages from PRD.
 
 Tasks:
-- Home
-- About
-- Services
-- Portfolio archive
-- Portfolio detail
-- Insights archive
-- Insight detail
-- Contact
+- Home. In progress 2026-06-04; homepage follows final IA, Portfolio CPT, editable hero/CTA, and light visual system.
+- About. In progress 2026-06-04; page template exists with final copy direction and light visual system.
+- Services. In progress 2026-06-04; page template reads Service CPT and seeded core services.
+- Portfolio archive. In progress 2026-06-04; archive template exists for `/portfolio/`.
+- Portfolio detail. In progress 2026-06-04; single template exists for `/portfolio/{slug}`.
+- Insights archive. In progress 2026-06-04; archive template exists for `/insights/`.
+- Insight detail. In progress 2026-06-04; single template exists for `/insights/{slug}`.
+- Contact. In progress 2026-06-04; page template exists and reads editable contact options.
+- Generic fallback templates. Started 2026-06-04; `page.php`, `single.php`, `index.php`, and `search.php` are aligned with the light visual system.
 
 Definition of done:
 - All primary nav pages exist, render correct templates, and use final copy direction.

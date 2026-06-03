@@ -13,7 +13,7 @@ get_header(); ?>
 	<?php while ( have_posts() ) : the_post(); ?>
 		<section class="container-x pt-28 pb-16 md:pt-40 md:pb-24">
 			<div class="max-w-5xl" data-reveal>
-				<?php kasta_eyebrow( __( 'About KastaLabs', 'kastalabs' ) ); ?>
+				<?php kasta_eyebrow( __( 'About Kastalabs', 'kastalabs' ) ); ?>
 				<h1 class="font-display font-extrabold text-5xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9] mt-6">
 					<?php esc_html_e( 'Studio kecil untuk brand yang ingin bergerak lebih tajam.', 'kastalabs' ); ?>
 				</h1>
@@ -29,7 +29,7 @@ get_header(); ?>
 					<?php if ( trim( get_the_content() ) ) : ?>
 						<?php the_content(); ?>
 					<?php else : ?>
-						<p><?php esc_html_e( 'KastaLabs membantu bisnis menyusun ekspresi brand, sistem visual, dan pengalaman digital yang bisa dipakai sehari-hari. Kami memilih kerja yang dekat, teliti, dan cukup berani untuk meninggalkan kesan.', 'kastalabs' ); ?></p>
+						<p><?php esc_html_e( 'Kastalabs membantu bisnis menyusun ekspresi brand, sistem visual, dan pengalaman digital yang bisa dipakai sehari-hari. Kami memilih kerja yang dekat, teliti, dan cukup berani untuk meninggalkan kesan.', 'kastalabs' ); ?></p>
 					<?php endif; ?>
 				</div>
 			</div>
