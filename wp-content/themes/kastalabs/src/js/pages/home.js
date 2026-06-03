@@ -155,7 +155,7 @@ function servicesAnimation() {
 }
 
 /* --------------------------------------------------------------------------
- * Work grid — clip-path reveal + hover distortion
+ * Work grid — restrained reveal
  * -------------------------------------------------------------------------- */
 function workGridAnimation() {
   const section = document.querySelector('[data-work-grid]');
@@ -165,14 +165,13 @@ function workGridAnimation() {
   if (!items.length) return;
 
   items.forEach((item, i) => {
-    const img = item.querySelector('img, video, [class*="bg-gradient"]');
-    const overlay = item.querySelector('[class*="from-bg"]');
+    const img = item.querySelector('img, video, [data-work-media]');
 
-    // Clip-path reveal: polygon wipe from bottom
     gsap.from(item, {
-      clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
-      duration: 1.2,
-      ease: 'power4.inOut',
+      y: 36,
+      opacity: 0,
+      duration: 0.7,
+      ease: 'power3.out',
       scrollTrigger: {
         trigger: item,
         start: 'top 80%',
@@ -180,28 +179,15 @@ function workGridAnimation() {
       },
     });
 
-    // Slight scale on the image for depth
     if (img) {
       gsap.from(img, {
-        scale: 1.3,
-        duration: 1.5,
+        scale: 1.04,
+        duration: 0.8,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: item,
           start: 'top 80%',
           once: true,
-        },
-      });
-
-      // Continuous parallax
-      gsap.to(img, {
-        yPercent: -15,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: item,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
         },
       });
     }
@@ -257,21 +243,19 @@ function aboutTeaserAnimation() {
 }
 
 /* --------------------------------------------------------------------------
- * CTA banner — scale + rotation entrance
+ * CTA banner — calm entrance
  * -------------------------------------------------------------------------- */
 function ctaAnimation() {
   const section = document.querySelector('[data-cta-banner]');
   if (!section) return;
 
-  const inner = section.querySelector('[class*="rounded-3xl"]');
+  const inner = section.querySelector('[data-cta-panel]');
   if (!inner) return;
 
   gsap.from(inner, {
-    scale: 0.85,
     opacity: 0,
-    rotateX: -5,
-    y: 60,
-    duration: 1.2,
+    y: 32,
+    duration: 0.75,
     ease: 'power3.out',
     scrollTrigger: {
       trigger: section,

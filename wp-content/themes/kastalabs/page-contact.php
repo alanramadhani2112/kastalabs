@@ -33,11 +33,11 @@ get_header(); ?>
 				</div>
 
 				<?php if ( 'sent' === $status ) : ?>
-					<p class="mb-6 border border-primary-500/40 bg-primary-500/10 p-4 text-primary-100">
+					<p class="mb-6 rounded-lg border border-primary-500/30 bg-surface p-4 text-primary-700">
 						<?php esc_html_e( 'Pesan terkirim. Kami akan membalas secepatnya.', 'kastalabs' ); ?>
 					</p>
 				<?php elseif ( 'error' === $status ) : ?>
-					<p class="mb-6 border border-red-400/40 bg-red-400/10 p-4 text-red-100">
+					<p class="mb-6 rounded-lg border border-red-400/40 bg-red-50 p-4 text-red-700">
 						<?php esc_html_e( 'Pesan belum terkirim. Periksa nama, email, dan pesan Anda.', 'kastalabs' ); ?>
 					</p>
 				<?php endif; ?>
@@ -88,9 +88,9 @@ get_header(); ?>
 				</button>
 			</form>
 
-			<aside class="border border-white/10 bg-surface/60 p-6 lg:sticky lg:top-28 self-start" data-reveal data-reveal-delay="0.12">
+			<aside class="rounded-lg border border-hairline bg-surface p-6 lg:sticky lg:top-28 self-start" data-reveal data-reveal-delay="0.12">
 				<h2 class="eyebrow"><?php esc_html_e( 'Direct line', 'kastalabs' ); ?></h2>
-				<a class="mt-4 block text-2xl font-bold hover:text-primary-400" href="mailto:hello@kastalabs.com">hello@kastalabs.com</a>
+				<a class="mt-4 block text-2xl font-bold hover:text-primary-600" href="mailto:hello@kastalabs.com">hello@kastalabs.com</a>
 				<p class="mt-8 text-muted leading-relaxed">
 					<?php esc_html_e( 'Berbasis di Indonesia. Terbuka untuk kerja jarak jauh dengan brand, founder, dan tim produk.', 'kastalabs' ); ?>
 				</p>

@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<footer class="site-footer border-t border-white/10 mt-24" role="contentinfo">
+<footer class="site-footer border-t border-hairline mt-24" role="contentinfo">
 	<div class="container-x py-16 grid gap-12 md:grid-cols-4">
 		<div class="md:col-span-2">
 			<?php echo kasta_site_logo(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -48,7 +48,7 @@ defined( 'ABSPATH' ) || exit;
 		</nav>
 	</div>
 
-	<div class="container-x flex items-center justify-between text-xs text-muted py-6 border-t border-white/5">
+	<div class="container-x flex items-center justify-between text-xs text-muted py-6 border-t border-hairline">
 		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
 		<p class="font-mono"><?php esc_html_e( 'kasta.theme v', 'kastalabs' ); ?><?php echo esc_html( KASTA_VERSION ); ?></p>
 	</div>

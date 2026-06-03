@@ -40,7 +40,6 @@ defined( 'ABSPATH' ) || exit;
 				href="<?php echo esc_url( home_url( '/contact' ) ); ?>"
 				class="btn-primary"
 				data-magnetic
-				data-cursor="grow"
 			>
 				<?php esc_html_e( 'Mulai proyek', 'kastalabs' ); ?>
 			</a>
@@ -48,7 +47,6 @@ defined( 'ABSPATH' ) || exit;
 				href="<?php echo esc_url( home_url( '/portfolio/' ) ); ?>"
 				class="btn-ghost"
 				data-magnetic
-				data-cursor="grow"
 			>
 				<?php esc_html_e( 'Lihat portfolio', 'kastalabs' ); ?>
 			</a>

@@ -1,21 +1,18 @@
 <?php
 /**
- * Featured work grid section.
+ * Featured portfolio grid section.
  *
- * Displays featured portfolio items with scroll-driven parallax images.
- * Falls back to placeholder if no work posts exist.
+ * Displays portfolio items with a calm editorial card treatment.
  *
  * @package KastaLabs
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$work_query = new WP_Query(
+$portfolio_query = new WP_Query(
 	array(
-		'post_type'      => 'work',
+		'post_type'      => 'portfolio',
 		'posts_per_page' => 4,
-		'meta_key'       => '_kasta_is_featured',
-		'meta_value'     => '1',
 		'orderby'        => 'date',
 		'order'          => 'DESC',
 	)
@@ -30,7 +27,7 @@ $placeholders = array(
 );
 ?>
 
-<section class="py-24 md:py-32" data-work-grid>
+<section class="py-24 md:py-32 bg-bg" data-work-grid>
 	<div class="container-x">
 		<div class="flex items-end justify-between mb-16">
 			<div data-reveal>
@@ -40,61 +37,64 @@ $placeholders = array(
 				</h2>
 			</div>
 			<a
-				href="<?php echo esc_url( get_post_type_archive_link( 'work' ) ); ?>"
+				href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ) ); ?>"
 				class="btn-ghost text-sm hidden md:inline-flex"
 				data-magnetic
-				data-cursor="grow"
 			>
-				<?php esc_html_e( 'Lihat semua karya', 'kastalabs' ); ?>
+				<?php esc_html_e( 'Lihat semua portfolio', 'kastalabs' ); ?>
 			</a>
 		</div>
 
 		<div class="grid gap-8 md:grid-cols-2">
-			<?php if ( $work_query->have_posts() ) : ?>
-				<?php while ( $work_query->have_posts() ) : $work_query->the_post(); ?>
-					<article class="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-surface" data-work-item data-cursor="grow">
-						<?php if ( has_post_thumbnail() ) : ?>
-							<?php the_post_thumbnail( 'large', array(
-								'class' => 'w-full h-full object-cover scale-105',
-								'loading' => 'lazy',
-							) ); ?>
-						<?php else : ?>
-							<div class="w-full h-full bg-gradient-to-br from-primary-900/30 to-surface"></div>
-						<?php endif; ?>
-
-						<div class="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent"></div>
-
-						<div class="absolute bottom-0 left-0 right-0 p-8">
+			<?php if ( $portfolio_query->have_posts() ) : ?>
+				<?php while ( $portfolio_query->have_posts() ) : $portfolio_query->the_post(); ?>
+					<article class="group overflow-hidden rounded-lg border border-hairline bg-bg shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-work-item>
+						<a href="<?php the_permalink(); ?>" class="block text-inherit">
+							<div class="aspect-[4/3] overflow-hidden bg-surface" data-work-media>
+								<?php if ( has_post_thumbnail() ) : ?>
+									<?php
+									the_post_thumbnail(
+										'large',
+										array(
+											'class'   => 'w-full h-full object-cover scale-105 transition-transform duration-700 group-hover:scale-110',
+											'loading' => 'lazy',
+										)
+									);
+									?>
+								<?php else : ?>
+									<div class="flex h-full w-full items-center justify-center bg-surface">
+										<span class="font-mono text-sm text-muted"><?php esc_html_e( 'Portfolio', 'kastalabs' ); ?></span>
+									</div>
+								<?php endif; ?>
+							</div>
+							<div class="p-6 md:p-8">
 							<?php
-							$categories = get_the_terms( get_the_ID(), 'work_category' );
+							$categories = get_the_terms( get_the_ID(), 'portfolio_category' );
 							if ( $categories && ! is_wp_error( $categories ) ) :
 							?>
-								<span class="eyebrow text-primary-400 mb-2 block">
+								<span class="eyebrow text-primary-600 mb-2 block">
 									<?php echo esc_html( $categories[0]->name ); ?>
 								</span>
 							<?php endif; ?>
-							<h3 class="text-xl md:text-2xl font-bold group-hover:text-primary-400 transition-colors">
+							<h3 class="text-xl md:text-2xl font-bold group-hover:text-primary-600 transition-colors">
 								<?php the_title(); ?>
 							</h3>
-						</div>
-
-						<a href="<?php the_permalink(); ?>" class="absolute inset-0" aria-label="<?php the_title_attribute(); ?>">
-							<span class="sr-only"><?php the_title(); ?></span>
+							<?php if ( has_excerpt() ) : ?>
+								<p class="mt-4 text-sm leading-relaxed text-muted"><?php echo esc_html( get_the_excerpt() ); ?></p>
+							<?php endif; ?>
+							</div>
 						</a>
 					</article>
 				<?php endwhile; ?>
 				<?php wp_reset_postdata(); ?>
 			<?php else : ?>
 				<?php foreach ( $placeholders as $ph ) : ?>
-					<article class="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-surface border border-white/8" data-work-item data-cursor="grow">
-						<div class="w-full h-full bg-gradient-to-br from-primary-900/20 to-surface flex items-center justify-center">
+					<article class="overflow-hidden rounded-lg border border-hairline bg-bg shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-work-item>
+						<div class="flex aspect-[4/3] w-full items-center justify-center bg-surface" data-work-media>
 							<span class="font-mono text-sm text-muted"><?php echo esc_html( $ph['cat'] ); ?></span>
 						</div>
-
-						<div class="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent"></div>
-
-						<div class="absolute bottom-0 left-0 right-0 p-8">
-							<span class="eyebrow text-primary-400 mb-2 block"><?php echo esc_html( $ph['cat'] ); ?></span>
+						<div class="p-6 md:p-8">
+							<span class="eyebrow text-primary-600 mb-2 block"><?php echo esc_html( $ph['cat'] ); ?></span>
 							<h3 class="text-xl md:text-2xl font-bold"><?php echo esc_html( $ph['title'] ); ?></h3>
 						</div>
 					</article>
@@ -104,11 +104,11 @@ $placeholders = array(
 
 		<div class="mt-10 text-center md:hidden">
 			<a
-				href="<?php echo esc_url( get_post_type_archive_link( 'work' ) ); ?>"
+				href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ) ); ?>"
 				class="btn-ghost text-sm"
 				data-magnetic
 			>
-				<?php esc_html_e( 'Lihat semua karya', 'kastalabs' ); ?>
+				<?php esc_html_e( 'Lihat semua portfolio', 'kastalabs' ); ?>
 			</a>
 		</div>
 	</div>

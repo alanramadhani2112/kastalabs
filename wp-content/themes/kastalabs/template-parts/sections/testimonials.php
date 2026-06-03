@@ -26,7 +26,7 @@ $testimonials = array(
 );
 ?>
 
-<section class="py-24 md:py-32" data-testimonials>
+<section class="py-24 md:py-32 bg-bg" data-testimonials>
 	<div class="container-x">
 		<div class="mb-14 max-w-3xl" data-reveal>
 			<?php kasta_eyebrow( __( 'Kata klien', 'kastalabs' ) ); ?>
@@ -37,12 +37,12 @@ $testimonials = array(
 
 		<div class="grid gap-5 md:grid-cols-3">
 			<?php foreach ( $testimonials as $index => $item ) : ?>
-				<article class="border border-white/10 bg-surface/70 p-6" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
-					<p class="text-primary-400 font-mono text-xs">★★★★★</p>
+				<article class="rounded-lg border border-hairline bg-bg p-6 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
+					<p class="text-primary-600 font-mono text-xs">★★★★★</p>
 					<blockquote class="mt-8 text-lg font-semibold leading-snug">
 						&ldquo;<?php echo esc_html( $item['quote'] ); ?>&rdquo;
 					</blockquote>
-					<div class="mt-8 border-t border-white/10 pt-5">
+					<div class="mt-8 border-t border-hairline pt-5">
 						<p class="font-semibold"><?php echo esc_html( $item['name'] ); ?></p>
 						<p class="text-sm text-muted"><?php echo esc_html( $item['role'] ); ?></p>
 					</div>

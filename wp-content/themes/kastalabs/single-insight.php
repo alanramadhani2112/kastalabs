@@ -32,7 +32,7 @@ get_header(); ?>
 
 			<?php if ( has_post_thumbnail() ) : ?>
 				<figure class="container-x" data-reveal data-reveal-delay="0.1">
-					<div class="overflow-hidden rounded border border-white/10 bg-surface">
+					<div class="overflow-hidden rounded-lg border border-hairline bg-surface">
 						<?php the_post_thumbnail( 'kasta-cover', array( 'class' => 'w-full h-auto object-cover' ) ); ?>
 					</div>
 				</figure>
@@ -41,12 +41,12 @@ get_header(); ?>
 			<section class="container-x py-16 md:py-24">
 				<div class="grid gap-12 lg:grid-cols-[16rem_minmax(0,44rem)]">
 					<aside class="lg:sticky lg:top-28 self-start" data-reveal>
-						<a class="eyebrow inline-flex hover:text-primary-400" href="<?php echo esc_url( get_post_type_archive_link( 'insight' ) ); ?>">
+						<a class="eyebrow inline-flex hover:text-primary-600" href="<?php echo esc_url( get_post_type_archive_link( 'insight' ) ); ?>">
 							<?php esc_html_e( 'Back to insights', 'kastalabs' ); ?>
 						</a>
 					</aside>
 
-					<div class="prose prose-invert" data-reveal data-reveal-delay="0.15">
+					<div class="prose" data-reveal data-reveal-delay="0.15">
 						<?php the_content(); ?>
 					</div>
 				</div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Services section — 6 cards with staggered reveal + 3D tilt.
+ * Services section.
  *
  * @package KastaLabs
  */
@@ -42,11 +42,11 @@ $fallback_services = array(
 );
 ?>
 
-<section class="py-24 md:py-32" data-services>
+<section class="py-24 md:py-32 bg-surface/55" data-services>
 	<div class="container-x">
-		<div class="mb-16" data-reveal>
+		<div class="mb-14 max-w-2xl" data-reveal>
 			<?php kasta_eyebrow( __( 'Layanan', 'kastalabs' ) ); ?>
-			<h2 class="text-3xl md:text-5xl font-bold mt-4 max-w-lg">
+			<h2 class="text-3xl md:text-5xl font-bold mt-4 leading-tight">
 				<?php esc_html_e( 'Services built around clarity, creativity, and systems thinking.', 'kastalabs' ); ?>
 			</h2>
 		</div>
@@ -59,36 +59,32 @@ $fallback_services = array(
 					$overview = (string) get_post_meta( get_the_ID(), 'overview', true );
 					?>
 					<article
-						class="group relative p-8 rounded-2xl border border-white/8 bg-surface hover:border-primary-500/30 transition-colors duration-300"
+						class="group relative min-h-72 rounded-lg border border-hairline bg-bg p-7 transition-colors duration-300 hover:border-primary-500/40"
 						data-service-card
-						data-cursor="grow"
 					>
-						<span class="font-mono text-sm text-primary-500 font-bold"><?php echo esc_html( sprintf( '%02d', $services_query->current_post + 1 ) ); ?></span>
-						<h3 class="text-xl font-bold mt-4 mb-3 group-hover:text-primary-400 transition-colors">
+						<span class="font-mono text-sm text-primary-600 font-bold"><?php echo esc_html( sprintf( '%02d', $services_query->current_post + 1 ) ); ?></span>
+						<h3 class="text-xl font-bold mt-10 mb-3 group-hover:text-primary-600 transition-colors">
 							<?php the_title(); ?>
 						</h3>
 						<p class="text-muted text-sm leading-relaxed">
 							<?php echo esc_html( $overview ?: get_the_excerpt() ); ?>
 						</p>
-						<div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" aria-hidden="true"></div>
 					</article>
 				<?php endwhile; ?>
 				<?php wp_reset_postdata(); ?>
 			<?php else : ?>
 				<?php foreach ( $fallback_services as $service ) : ?>
 				<article
-					class="group relative p-8 rounded-2xl border border-white/8 bg-surface hover:border-primary-500/30 transition-colors duration-300"
+					class="group relative min-h-72 rounded-lg border border-hairline bg-bg p-7 transition-colors duration-300 hover:border-primary-500/40"
 					data-service-card
-					data-cursor="grow"
 				>
-					<span class="font-mono text-sm text-primary-500 font-bold"><?php echo esc_html( $service['icon'] ); ?></span>
-					<h3 class="text-xl font-bold mt-4 mb-3 group-hover:text-primary-400 transition-colors">
+					<span class="font-mono text-sm text-primary-600 font-bold"><?php echo esc_html( $service['icon'] ); ?></span>
+					<h3 class="text-xl font-bold mt-10 mb-3 group-hover:text-primary-600 transition-colors">
 						<?php echo esc_html( $service['title'] ); ?>
 					</h3>
 					<p class="text-muted text-sm leading-relaxed">
 						<?php echo esc_html( $service['desc'] ); ?>
 					</p>
-					<div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" aria-hidden="true"></div>
 				</article>
 				<?php endforeach; ?>
 			<?php endif; ?>

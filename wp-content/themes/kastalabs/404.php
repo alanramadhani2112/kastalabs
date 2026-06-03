@@ -21,8 +21,8 @@ get_header(); ?>
 		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn-primary">
 			<?php esc_html_e( 'Kembali ke beranda', 'kastalabs' ); ?>
 		</a>
-		<a href="<?php echo esc_url( home_url( '/work' ) ); ?>" class="btn-ghost">
-			<?php esc_html_e( 'Lihat karya', 'kastalabs' ); ?>
+		<a href="<?php echo esc_url( home_url( '/portfolio/' ) ); ?>" class="btn-ghost">
+			<?php esc_html_e( 'Lihat portfolio', 'kastalabs' ); ?>
 		</a>
 	</div>
 </main>

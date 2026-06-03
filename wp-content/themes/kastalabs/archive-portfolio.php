@@ -66,7 +66,7 @@ get_header(); ?>
 					$size_class = $is_large ? 'work-card--large' : 'work-card--regular';
 					?>
 					<article class="work-card <?php echo esc_attr( $size_class ); ?>" data-work-card data-category="<?php echo esc_attr( $term_slugs ); ?>" data-index="<?php echo esc_attr( $index ); ?>">
-						<a href="<?php echo esc_url( get_permalink() ); ?>" class="work-card__link" data-cursor="grow">
+						<a href="<?php echo esc_url( get_permalink() ); ?>" class="work-card__link">
 							<div class="work-card__media">
 								<?php if ( has_post_thumbnail() ) : ?>
 									<?php the_post_thumbnail( $is_large ? 'kasta-cover' : 'kasta-card', array( 'class' => 'work-card__img' ) ); ?>

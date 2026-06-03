@@ -20,7 +20,7 @@ get_header(); ?>
 			</div>
 		</section>
 
-		<section class="container-x py-16 border-y border-white/10">
+		<section class="container-x py-16 border-y border-hairline">
 			<div class="grid gap-10 md:grid-cols-[1fr_1.4fr] md:items-start">
 				<div data-reveal>
 					<p class="eyebrow"><?php esc_html_e( 'Our posture', 'kastalabs' ); ?></p>
@@ -54,8 +54,8 @@ get_header(); ?>
 				);
 				foreach ( $values as $index => $value ) :
 					?>
-					<article class="border border-white/10 bg-surface/60 p-6" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
-						<p class="font-mono text-sm text-primary-400"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></p>
+					<article class="rounded-lg border border-hairline bg-bg p-6 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
+						<p class="font-mono text-sm text-primary-600"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></p>
 						<h2 class="mt-8 text-2xl font-bold leading-tight"><?php echo esc_html( $value['title'] ); ?></h2>
 						<p class="mt-4 text-muted leading-relaxed"><?php echo esc_html( $value['body'] ); ?></p>
 					</article>
@@ -80,7 +80,7 @@ get_header(); ?>
 					);
 					foreach ( $capabilities as $capability ) :
 						?>
-						<p class="border-b border-white/10 py-4 text-xl font-semibold"><?php echo esc_html( $capability ); ?></p>
+						<p class="border-b border-hairline py-4 text-xl font-semibold"><?php echo esc_html( $capability ); ?></p>
 					<?php endforeach; ?>
 				</div>
 			</div>

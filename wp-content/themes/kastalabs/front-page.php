@@ -2,13 +2,7 @@
 /**
  * Front page (home).
  *
- * Full homepage with GSAP-powered interactions:
- * - Hero with split-text + parallax
- * - Brand marquee ticker
- * - Services with 3D tilt cards
- * - Featured work grid with scroll parallax
- * - About teaser with word-by-word reveal
- * - CTA banner with scale-in
+ * Company profile homepage.
  *
  * @package KastaLabs
  */

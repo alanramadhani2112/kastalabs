@@ -61,7 +61,7 @@ $fallback_services = array(
 					$services->the_post();
 					$overview = (string) get_post_meta( get_the_ID(), 'overview', true );
 					?>
-					<article class="border border-white/10 bg-surface/70 p-8" data-reveal>
+					<article class="rounded-lg border border-hairline bg-bg p-8 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal>
 						<p class="eyebrow"><?php echo esc_html( sprintf( '%02d', $services->current_post + 1 ) ); ?></p>
 						<h2 class="mt-10 text-3xl font-bold leading-tight"><?php the_title(); ?></h2>
 						<p class="mt-5 text-muted leading-relaxed">
@@ -77,7 +77,7 @@ $fallback_services = array(
 				<?php wp_reset_postdata(); ?>
 			<?php else : ?>
 				<?php foreach ( $fallback_services as $index => $service ) : ?>
-					<article class="border border-white/10 bg-surface/70 p-8" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
+					<article class="rounded-lg border border-hairline bg-bg p-8 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
 						<p class="eyebrow"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></p>
 						<h2 class="mt-10 text-3xl font-bold leading-tight"><?php echo esc_html( $service['title'] ); ?></h2>
 						<p class="mt-5 text-muted leading-relaxed"><?php echo esc_html( $service['body'] ); ?></p>

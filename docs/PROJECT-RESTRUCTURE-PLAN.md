@@ -346,6 +346,8 @@ Tasks:
 - Convert base layout from dark-first to light-first. Started 2026-06-04; global body/editor surfaces now default to a light visual system.
 - Rebuild component classes for buttons, cards, forms, nav, sections. Started 2026-06-04; buttons, hairlines, prose, filters, forms, and header received first light-system pass.
 - Remove or tone down noisy visual effects. Started 2026-06-04; custom cursor, hero glow/orbs, pinned hero, 3D service card tilt, and heavy hero motion were removed or toned down.
+- Align homepage and primary page surfaces. Continued 2026-06-04; Home sections, About, Services, Contact, Portfolio detail, Insight detail, footer, and 404 received a light-system pass.
+- Move homepage Featured Work toward final content model. Continued 2026-06-04; homepage now reads Portfolio items instead of legacy Work.
 - Self-host fonts.
 - Keep motion subtle.
 

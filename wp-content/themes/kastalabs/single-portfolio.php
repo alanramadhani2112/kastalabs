@@ -43,7 +43,7 @@ get_header(); ?>
 						<?php endif; ?>
 					</div>
 
-					<aside class="rounded border border-white/10 bg-surface/70 p-6 backdrop-blur" data-reveal data-reveal-delay="0.15">
+					<aside class="rounded-lg border border-hairline bg-bg p-6 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal data-reveal-delay="0.15">
 						<dl class="grid gap-5">
 							<?php foreach ( array( 'Client' => $client, 'Year' => $year, 'Role' => $role, 'Scope' => $scope ) as $label => $value ) : ?>
 								<?php if ( $value ) : ?>
@@ -65,7 +65,7 @@ get_header(); ?>
 
 			<?php if ( has_post_thumbnail() ) : ?>
 				<figure class="container-x" data-reveal data-reveal-delay="0.1">
-					<div class="overflow-hidden rounded border border-white/10 bg-surface">
+					<div class="overflow-hidden rounded-lg border border-hairline bg-surface">
 						<?php the_post_thumbnail( 'kasta-cover', array( 'class' => 'w-full h-auto object-cover' ) ); ?>
 					</div>
 				</figure>
@@ -74,7 +74,7 @@ get_header(); ?>
 			<section class="container-x py-16 md:py-24">
 				<div class="grid gap-12 lg:grid-cols-[16rem_minmax(0,44rem)] lg:items-start">
 					<aside class="lg:sticky lg:top-28" data-reveal>
-						<a class="eyebrow inline-flex hover:text-primary-400" href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ); ?>">
+						<a class="eyebrow inline-flex hover:text-primary-600" href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ); ?>">
 							<?php esc_html_e( 'Back to portfolio', 'kastalabs' ); ?>
 						</a>
 
@@ -83,7 +83,7 @@ get_header(); ?>
 								<h2 class="eyebrow"><?php esc_html_e( 'Category', 'kastalabs' ); ?></h2>
 								<div class="mt-4 flex flex-wrap gap-2">
 									<?php foreach ( $categories as $category ) : ?>
-										<a class="rounded-full border border-white/10 px-3 py-1 text-sm text-muted hover:border-primary-500 hover:text-primary-400" href="<?php echo esc_url( get_term_link( $category ) ); ?>">
+										<a class="rounded-md border border-hairline px-3 py-1 text-sm text-muted hover:border-primary-500 hover:text-primary-600" href="<?php echo esc_url( get_term_link( $category ) ); ?>">
 											<?php echo esc_html( $category->name ); ?>
 										</a>
 									<?php endforeach; ?>
@@ -96,7 +96,7 @@ get_header(); ?>
 								<h2 class="eyebrow"><?php esc_html_e( 'Tags', 'kastalabs' ); ?></h2>
 								<div class="mt-4 flex flex-wrap gap-2">
 									<?php foreach ( $tags as $tag ) : ?>
-										<a class="rounded-full bg-white/5 px-3 py-1 text-sm text-muted hover:bg-primary-500 hover:text-bg" href="<?php echo esc_url( get_term_link( $tag ) ); ?>">
+										<a class="rounded-md bg-surface px-3 py-1 text-sm text-muted hover:bg-primary-500 hover:text-white" href="<?php echo esc_url( get_term_link( $tag ) ); ?>">
 											<?php echo esc_html( $tag->name ); ?>
 										</a>
 									<?php endforeach; ?>
@@ -105,7 +105,7 @@ get_header(); ?>
 						<?php endif; ?>
 					</aside>
 
-					<div class="prose prose-invert" data-reveal data-reveal-delay="0.15">
+					<div class="prose" data-reveal data-reveal-delay="0.15">
 						<?php the_content(); ?>
 					</div>
 				</div>
