@@ -8,6 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 $status = isset( $_GET['contact_status'] ) ? sanitize_key( wp_unslash( $_GET['contact_status'] ) ) : '';
+$contact_email    = kasta_contact_email();
+$company_location = kasta_site_option( 'company_location', __( 'Indonesia', 'kastalabs' ) );
+$whatsapp_url     = kasta_site_url_option( 'whatsapp_url' );
 
 get_header(); ?>
 
@@ -90,9 +93,20 @@ get_header(); ?>
 
 			<aside class="rounded-lg border border-hairline bg-surface p-6 lg:sticky lg:top-28 self-start" data-reveal data-reveal-delay="0.12">
 				<h2 class="eyebrow"><?php esc_html_e( 'Direct line', 'kastalabs' ); ?></h2>
-				<a class="mt-4 block text-2xl font-bold hover:text-primary-600" href="mailto:hello@kastalabs.com">hello@kastalabs.com</a>
+				<a class="mt-4 block text-2xl font-bold hover:text-primary-600" href="<?php echo esc_url( 'mailto:' . $contact_email ); ?>"><?php echo esc_html( antispambot( $contact_email ) ); ?></a>
+				<?php if ( $whatsapp_url ) : ?>
+					<a class="mt-3 inline-flex text-sm font-semibold text-primary-600 hover:text-primary-700" href="<?php echo esc_url( $whatsapp_url ); ?>" target="_blank" rel="noopener noreferrer">
+						<?php esc_html_e( 'Chat via WhatsApp', 'kastalabs' ); ?>
+					</a>
+				<?php endif; ?>
 				<p class="mt-8 text-muted leading-relaxed">
-					<?php esc_html_e( 'Berbasis di Indonesia. Terbuka untuk kerja jarak jauh dengan brand, founder, dan tim produk.', 'kastalabs' ); ?>
+					<?php
+					printf(
+						/* translators: %s: company location. */
+						esc_html__( 'Berbasis di %s. Terbuka untuk kerja jarak jauh dengan brand, founder, dan tim produk.', 'kastalabs' ),
+						esc_html( $company_location )
+					);
+					?>
 				</p>
 			</aside>
 		</div>

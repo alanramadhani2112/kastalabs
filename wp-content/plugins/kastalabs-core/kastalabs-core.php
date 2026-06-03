@@ -23,6 +23,7 @@ if ( ! defined( 'KASTALABS_CORE_PATH' ) ) {
 }
 
 require_once KASTALABS_CORE_PATH . '/includes/helpers.php';
+require_once KASTALABS_CORE_PATH . '/includes/options.php';
 require_once KASTALABS_CORE_PATH . '/post-types/portfolio.php';
 require_once KASTALABS_CORE_PATH . '/post-types/service.php';
 require_once KASTALABS_CORE_PATH . '/post-types/insight.php';
@@ -32,6 +33,7 @@ require_once KASTALABS_CORE_PATH . '/taxonomies/insight.php';
 require_once KASTALABS_CORE_PATH . '/includes/meta.php';
 require_once KASTALABS_CORE_PATH . '/includes/contact.php';
 require_once KASTALABS_CORE_PATH . '/acf/field-groups.php';
+require_once KASTALABS_CORE_PATH . '/admin/settings.php';
 require_once KASTALABS_CORE_PATH . '/admin/seed.php';
 require_once KASTALABS_CORE_PATH . '/admin/migration.php';
 
@@ -44,6 +46,7 @@ register_activation_hook(
 		kastalabs_register_legacy_work_post_type();
 		kastalabs_register_portfolio_taxonomies();
 		kastalabs_register_insight_taxonomies();
+		kastalabs_seed_default_options();
 		kastalabs_seed_default_services();
 		flush_rewrite_rules();
 	}

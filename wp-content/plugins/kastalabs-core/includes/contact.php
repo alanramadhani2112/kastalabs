@@ -39,7 +39,7 @@ function kastalabs_handle_contact_form(): void {
 		exit;
 	}
 
-	$to      = get_option( 'admin_email' );
+	$to      = kastalabs_get_option( 'contact_email', get_option( 'admin_email' ) );
 	$subject = sprintf(
 		/* translators: %s: sender name. */
 		__( 'New Kastalabs project inquiry from %s', 'kastalabs' ),

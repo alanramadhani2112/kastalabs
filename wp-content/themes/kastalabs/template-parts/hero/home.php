@@ -6,6 +6,14 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
+$hero_eyebrow         = kasta_site_option( 'hero_eyebrow', __( 'Studio kreatif berbasis di Indonesia', 'kastalabs' ) );
+$hero_heading         = kasta_site_option( 'hero_heading', __( 'Brand yang tajam. Website yang bekerja.', 'kastalabs' ) );
+$hero_body            = kasta_site_option( 'hero_body', __( 'Kastalabs membantu founder, tim marketing, dan brand owner menyusun identitas visual, website, dan sistem konten yang jelas, menarik, dan siap dipakai.', 'kastalabs' ) );
+$hero_primary_label   = kasta_site_option( 'hero_primary_label', __( 'Mulai proyek', 'kastalabs' ) );
+$hero_primary_url     = kasta_site_url_option( 'hero_primary_url', '/contact/' );
+$hero_secondary_label = kasta_site_option( 'hero_secondary_label', __( 'Lihat portfolio', 'kastalabs' ) );
+$hero_secondary_url   = kasta_site_url_option( 'hero_secondary_url', '/portfolio/' );
 ?>
 
 <section class="relative min-h-[86vh] flex items-center overflow-hidden border-b border-hairline bg-bg" data-hero>
@@ -18,37 +26,37 @@ defined( 'ABSPATH' ) || exit;
 
 	<div class="container-x py-28 md:py-36 lg:py-40 relative z-10">
 		<div data-hero-eyebrow>
-			<?php kasta_eyebrow( __( 'Studio kreatif berbasis di Indonesia', 'kastalabs' ) ); ?>
+			<?php kasta_eyebrow( $hero_eyebrow ); ?>
 		</div>
 
 		<h1
 			class="font-display font-extrabold tracking-tight leading-[0.92] mt-8 text-5xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] max-w-[16ch]"
 			data-hero-headline
 		>
-			<?php esc_html_e( 'Brand yang tajam. Website yang bekerja.', 'kastalabs' ); ?>
+			<?php echo esc_html( $hero_heading ); ?>
 		</h1>
 
 		<p
 			class="text-lg md:text-xl text-muted mt-8 max-w-2xl leading-relaxed"
 			data-hero-subtitle
 		>
-			<?php esc_html_e( 'KastaLabs membantu founder, tim marketing, dan brand owner menyusun identitas visual, website, dan sistem konten yang jelas, menarik, dan siap dipakai.', 'kastalabs' ); ?>
+			<?php echo esc_html( $hero_body ); ?>
 		</p>
 
 		<div class="mt-12 flex flex-wrap gap-4" data-hero-ctas>
 			<a
-				href="<?php echo esc_url( home_url( '/contact' ) ); ?>"
+				href="<?php echo esc_url( $hero_primary_url ); ?>"
 				class="btn-primary"
 				data-magnetic
 			>
-				<?php esc_html_e( 'Mulai proyek', 'kastalabs' ); ?>
+				<?php echo esc_html( $hero_primary_label ); ?>
 			</a>
 			<a
-				href="<?php echo esc_url( home_url( '/portfolio/' ) ); ?>"
+				href="<?php echo esc_url( $hero_secondary_url ); ?>"
 				class="btn-ghost"
 				data-magnetic
 			>
-				<?php esc_html_e( 'Lihat portfolio', 'kastalabs' ); ?>
+				<?php echo esc_html( $hero_secondary_label ); ?>
 			</a>
 		</div>
 	</div>

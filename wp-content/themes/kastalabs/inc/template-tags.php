@@ -32,6 +32,41 @@ function kasta_site_logo(): string {
 }
 
 /**
+ * Return a site option from Kastalabs Core with a theme-safe fallback.
+ */
+function kasta_site_option( string $key, string $fallback = '' ): string {
+	if ( function_exists( 'kastalabs_get_option' ) ) {
+		return kastalabs_get_option( $key, $fallback );
+	}
+
+	return $fallback;
+}
+
+/**
+ * Convert a possibly relative site option URL into an absolute frontend URL.
+ */
+function kasta_site_url_option( string $key, string $fallback = '' ): string {
+	$url = kasta_site_option( $key, $fallback );
+
+	if ( '' === $url ) {
+		return '';
+	}
+
+	if ( str_starts_with( $url, '/' ) ) {
+		return home_url( $url );
+	}
+
+	return $url;
+}
+
+/**
+ * Return configured contact email.
+ */
+function kasta_contact_email(): string {
+	return kasta_site_option( 'contact_email', 'hello@kastalabs.com' );
+}
+
+/**
  * Reading time post (menit), berdasarkan rata-rata 220 wpm.
  */
 function kasta_reading_time( ?int $post_id = null ): int {
@@ -60,6 +95,30 @@ function kastalabs_primary_nav_fallback(): void {
 	);
 
 	echo '<ul class="flex items-center gap-8 text-sm font-medium">';
+	foreach ( $items as $label => $url ) {
+		printf(
+			'<li><a href="%s">%s</a></li>',
+			esc_url( $url ),
+			esc_html( $label )
+		);
+	}
+	echo '</ul>';
+}
+
+/**
+ * Fallback footer navigation.
+ */
+function kasta_footer_nav_fallback(): void {
+	$items = array(
+		__( 'Home', 'kastalabs' )      => home_url( '/' ),
+		__( 'About', 'kastalabs' )     => home_url( '/about/' ),
+		__( 'Services', 'kastalabs' )  => home_url( '/services/' ),
+		__( 'Portfolio', 'kastalabs' ) => get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ),
+		__( 'Insights', 'kastalabs' )  => get_post_type_archive_link( 'insight' ) ?: home_url( '/insights/' ),
+		__( 'Contact', 'kastalabs' )   => home_url( '/contact/' ),
+	);
+
+	echo '<ul class="flex flex-col gap-2 text-sm">';
 	foreach ( $items as $label => $url ) {
 		printf(
 			'<li><a href="%s">%s</a></li>',

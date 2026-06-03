@@ -6,6 +6,8 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+$header_cta_label = kasta_site_option( 'hero_primary_label', __( 'Mulai proyek', 'kastalabs' ) );
+$header_cta_url   = kasta_site_url_option( 'hero_primary_url', '/contact/' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -39,8 +41,8 @@ defined( 'ABSPATH' ) || exit;
 			?>
 		</nav>
 
-		<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn-primary text-sm">
-			<?php esc_html_e( 'Mulai proyek', 'kastalabs' ); ?>
+		<a href="<?php echo esc_url( $header_cta_url ); ?>" class="btn-primary text-sm">
+			<?php echo esc_html( $header_cta_label ); ?>
 		</a>
 	</div>
 </header>
