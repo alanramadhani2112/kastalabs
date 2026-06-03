@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 add_action(
 	'wp_head',
 	function () {
-		if ( ! is_singular( 'work' ) ) {
+		if ( ! is_singular( array( 'portfolio', 'work' ) ) ) {
 			return;
 		}
 

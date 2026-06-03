@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit;
 					'theme_location' => 'primary',
 					'container'      => false,
 					'menu_class'     => 'flex items-center gap-8 text-sm font-medium',
-					'fallback_cb'    => '__return_empty_string',
+					'fallback_cb'    => 'kastalabs_primary_nav_fallback',
 					'depth'          => 1,
 				)
 			);

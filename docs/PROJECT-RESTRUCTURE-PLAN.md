@@ -2,6 +2,7 @@
 
 Status: Draft v1
 Date: 2026-06-03
+Latest implementation update: 2026-06-04
 Source documents:
 - `C:\Users\LENOVO\Downloads\KASTALABS_PRD_FINAL.md`
 - `C:\Users\LENOVO\Downloads\Documents\Kastalabs Visual Direction.pdf`
@@ -322,13 +323,14 @@ Goal:
 - Move CMS/business logic from theme into `kastalabs-core`.
 
 Tasks:
-- Scaffold `wp-content/plugins/kastalabs-core`.
-- Move CPT `work` logic out of theme.
-- Register new CPTs: `portfolio`, `service`, `insight`.
-- Register related taxonomies.
-- Add migration helpers for existing `work` posts.
-- Add ACF field groups if ACF Pro exists.
-- Add safe fallbacks if ACF is not active.
+- Scaffold `wp-content/plugins/kastalabs-core`. Done 2026-06-04.
+- Move CPT `work` logic out of theme. Done 2026-06-04; legacy `work` is temporarily registered by the core plugin.
+- Register new CPTs: `portfolio`, `service`, `insight`. Done 2026-06-04.
+- Register related taxonomies. Done 2026-06-04.
+- Add migration helpers for existing `work` posts. Done 2026-06-04; first local migration copied 1 dummy Work item to Portfolio.
+- Add ACF field groups if ACF Pro exists. Done 2026-06-04; local ACF groups are conditionally registered when ACF is active.
+- Add safe fallbacks if ACF is not active. Done 2026-06-04; REST-exposed post meta and Custom Fields support remain available without ACF.
+- Seed initial Services content. Done 2026-06-04; four core services were seeded locally when Service content was empty.
 
 Definition of done:
 - Theme can be changed without losing content models.
@@ -431,6 +433,16 @@ Recommended next sprint:
 4. Register `service`, `portfolio`, and `insight`.
 5. Add `/services/` page template and make nav match PRD.
 6. Start visual reset from dark-first to breathable light-first.
+
+Completed on 2026-06-04:
+- `kastalabs-core` plugin scaffolded and activated locally.
+- New CMS post types available: Portfolio, Services, Insights.
+- Legacy Work retained temporarily to avoid breaking `/work/`.
+- New templates added: `/services/`, `/portfolio/`, `/portfolio/{slug}`, `/insights/`, `/insights/{slug}`.
+- Header fallback navigation now follows PRD IA.
+- Homepage Services section can read from Service CPT with fallback content.
+- Local ACF field groups were added for Portfolio, Services, and Insight SEO, with fallback registered post meta when ACF is not active.
+- Default Service content was seeded for Branding Design, UI/UX Design, Web Development, and Custom Software Development.
 
 Do not continue polishing the current dark landing page until architecture and direction are aligned.
 

@@ -25,9 +25,5 @@ if ( ! defined( 'KASTA_VITE_DEV' ) ) {
 
 require_once __DIR__ . '/inc/setup.php';
 require_once __DIR__ . '/inc/enqueue.php';
-require_once __DIR__ . '/inc/post-types.php';
-require_once __DIR__ . '/inc/taxonomies.php';
-require_once __DIR__ . '/inc/meta.php';
 require_once __DIR__ . '/inc/seo.php';
-require_once __DIR__ . '/inc/contact.php';
 require_once __DIR__ . '/inc/template-tags.php';

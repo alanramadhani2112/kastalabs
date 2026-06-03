@@ -43,3 +43,29 @@ function kasta_reading_time( ?int $post_id = null ): int {
 	$words   = str_word_count( wp_strip_all_tags( $content ) );
 	return max( 1, (int) ceil( $words / 220 ) );
 }
+
+/**
+ * Fallback primary navigation matching the final PRD IA.
+ *
+ * Used when no WordPress menu has been assigned yet.
+ */
+function kastalabs_primary_nav_fallback(): void {
+	$items = array(
+		__( 'Home', 'kastalabs' )      => home_url( '/' ),
+		__( 'About', 'kastalabs' )     => home_url( '/about/' ),
+		__( 'Services', 'kastalabs' )  => home_url( '/services/' ),
+		__( 'Portfolio', 'kastalabs' ) => get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ),
+		__( 'Insights', 'kastalabs' )  => get_post_type_archive_link( 'insight' ) ?: home_url( '/insights/' ),
+		__( 'Contact', 'kastalabs' )   => home_url( '/contact/' ),
+	);
+
+	echo '<ul class="flex items-center gap-8 text-sm font-medium">';
+	foreach ( $items as $label => $url ) {
+		printf(
+			'<li><a href="%s">%s</a></li>',
+			esc_url( $url ),
+			esc_html( $label )
+		);
+	}
+	echo '</ul>';
+}
