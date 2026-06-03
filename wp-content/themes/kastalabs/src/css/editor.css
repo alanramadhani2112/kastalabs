@@ -1,0 +1,25 @@
+/**
+ * Stylesheet untuk Gutenberg block editor preview.
+ * Dipakai oleh add_editor_style() di inc/setup.php.
+ *
+ * Tujuan: editor preview kira-kira mirip frontend (warna, font),
+ * tanpa harus ngebebanin Tailwind utility full di editor.
+ */
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #007BFF;
+  --color-bg: #0A0A0B;
+  --color-fg: #F4F4F0;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+.editor-styles-wrapper {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+}
+.editor-styles-wrapper a {
+  color: var(--color-primary);
+}

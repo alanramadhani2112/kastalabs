@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>KastaLabs / Brand Tokens / 0.1 Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+<style>
+:root {
+  --primary-50:  #CCE5FF;
+  --primary-75:  #B8DAFF;
+  --primary-100: #A3D0FF;
+  --primary-150: #8FC5FF;
+  --primary-200: #7ABBFF;
+  --primary-300: #52A5FF;
+  --primary-400: #2990FF;
+  --primary-500: #007BFF;
+  --primary-600: #0067D6;
+  --primary-700: #005AAD;
+  --primary-800: #004085;
+  --primary-850: #003670;
+  --primary-900: #002D5C;
+  --primary-925: #002347;
+  --primary-950: #001933;
+  --bg: #0A0A0B;
+  --surface: #141416;
+  --fg: #F4F4F0;
+  --muted: #7A7A75;
+  --hairline: rgba(255,255,255,0.08);
+  --hairline-strong: rgba(255,255,255,0.16);
+  --primary: var(--primary-500);
+  --primary-hover: var(--primary-600);
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 5rem;
+  --space-12: 8rem;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-sans);
+  background:var(--bg);
+  color:var(--fg);
+  font-weight:400;
+  line-height:1.5;
+  font-feature-settings:"ss01","cv11";
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+::selection{background:var(--primary);color:var(--fg)}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:2px}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+.container{max-width:1280px;margin-inline:auto;padding-inline:clamp(1.5rem,4vw,4rem)}
+.eyebrow{
+  font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);font-family:var(--font-mono);
+}
+.divider{height:1px;background:var(--hairline);width:100%}
+
+/* Hero */
+.hero{padding-block:clamp(4rem,10vw,8rem) clamp(3rem,6vw,5rem)}
+.hero__crumb{display:flex;gap:1rem;align-items:center;margin-bottom:clamp(2rem,5vw,4rem)}
+.hero__crumb span{color:var(--muted)}
+.hero__crumb strong{color:var(--fg);font-weight:500}
+.hero__title{
+  font-size:clamp(3rem,9vw,8rem);
+  font-weight:800;
+  line-height:0.95;
+  letter-spacing:-0.04em;
+  margin-bottom:clamp(1.5rem,3vw,2.5rem);
+  max-width:18ch;
+}
+.hero__title em{font-style:normal;color:var(--primary-400)}
+.hero__sub{
+  font-size:clamp(1rem,1.5vw,1.25rem);
+  color:var(--muted);
+  max-width:60ch;
+  line-height:1.6;
+  margin-bottom:clamp(2rem,4vw,3rem);
+}
+.hero__cta{display:flex;gap:1rem;flex-wrap:wrap}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.875rem 1.5rem;
+  font-weight:600;font-size:0.9375rem;
+  border-radius:999px;
+  transition:transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn--primary{background:var(--primary-500);color:var(--bg)}
+.btn--primary:hover{background:var(--primary-400);transform:translateY(-1px)}
+.btn--primary:active{background:var(--primary-600);transform:translateY(0)}
+.btn--primary[disabled]{background:var(--primary-900);color:var(--muted);cursor:not-allowed;transform:none}
+.btn--ghost{border:1px solid var(--hairline-strong);color:var(--fg)}
+.btn--ghost:hover{border-color:var(--primary-500);color:var(--primary-400)}
+.btn--link{padding:0;color:var(--primary-400);font-weight:500;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.btn--link:hover{color:var(--primary-300);text-decoration-thickness:2px}
+
+/* Section frame */
+.section{padding-block:clamp(4rem,8vw,6rem)}
+.section__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(2rem,4vw,3.5rem);gap:2rem;flex-wrap:wrap}
+.section__head h2{font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:700;letter-spacing:-0.02em;line-height:1.1}
+.section__head p{color:var(--muted);max-width:42ch;line-height:1.6}
+
+/* Palette */
+.palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--hairline)}
+.swatch{background:var(--bg);padding:1.25rem;cursor:pointer;display:flex;flex-direction:column;gap:0.875rem;transition:background 0.15s ease}
+.swatch:hover{background:var(--surface)}
+.swatch__chip{aspect-ratio:1.6/1;border-radius:6px;border:1px solid var(--hairline)}
+.swatch__meta{display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem}
+.swatch__step{font-family:var(--font-mono);font-size:0.75rem;color:var(--muted)}
+.swatch__hex{font-family:var(--font-mono);font-size:0.875rem;font-weight:500}
+.swatch__rgb{font-family:var(--font-mono);font-size:0.6875rem;color:var(--muted)}
+.swatch__badges{display:flex;gap:0.375rem;flex-wrap:wrap;font-family:var(--font-mono);font-size:0.625rem;letter-spacing:0.04em}
+.badge{padding:0.1875rem 0.4375rem;border-radius:3px;border:1px solid var(--hairline);color:var(--muted)}
+.badge--pass{color:var(--primary-300);border-color:var(--primary-800)}
+.badge--fail{color:#ff6a6a;border-color:rgba(255,106,106,0.3)}
+.swatch__copied{font-family:var(--font-mono);font-size:0.6875rem;color:var(--primary-300);opacity:0;transition:opacity 0.2s ease;height:0}
+.swatch.is-copied .swatch__copied{opacity:1;height:auto}
+
+/* Typography scale */
+.typo{display:grid;gap:1.5rem}
+.typo__row{display:grid;grid-template-columns:200px 1fr;gap:2rem;padding-block:1.5rem;border-bottom:1px solid var(--hairline);align-items:baseline}
+.typo__spec{font-family:var(--font-mono);font-size:0.75rem;color:var(--muted);line-height:1.6}
+.typo__spec strong{color:var(--fg);font-weight:500;display:block;margin-bottom:0.25rem;text-transform:uppercase;letter-spacing:0.08em;font-size:0.6875rem}
+.typo__sample{font-family:var(--font-sans);color:var(--fg);line-height:1.1;letter-spacing:-0.01em}
+.t-display{font-size:clamp(3rem,7vw,6rem);font-weight:800;letter-spacing:-0.04em;line-height:0.95}
+.t-h1{font-size:clamp(2.25rem,4.5vw,3.75rem);font-weight:700;letter-spacing:-0.03em;line-height:1.05}
+.t-h2{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:700;letter-spacing:-0.02em;line-height:1.1}
+.t-h3{font-size:clamp(1.375rem,2vw,1.75rem);font-weight:600;letter-spacing:-0.01em;line-height:1.2}
+.t-h4{font-size:1.25rem;font-weight:600;line-height:1.3}
+.t-body-lg{font-size:1.125rem;font-weight:400;line-height:1.6;letter-spacing:0}
+.t-body{font-size:1rem;font-weight:400;line-height:1.6;letter-spacing:0}
+.t-body-sm{font-size:0.875rem;font-weight:400;line-height:1.55}
+.t-caption{font-size:0.75rem;font-weight:500;line-height:1.5;color:var(--muted);letter-spacing:0.04em}
+.typo__row p{color:var(--muted);font-size:0.9375rem;line-height:1.7;max-width:62ch;margin-top:0.75rem}
+
+/* Buttons demo grid */
+.buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.btn-demo{padding:1.5rem;border:1px solid var(--hairline);background:var(--surface);display:flex;flex-direction:column;gap:1rem;align-items:flex-start}
+.btn-demo__label{font-family:var(--font-mono);font-size:0.6875rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+
+/* Contrast matrix */
+.matrix{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:0.8125rem}
+.matrix th, .matrix td{padding:0.875rem 1rem;text-align:left;border-bottom:1px solid var(--hairline)}
+.matrix th{font-weight:500;color:var(--muted);text-transform:uppercase;font-size:0.6875rem;letter-spacing:0.1em}
+.matrix__chip{display:inline-block;width:1rem;height:1rem;border-radius:3px;vertical-align:-3px;margin-right:0.5rem;border:1px solid var(--hairline)}
+.matrix__ratio{font-weight:500}
+.matrix__verdict{display:inline-flex;gap:0.375rem;font-size:0.6875rem;letter-spacing:0.06em}
+.matrix__verdict span{padding:0.1875rem 0.4375rem;border-radius:3px;border:1px solid var(--hairline);color:var(--muted)}
+.matrix__verdict span.is-pass{color:var(--primary-300);border-color:var(--primary-800)}
+.matrix__verdict span.is-fail{color:#ff6a6a;border-color:rgba(255,106,106,0.3)}
+
+/* Footer */
+.foot{padding-block:clamp(3rem,5vw,4rem);border-top:1px solid var(--hairline);color:var(--muted);font-size:0.8125rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.foot code{font-family:var(--font-mono);color:var(--fg)}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+<header class="container hero" role="banner">
+  <div class="hero__crumb">
+    <span class="eyebrow">KastaLabs</span>
+    <span aria-hidden="true">/</span>
+    <span class="eyebrow">Brand Tokens</span>
+    <span aria-hidden="true">/</span>
+    <strong class="eyebrow" style="color:var(--fg)">0.1 Preview</strong>
+  </div>
+  <h1 class="hero__title">Token brand untuk web yang <em>tidak generik</em>.</h1>
+  <p class="hero__sub">Preview sistem warna 15-step <code style="font-family:var(--font-mono)">#007BFF</code>, tipografi Plus Jakarta Sans, button states, dan matrix kontras WCAG. Tujuan: validasi visual sebelum scaffold tema WordPress dimulai.</p>
+  <div class="hero__cta">
+    <a href="#palette" class="btn btn--primary">Lihat palette</a>
+    <a href="#typography" class="btn btn--ghost">Tipografi</a>
+    <a href="#contrast" class="btn btn--ghost">Matrix kontras</a>
+  </div>
+</header>
+
+<main>
+  <section id="palette" class="section">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">01 / Palette</span>
+          <h2>Primary 15-step</h2>
+        </div>
+        <p>Anchor di step 5 (#007BFF). Half-step (75, 150, 850, 925) dipakai untuk transisi gradient atau intermediate state. Klik kartu untuk salin hex.</p>
+      </div>
+      <div class="palette" id="palette-grid" role="list" aria-label="Primary color palette swatches"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">02 / Surface</span>
+          <h2>Surface &amp; text</h2>
+        </div>
+        <p>Token sementara — final saat brand file lengkap masuk (logo, neutral palette, secondary).</p>
+      </div>
+      <div class="palette" id="surface-grid" role="list" aria-label="Surface and text tokens"></div>
+    </div>
+  </section>
+
+  <section id="typography" class="section">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">03 / Typography</span>
+          <h2>Plus Jakarta Sans</h2>
+        </div>
+        <p>Skala fluid pakai clamp(). Display, headline, body, caption — semua satu family. Mono untuk angka teknis dan kode.</p>
+      </div>
+      <div class="typo" id="typo-list"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">04 / Buttons</span>
+          <h2>Interactive states</h2>
+        </div>
+        <p>Hover, focus, pressed, disabled. Radius pill (999px) untuk primary &amp; ghost. Underline link untuk tertiary.</p>
+      </div>
+      <div class="buttons">
+        <div class="btn-demo">
+          <span class="btn-demo__label">Primary &mdash; default</span>
+          <button type="button" class="btn btn--primary">Mulai proyek</button>
+        </div>
+        <div class="btn-demo">
+          <span class="btn-demo__label">Primary &mdash; hover (arahkan kursor)</span>
+          <button type="button" class="btn btn--primary">Lihat karya</button>
+        </div>
+        <div class="btn-demo">
+          <span class="btn-demo__label">Primary &mdash; disabled</span>
+          <button type="button" class="btn btn--primary" disabled>Tidak tersedia</button>
+        </div>
+        <div class="btn-demo">
+          <span class="btn-demo__label">Ghost</span>
+          <button type="button" class="btn btn--ghost">Pelajari lebih</button>
+        </div>
+        <div class="btn-demo">
+          <span class="btn-demo__label">Link / tertiary</span>
+          <a href="#" class="btn btn--link">Baca whitepaper</a>
+        </div>
+        <div class="btn-demo">
+          <span class="btn-demo__label">Focus ring (Tab keyboard)</span>
+          <button type="button" class="btn btn--primary">Tab kemari</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contrast" class="section">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">05 / Contrast</span>
+          <h2>WCAG 2.2 matrix</h2>
+        </div>
+        <p>Rasio dihitung di-browser via formula relative luminance. AA normal &ge; 4.5, AA large/UI &ge; 3.0, AAA &ge; 7.0.</p>
+      </div>
+      <table class="matrix" id="matrix">
+        <thead><tr><th scope="col">Foreground</th><th scope="col">Background</th><th scope="col">Ratio</th><th scope="col">Verdict</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="container foot" role="contentinfo">
+  <span>Generated 2026-05-30 &mdash; for stakeholder review only.</span>
+  <span><code>brand-preview.html</code> &middot; KastaLabs theme v0.1</span>
+</footer>
+<script>
+/* === KastaLabs brand preview - vanilla JS === */
+  { step: '0',   tier: 50,  hex: '#CCE5FF' },
+  { step: '0.5', tier: 75,  hex: '#B8DAFF' },
+  { step: '1',   tier: 100, hex: '#A3D0FF' },
+  { step: '1.5', tier: 150, hex: '#8FC5FF' },
+  { step: '2',   tier: 200, hex: '#7ABBFF' },
+  { step: '3',   tier: 300, hex: '#52A5FF' },
+  { step: '4',   tier: 400, hex: '#2990FF' },
+  { step: '5',   tier: 500, hex: '#007BFF', anchor: true },
+  { step: '6',   tier: 600, hex: '#0067D6' },
+  { step: '7',   tier: 700, hex: '#005AAD' },
+  { step: '8',   tier: 800, hex: '#004085' },
+  { step: '8.5', tier: 850, hex: '#003670' },
+  { step: '9',   tier: 900, hex: '#002D5C' },
+  { step: '9.5', tier: 925, hex: '#002347' },
+  { step: '10',  tier: 950, hex: '#001933' },
+];
+const SURFACE = [
+  { name: 'bg',      hex: '#0A0A0B', note: 'Background utama (dark)' },
+  { name: 'surface', hex: '#141416', note: 'Card / elevated surface' },
+  { name: 'fg',      hex: '#F4F4F0', note: 'Body text' },
+  { name: 'muted',   hex: '#7A7A75', note: 'Secondary text, dividers' },
+];
+function hexToRgb(h) {
+  const v = h.replace('#', '');
+  return { r: parseInt(v.slice(0,2),16), g: parseInt(v.slice(2,4),16), b: parseInt(v.slice(4,6),16) };
+}
+function relLum({ r, g, b }) {
+  const f = (c) => { const s = c/255; return s <= 0.03928 ? s/12.92 : Math.pow((s+0.055)/1.055, 2.4); };
+  return 0.2126*f(r) + 0.7152*f(g) + 0.0722*f(b);
+}
+function ratio(a, b) {
+  const la = relLum(hexToRgb(a));
+  const lb = relLum(hexToRgb(b));
+  const hi = Math.max(la, lb), lo = Math.min(la, lb);
+  return (hi + 0.05) / (lo + 0.05);
+}
+function fmtRatio(r) { return r.toFixed(2) + ':1'; }
+function verdict(r) { return { AA: r >= 4.5, AA_large: r >= 3.0, AAA: r >= 7.0 }; }
+
+function badge(label, ok) {
+  return '<span class="badge ' + (ok ? 'badge--pass' : 'badge--fail') + '">' + label + (ok ? ' OK' : ' fail') + '</span>';
+}
+function copyHex(node, hex) {
+  navigator.clipboard?.writeText(hex);
+  node.classList.add('is-copied');
+  setTimeout(() => node.classList.remove('is-copied'), 1200);
+}
+
+function renderPalette() {
+  const grid = document.getElementById('palette-grid');
+  if (!grid) return;
+  grid.innerHTML = PRIMARY.map((p) => {
+    const onBg = ratio(p.hex, '#0A0A0B');
+    const onWhite = ratio(p.hex, '#FFFFFF');
+    const v1 = verdict(onBg);
+    const v2 = verdict(onWhite);
+    const label = p.anchor ? '<strong style="color:var(--primary-400)">step ' + p.step + ' &middot; anchor</strong>' : 'step ' + p.step;
+    const r = hexToRgb(p.hex);
+    return [
+      '<button type="button" class="swatch" role="listitem" data-hex="' + p.hex + '" aria-label="Copy ' + p.hex + '">',
+      '<span class="swatch__chip" style="background:' + p.hex + '"></span>',
+      '<span class="swatch__meta">',
+      '<span class="swatch__step">' + label + '</span>',
+      '<span class="swatch__hex">' + p.hex + '</span>',
+      '</span>',
+      '<span class="swatch__rgb">rgb(' + r.r + ',' + r.g + ',' + r.b + ') &middot; tier ' + p.tier + '</span>',
+      '<span class="swatch__badges">',
+      badge('AA bg ' + onBg.toFixed(1), v1.AA_large),
+      badge('AA white ' + onWhite.toFixed(1), v2.AA_large),
+      '</span>',
+      '<span class="swatch__copied">disalin</span>',
+      '</button>',
+    ].join('');
+  }).join('');
+  grid.querySelectorAll('.swatch').forEach((node) => {
+    node.addEventListener('click', () => copyHex(node, node.dataset.hex));
+  });
+}
+
+function renderSurface() {
+  const grid = document.getElementById('surface-grid');
+  if (!grid) return;
+  grid.innerHTML = SURFACE.map((p) => {
+    const r = hexToRgb(p.hex);
+    return [
+      '<button type="button" class="swatch" role="listitem" data-hex="' + p.hex + '" aria-label="Copy ' + p.hex + '">',
+      '<span class="swatch__chip" style="background:' + p.hex + '"></span>',
+      '<span class="swatch__meta">',
+      '<span class="swatch__step">--' + p.name + '</span>',
+      '<span class="swatch__hex">' + p.hex + '</span>',
+      '</span>',
+      '<span class="swatch__rgb">rgb(' + r.r + ',' + r.g + ',' + r.b + ') &middot; ' + p.note + '</span>',
+      '<span class="swatch__copied">disalin</span>',
+      '</button>',
+    ].join('');
+  }).join('');
+  grid.querySelectorAll('.swatch').forEach((node) => {
+    node.addEventListener('click', () => copyHex(node, node.dataset.hex));
+  });
+}
+
+function renderTypo() {
+  const list = document.getElementById('typo-list');
+  if (!list) return;
+  const samples = [
+    { cls: 't-display',  name: 'Display',     spec: '800 / clamp 48-96px / lh 0.95' },
+    { cls: 't-h1',       name: 'H1',          spec: '700 / clamp 36-60px / lh 1.05' },
+    { cls: 't-h2',       name: 'H2',          spec: '700 / clamp 28-40px / lh 1.10' },
+    { cls: 't-h3',       name: 'H3',          spec: '600 / clamp 22-28px / lh 1.20' },
+    { cls: 't-h4',       name: 'H4',          spec: '600 / 20px / lh 1.30' },
+    { cls: 't-body-lg',  name: 'Body large',  spec: '400 / 18px / lh 1.60' },
+    { cls: 't-body',     name: 'Body',        spec: '400 / 16px / lh 1.60' },
+    { cls: 't-body-sm',  name: 'Body small',  spec: '400 / 14px / lh 1.55' },
+    { cls: 't-caption',  name: 'Caption',     spec: '500 / 12px / lh 1.50 / muted' },
+  ];
+  list.innerHTML = samples.map((s) => [
+    '<div class="typo__row">',
+    '<div class="typo__spec"><strong>' + s.name + '</strong>' + s.spec + '</div>',
+    '<div>',
+    '<div class="typo__sample ' + s.cls + '">Kasta Labs &mdash; kreatif yang berdampak.</div>',
+    s.cls === 't-body' || s.cls === 't-body-lg' ? '<p>Kami bantu brand Indonesia tampil dengan ekspresi yang relevan dan eksekusi yang teliti, dari strategi sampai produksi. Setiap proyek dimulai dari mendengar.</p>' : '',
+    '</div>',
+    '</div>',
+  ].join('')).join('');
+}
+
+function renderMatrix() {
+  const tbody = document.querySelector('#matrix tbody');
+  if (!tbody) return;
+  const pairs = [
+    { fg: '#007BFF', bg: '#0A0A0B', fgN: 'primary-500', bgN: 'bg' },
+    { fg: '#FFFFFF', bg: '#007BFF', fgN: 'white',       bgN: 'primary-500' },
+    { fg: '#F4F4F0', bg: '#007BFF', fgN: 'fg',          bgN: 'primary-500' },
+    { fg: '#F4F4F0', bg: '#0A0A0B', fgN: 'fg',          bgN: 'bg' },
+    { fg: '#7A7A75', bg: '#0A0A0B', fgN: 'muted',       bgN: 'bg' },
+    { fg: '#007BFF', bg: '#FFFFFF', fgN: 'primary-500', bgN: 'white' },
+    { fg: '#005AAD', bg: '#FFFFFF', fgN: 'primary-700', bgN: 'white' },
+    { fg: '#A3D0FF', bg: '#0A0A0B', fgN: 'primary-100', bgN: 'bg' },
+    { fg: '#0A0A0B', bg: '#A3D0FF', fgN: 'bg',          bgN: 'primary-100' },
+  ];
+  tbody.innerHTML = pairs.map((p) => {
+    const r = ratio(p.fg, p.bg);
+    const v = verdict(r);
+    return [
+      '<tr>',
+      '<td><span class="matrix__chip" style="background:' + p.fg + '"></span>' + p.fgN + ' <span style="color:var(--muted)">' + p.fg + '</span></td>',
+      '<td><span class="matrix__chip" style="background:' + p.bg + '"></span>' + p.bgN + ' <span style="color:var(--muted)">' + p.bg + '</span></td>',
+      '<td class="matrix__ratio">' + fmtRatio(r) + '</td>',
+      '<td class="matrix__verdict">',
+      '<span class="' + (v.AA_large ? 'is-pass' : 'is-fail') + '">UI ' + (v.AA_large ? 'OK' : 'fail') + '</span>',
+      '<span class="' + (v.AA ? 'is-pass' : 'is-fail') + '">AA ' + (v.AA ? 'OK' : 'fail') + '</span>',
+      '<span class="' + (v.AAA ? 'is-pass' : 'is-fail') + '">AAA ' + (v.AAA ? 'OK' : 'fail') + '</span>',
+      '</td>',
+      '</tr>',
+    ].join('');
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderPalette();
+  renderSurface();
+  renderTypo();
+  renderMatrix();
+});
+</script>
+</body>
+</html>

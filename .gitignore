@@ -1,0 +1,40 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+wp-config.php
+
+# Node
+node_modules/
+wp-content/themes/kastalabs/dist/
+wp-content/themes/kastalabs/.vite/
+*.timestamp-*.mjs
+
+# WordPress
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Logs
+*.log
+debug.log
+
+# Local automation / generated review artifacts
+.playwright-cli/
+output/
+tmp/
+
+# Build artefacts
+*.zip
+*.tar.gz

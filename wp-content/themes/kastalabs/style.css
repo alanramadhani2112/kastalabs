@@ -1,0 +1,18 @@
+/*
+Theme Name:        KastaLabs
+Theme URI:         https://kastalabs.com
+Author:            KastaLabs
+Author URI:        https://kastalabs.com
+Description:       Custom WordPress theme untuk KastaLabs - portofolio + blog. Stack: Tailwind CSS v4 + GSAP. Editorial-cinematic, dark-first, terinspirasi Salient Signal.
+Version:           0.1.0
+Requires at least: 6.4
+Tested up to:      6.5
+Requires PHP:      8.1
+License:           Proprietary
+License URI:       https://kastalabs.com/license
+Text Domain:       kastalabs
+Tags:              custom, portfolio, blog, agency, dark, gsap, tailwind
+*/
+
+/* Catatan: file ini hanya untuk metadata WordPress.
+   CSS sebenarnya di-bundle oleh Vite dan keluar di /dist/. */
