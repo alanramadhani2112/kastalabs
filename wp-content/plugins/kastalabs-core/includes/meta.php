@@ -62,6 +62,8 @@ function kastalabs_register_structured_meta(): void {
 			'budget'         => 'string',
 			'project_type'   => 'string',
 			'inquiry_status' => 'string',
+			'follow_up_date' => 'string',
+			'internal_notes' => 'textarea',
 			'email_status'   => 'string',
 			'source_url'     => 'url',
 			'user_ip_hash'   => 'string',

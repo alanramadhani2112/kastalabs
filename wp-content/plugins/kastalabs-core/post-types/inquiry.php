@@ -65,6 +65,7 @@ function kastalabs_inquiry_admin_columns( array $columns ): array {
 		'email'          => __( 'Email', 'kastalabs' ),
 		'project_type'   => __( 'Project Type', 'kastalabs' ),
 		'inquiry_status' => __( 'Lead Status', 'kastalabs' ),
+		'follow_up_date' => __( 'Follow Up', 'kastalabs' ),
 		'email_status'   => __( 'Email Status', 'kastalabs' ),
 		'date'           => $columns['date'] ?? __( 'Date', 'kastalabs' ),
 	);
@@ -79,6 +80,7 @@ function kastalabs_render_inquiry_admin_column( string $column, int $post_id ): 
 		'email'          => get_post_meta( $post_id, 'email', true ),
 		'project_type'   => get_post_meta( $post_id, 'project_type', true ),
 		'inquiry_status' => kastalabs_get_inquiry_status_label( (string) get_post_meta( $post_id, 'inquiry_status', true ) ),
+		'follow_up_date' => kastalabs_format_inquiry_follow_up_date( (string) get_post_meta( $post_id, 'follow_up_date', true ) ),
 		'email_status'   => get_post_meta( $post_id, 'email_status', true ),
 		default          => '',
 	};
@@ -119,6 +121,34 @@ function kastalabs_get_inquiry_status_label( string $status ): string {
 }
 
 /**
+ * Sanitize an Inquiry follow-up date in YYYY-MM-DD format.
+ */
+function kastalabs_sanitize_inquiry_follow_up_date( string $date ): string {
+	$date = trim( $date );
+
+	if ( '' === $date || ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date ) ) {
+		return '';
+	}
+
+	$parts = array_map( 'absint', explode( '-', $date ) );
+
+	return checkdate( $parts[1], $parts[2], $parts[0] ) ? $date : '';
+}
+
+/**
+ * Format an Inquiry follow-up date for admin display.
+ */
+function kastalabs_format_inquiry_follow_up_date( string $date ): string {
+	$date = kastalabs_sanitize_inquiry_follow_up_date( $date );
+
+	if ( '' === $date ) {
+		return '';
+	}
+
+	return wp_date( get_option( 'date_format' ), strtotime( $date . ' 00:00:00' ) );
+}
+
+/**
  * Register admin meta boxes for Inquiry details.
  */
 function kastalabs_register_inquiry_meta_boxes(): void {
@@ -139,6 +169,8 @@ function kastalabs_render_inquiry_details_meta_box( WP_Post $post ): void {
 	wp_nonce_field( 'kastalabs_save_inquiry_details', 'kastalabs_inquiry_details_nonce' );
 
 	$current_status = (string) get_post_meta( $post->ID, 'inquiry_status', true );
+	$follow_up_date = kastalabs_sanitize_inquiry_follow_up_date( (string) get_post_meta( $post->ID, 'follow_up_date', true ) );
+	$internal_notes = (string) get_post_meta( $post->ID, 'internal_notes', true );
 	$fields         = array(
 		__( 'Name', 'kastalabs' )         => get_post_meta( $post->ID, 'inquiry_name', true ),
 		__( 'Email', 'kastalabs' )        => get_post_meta( $post->ID, 'email', true ),
@@ -159,6 +191,26 @@ function kastalabs_render_inquiry_details_meta_box( WP_Post $post ): void {
 			</option>
 		<?php endforeach; ?>
 	</select>
+
+	<p style="margin-top: 1rem;">
+		<label for="kastalabs_follow_up_date"><strong><?php esc_html_e( 'Follow Up Date', 'kastalabs' ); ?></strong></label>
+	</p>
+	<input
+		type="date"
+		id="kastalabs_follow_up_date"
+		name="kastalabs_follow_up_date"
+		value="<?php echo esc_attr( $follow_up_date ); ?>"
+	/>
+
+	<p style="margin-top: 1rem;">
+		<label for="kastalabs_internal_notes"><strong><?php esc_html_e( 'Internal Notes', 'kastalabs' ); ?></strong></label>
+	</p>
+	<textarea
+		id="kastalabs_internal_notes"
+		name="kastalabs_internal_notes"
+		rows="5"
+		class="large-text"
+	><?php echo esc_textarea( $internal_notes ); ?></textarea>
 
 	<table class="widefat striped" style="margin-top: 1rem;">
 		<tbody>
@@ -195,6 +247,20 @@ function kastalabs_save_inquiry_status_meta_box( int $post_id ): void {
 	}
 
 	update_post_meta( $post_id, 'inquiry_status', $status );
+
+	$follow_up_date = isset( $_POST['kastalabs_follow_up_date'] ) ? kastalabs_sanitize_inquiry_follow_up_date( sanitize_text_field( wp_unslash( $_POST['kastalabs_follow_up_date'] ) ) ) : '';
+	if ( '' === $follow_up_date ) {
+		delete_post_meta( $post_id, 'follow_up_date' );
+	} else {
+		update_post_meta( $post_id, 'follow_up_date', $follow_up_date );
+	}
+
+	$internal_notes = isset( $_POST['kastalabs_internal_notes'] ) ? sanitize_textarea_field( wp_unslash( $_POST['kastalabs_internal_notes'] ) ) : '';
+	if ( '' === $internal_notes ) {
+		delete_post_meta( $post_id, 'internal_notes' );
+	} else {
+		update_post_meta( $post_id, 'internal_notes', $internal_notes );
+	}
 }
 
 /**
@@ -379,6 +445,8 @@ function kastalabs_export_inquiries_csv(): void {
 			'Budget',
 			'Project Type',
 			'Lead Status',
+			'Follow Up Date',
+			'Internal Notes',
 			'Email Status',
 			'Source URL',
 			'Message',
@@ -396,6 +464,8 @@ function kastalabs_export_inquiries_csv(): void {
 				(string) get_post_meta( $post->ID, 'budget', true ),
 				(string) get_post_meta( $post->ID, 'project_type', true ),
 				kastalabs_get_inquiry_status_label( (string) get_post_meta( $post->ID, 'inquiry_status', true ) ),
+				(string) get_post_meta( $post->ID, 'follow_up_date', true ),
+				(string) get_post_meta( $post->ID, 'internal_notes', true ),
 				(string) get_post_meta( $post->ID, 'email_status', true ),
 				(string) get_post_meta( $post->ID, 'source_url', true ),
 				wp_strip_all_tags( $post->post_content ),
