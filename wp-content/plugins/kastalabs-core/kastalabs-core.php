@@ -27,6 +27,7 @@ require_once KASTALABS_CORE_PATH . '/includes/options.php';
 require_once KASTALABS_CORE_PATH . '/post-types/portfolio.php';
 require_once KASTALABS_CORE_PATH . '/post-types/service.php';
 require_once KASTALABS_CORE_PATH . '/post-types/insight.php';
+require_once KASTALABS_CORE_PATH . '/post-types/inquiry.php';
 require_once KASTALABS_CORE_PATH . '/post-types/work-legacy.php';
 require_once KASTALABS_CORE_PATH . '/taxonomies/portfolio.php';
 require_once KASTALABS_CORE_PATH . '/taxonomies/insight.php';
@@ -44,6 +45,7 @@ register_activation_hook(
 		kastalabs_register_portfolio_post_type();
 		kastalabs_register_service_post_type();
 		kastalabs_register_insight_post_type();
+		kastalabs_register_inquiry_post_type();
 		kastalabs_register_legacy_work_post_type();
 		kastalabs_register_portfolio_taxonomies();
 		kastalabs_register_insight_taxonomies();

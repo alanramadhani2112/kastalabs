@@ -19,6 +19,8 @@ Use this before launch or deployment review.
 - Confirm contact form nonce validation works.
 - Confirm contact form honeypot blocks bot-like submissions.
 - Confirm rate limiting rejects repeated submissions after threshold.
+- Confirm every valid contact form submission creates a private Inquiry record.
+- Confirm Inquiry records show sender, email, project type, and email delivery status in wp-admin.
 - Verify security headers:
   - `X-Content-Type-Options`
   - `X-Frame-Options`
