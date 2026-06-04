@@ -44,10 +44,10 @@ $fallback_services = array(
 	<section class="container-x pt-28 pb-16 md:pt-40 md:pb-24">
 		<div class="max-w-5xl" data-reveal>
 			<?php kasta_eyebrow( __( 'Services', 'kastalabs' ) ); ?>
-			<h1 class="font-display font-extrabold text-5xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9] mt-6">
+			<h1 class="type-display-lg mt-6">
 				<?php esc_html_e( 'Digital services designed with clarity and purpose.', 'kastalabs' ); ?>
 			</h1>
-			<p class="text-muted text-lg md:text-xl mt-8 max-w-3xl leading-relaxed">
+			<p class="type-body-lg measure-copy text-muted mt-8">
 				<?php esc_html_e( 'Kami membantu bisnis membangun identitas, pengalaman, dan sistem digital yang lebih modern, efektif, dan scalable.', 'kastalabs' ); ?>
 			</p>
 		</div>
@@ -63,8 +63,8 @@ $fallback_services = array(
 					?>
 					<article class="rounded-lg border border-hairline bg-bg p-8 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal>
 						<p class="eyebrow"><?php echo esc_html( sprintf( '%02d', $services->current_post + 1 ) ); ?></p>
-						<h2 class="mt-10 text-3xl font-bold leading-tight"><?php the_title(); ?></h2>
-						<p class="mt-5 text-muted leading-relaxed">
+						<h2 class="type-h3 mt-10"><?php the_title(); ?></h2>
+						<p class="type-body mt-5 text-muted">
 							<?php echo esc_html( $overview ?: get_the_excerpt() ); ?>
 						</p>
 						<?php if ( trim( get_the_content() ) ) : ?>
@@ -79,8 +79,8 @@ $fallback_services = array(
 				<?php foreach ( $fallback_services as $index => $service ) : ?>
 					<article class="rounded-lg border border-hairline bg-bg p-8 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
 						<p class="eyebrow"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></p>
-						<h2 class="mt-10 text-3xl font-bold leading-tight"><?php echo esc_html( $service['title'] ); ?></h2>
-						<p class="mt-5 text-muted leading-relaxed"><?php echo esc_html( $service['body'] ); ?></p>
+						<h2 class="type-h3 mt-10"><?php echo esc_html( $service['title'] ); ?></h2>
+						<p class="type-body mt-5 text-muted"><?php echo esc_html( $service['body'] ); ?></p>
 					</article>
 				<?php endforeach; ?>
 			<?php endif; ?>

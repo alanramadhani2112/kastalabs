@@ -32,7 +32,7 @@ $faqs = array(
 		<div class="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
 			<div data-reveal>
 				<?php kasta_eyebrow( __( 'FAQ', 'kastalabs' ) ); ?>
-				<h2 class="mt-4 text-3xl md:text-5xl font-bold leading-tight">
+				<h2 class="type-h2 mt-4">
 					<?php esc_html_e( 'Pertanyaan yang sering muncul.', 'kastalabs' ); ?>
 				</h2>
 			</div>
@@ -40,10 +40,10 @@ $faqs = array(
 			<div class="grid gap-3" data-reveal data-reveal-delay="0.1">
 				<?php foreach ( $faqs as $index => $faq ) : ?>
 					<details class="group rounded-lg border border-hairline bg-bg p-5" <?php echo 0 === $index ? 'open' : ''; ?>>
-						<summary class="cursor-pointer list-none font-semibold marker:hidden">
+						<summary class="type-h4 cursor-pointer list-none marker:hidden">
 							<?php echo esc_html( $faq['q'] ); ?>
 						</summary>
-						<p class="mt-4 text-muted leading-relaxed">
+						<p class="type-body mt-4 text-muted">
 							<?php echo esc_html( $faq['a'] ); ?>
 						</p>
 					</details>

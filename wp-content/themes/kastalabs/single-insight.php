@@ -19,11 +19,11 @@ get_header(); ?>
 					<p class="eyebrow">
 						<?php echo esc_html( get_the_date() ); ?> / <?php echo esc_html( kasta_reading_time() ); ?> <?php esc_html_e( 'menit baca', 'kastalabs' ); ?>
 					</p>
-					<h1 class="font-display font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight leading-[0.92] mt-6">
+					<h1 class="type-h1 mt-6">
 						<?php the_title(); ?>
 					</h1>
 					<?php if ( has_excerpt() ) : ?>
-						<p class="text-muted text-lg md:text-xl mt-8 max-w-3xl leading-relaxed">
+						<p class="type-body-lg measure-copy text-muted mt-8">
 							<?php echo esc_html( get_the_excerpt() ); ?>
 						</p>
 					<?php endif; ?>

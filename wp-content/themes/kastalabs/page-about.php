@@ -14,7 +14,7 @@ get_header(); ?>
 		<section class="container-x pt-28 pb-16 md:pt-40 md:pb-24">
 			<div class="max-w-5xl" data-reveal>
 				<?php kasta_eyebrow( __( 'About Kastalabs', 'kastalabs' ) ); ?>
-				<h1 class="font-display font-extrabold text-5xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9] mt-6">
+				<h1 class="type-display-lg mt-6">
 					<?php esc_html_e( 'Studio kecil untuk brand yang ingin bergerak lebih tajam.', 'kastalabs' ); ?>
 				</h1>
 			</div>
@@ -55,9 +55,9 @@ get_header(); ?>
 				foreach ( $values as $index => $value ) :
 					?>
 					<article class="rounded-lg border border-hairline bg-bg p-6 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
-						<p class="font-mono text-sm text-primary-600"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></p>
-						<h2 class="mt-8 text-2xl font-bold leading-tight"><?php echo esc_html( $value['title'] ); ?></h2>
-						<p class="mt-4 text-muted leading-relaxed"><?php echo esc_html( $value['body'] ); ?></p>
+						<p class="type-label text-primary-600"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></p>
+						<h2 class="type-h4 mt-8"><?php echo esc_html( $value['title'] ); ?></h2>
+						<p class="type-body mt-4 text-muted"><?php echo esc_html( $value['body'] ); ?></p>
 					</article>
 				<?php endforeach; ?>
 			</div>
@@ -80,7 +80,7 @@ get_header(); ?>
 					);
 					foreach ( $capabilities as $capability ) :
 						?>
-						<p class="border-b border-hairline py-4 text-xl font-semibold"><?php echo esc_html( $capability ); ?></p>
+						<p class="type-h4 border-b border-hairline py-4"><?php echo esc_html( $capability ); ?></p>
 					<?php endforeach; ?>
 				</div>
 			</div>

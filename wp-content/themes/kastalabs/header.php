@@ -33,7 +33,7 @@ $header_cta_url   = kasta_site_url_option( 'hero_primary_url', '/contact/' );
 				array(
 					'theme_location' => 'primary',
 					'container'      => false,
-					'menu_class'     => 'flex items-center gap-8 text-sm font-medium',
+					'menu_class'     => 'type-body-sm flex items-center gap-8',
 					'fallback_cb'    => 'kastalabs_primary_nav_fallback',
 					'depth'          => 1,
 				)
@@ -41,7 +41,7 @@ $header_cta_url   = kasta_site_url_option( 'hero_primary_url', '/contact/' );
 			?>
 		</nav>
 
-		<a href="<?php echo esc_url( $header_cta_url ); ?>" class="btn-primary text-sm">
+		<a href="<?php echo esc_url( $header_cta_url ); ?>" class="btn-primary">
 			<?php echo esc_html( $header_cta_label ); ?>
 		</a>
 	</div>

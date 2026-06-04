@@ -25,7 +25,7 @@ function kasta_site_logo(): string {
 		return get_custom_logo();
 	}
 	return sprintf(
-		'<a href="%s" class="font-display font-extrabold tracking-tight text-xl">%s</a>',
+		'<a href="%s" class="type-h4">%s</a>',
 		esc_url( home_url( '/' ) ),
 		esc_html( get_bloginfo( 'name' ) )
 	);
@@ -94,7 +94,7 @@ function kastalabs_primary_nav_fallback(): void {
 		__( 'Contact', 'kastalabs' )   => home_url( '/contact/' ),
 	);
 
-	echo '<ul class="flex items-center gap-8 text-sm font-medium">';
+	echo '<ul class="type-body-sm flex items-center gap-8">';
 	foreach ( $items as $label => $url ) {
 		printf(
 			'<li><a href="%s">%s</a></li>',
@@ -118,7 +118,7 @@ function kasta_footer_nav_fallback(): void {
 		__( 'Contact', 'kastalabs' )   => home_url( '/contact/' ),
 	);
 
-	echo '<ul class="flex flex-col gap-2 text-sm">';
+	echo '<ul class="type-body-sm flex flex-col gap-2">';
 	foreach ( $items as $label => $url ) {
 		printf(
 			'<li><a href="%s">%s</a></li>',

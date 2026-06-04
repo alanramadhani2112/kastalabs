@@ -12,7 +12,7 @@ get_header(); ?>
 <main id="main" class="container-x py-24" role="main">
 	<header class="mb-12 max-w-3xl" data-reveal>
 		<?php kasta_eyebrow( get_the_archive_title() ); ?>
-		<h1 class="font-display font-bold text-4xl md:text-6xl tracking-tight mt-4">
+		<h1 class="type-h1 mt-4">
 			<?php the_archive_description(); ?>
 		</h1>
 	</header>
@@ -26,7 +26,7 @@ get_header(); ?>
 							<?php the_post_thumbnail( 'kasta-thumb', array( 'class' => 'w-full h-full object-cover' ) ); ?>
 						</a>
 					<?php endif; ?>
-					<h2 class="text-xl font-semibold"><a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a></h2>
+					<h2 class="type-h4"><a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a></h2>
 				</article>
 			<?php endwhile; ?>
 		</div>

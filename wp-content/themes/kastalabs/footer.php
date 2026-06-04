@@ -21,7 +21,7 @@ $social_links = array_filter(
 	<div class="container-x py-16 grid gap-12 md:grid-cols-4">
 		<div class="md:col-span-2">
 			<?php echo kasta_site_logo(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			<p class="text-muted mt-4 max-w-md text-sm leading-relaxed">
+			<p class="type-body-sm text-muted mt-4 max-w-md">
 				<?php echo esc_html( $footer_copy ); ?>
 			</p>
 		</div>
@@ -33,7 +33,7 @@ $social_links = array_filter(
 				array(
 					'theme_location' => 'footer',
 					'container'      => false,
-					'menu_class'     => 'flex flex-col gap-2 text-sm',
+					'menu_class'     => 'type-body-sm flex flex-col gap-2',
 					'fallback_cb'    => 'kasta_footer_nav_fallback',
 					'depth'          => 1,
 				)
@@ -49,14 +49,14 @@ $social_links = array_filter(
 					array(
 						'theme_location' => 'social',
 						'container'      => false,
-						'menu_class'     => 'flex flex-col gap-2 text-sm',
+						'menu_class'     => 'type-body-sm flex flex-col gap-2',
 						'fallback_cb'    => '__return_empty_string',
 						'depth'          => 1,
 					)
 				);
 				?>
 			<?php elseif ( $social_links ) : ?>
-				<ul class="flex flex-col gap-2 text-sm">
+				<ul class="type-body-sm flex flex-col gap-2">
 					<?php foreach ( $social_links as $label => $url ) : ?>
 						<li><a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $label ); ?></a></li>
 					<?php endforeach; ?>
@@ -65,9 +65,9 @@ $social_links = array_filter(
 		</nav>
 	</div>
 
-	<div class="container-x flex items-center justify-between text-xs text-muted py-6 border-t border-hairline">
+	<div class="type-label container-x flex items-center justify-between text-muted py-6 border-t border-hairline">
 		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
-		<p class="font-mono"><?php esc_html_e( 'kasta.theme v', 'kastalabs' ); ?><?php echo esc_html( KASTA_VERSION ); ?></p>
+		<p><?php esc_html_e( 'kasta.theme v', 'kastalabs' ); ?><?php echo esc_html( KASTA_VERSION ); ?></p>
 	</div>
 </footer>
 

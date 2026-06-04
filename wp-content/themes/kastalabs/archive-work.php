@@ -16,10 +16,10 @@ get_header(); ?>
 	<section class="container-x pt-32 pb-20 md:pt-44 md:pb-28" data-work-hero>
 		<div class="max-w-5xl">
 			<p class="eyebrow" data-reveal><?php esc_html_e( 'Portfolio', 'kastalabs' ); ?></p>
-			<h1 class="font-display font-extrabold text-5xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9] mt-6" data-reveal data-reveal-delay="0.1">
+			<h1 class="type-display-lg mt-6" data-reveal data-reveal-delay="0.1">
 				<?php esc_html_e( 'Selected work', 'kastalabs' ); ?>
 			</h1>
-			<p class="text-muted text-lg md:text-xl mt-8 max-w-2xl leading-relaxed" data-reveal data-reveal-delay="0.2">
+			<p class="type-body-lg measure-copy text-muted mt-8" data-reveal data-reveal-delay="0.2">
 				<?php esc_html_e( 'Koleksi proyek terpilih yang menunjukkan pendekatan kami dalam branding, desain digital, dan pengembangan web.', 'kastalabs' ); ?>
 			</p>
 		</div>
@@ -93,7 +93,7 @@ get_header(); ?>
 									<?php the_post_thumbnail( $is_large ? 'kasta-cover' : 'kasta-card', array( 'class' => 'work-card__img' ) ); ?>
 								<?php else : ?>
 									<div class="work-card__placeholder">
-										<span class="font-mono text-xs text-muted"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
+										<span class="type-label text-muted"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
 									</div>
 								<?php endif; ?>
 								<div class="work-card__overlay"></div>
@@ -137,7 +137,7 @@ get_header(); ?>
 	<?php else : ?>
 		<section class="container-x pb-32">
 			<div class="text-center py-20">
-				<p class="text-muted text-lg"><?php esc_html_e( 'Belum ada karya yang dipublikasi.', 'kastalabs' ); ?></p>
+				<p class="type-body-lg text-muted"><?php esc_html_e( 'Belum ada karya yang dipublikasi.', 'kastalabs' ); ?></p>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn-primary mt-8">
 					<?php esc_html_e( 'Kembali ke beranda', 'kastalabs' ); ?>
 				</a>

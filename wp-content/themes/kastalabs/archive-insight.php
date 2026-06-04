@@ -12,10 +12,10 @@ get_header(); ?>
 <main id="main" class="container-x py-24" role="main" data-page="insights">
 	<header class="mb-16 max-w-4xl" data-reveal>
 		<?php kasta_eyebrow( __( 'Insights', 'kastalabs' ) ); ?>
-		<h1 class="font-display font-extrabold text-4xl md:text-8xl tracking-tight leading-[0.95] mt-4">
+		<h1 class="type-display-lg mt-4">
 			<?php esc_html_e( 'Thoughts, insights, and digital perspectives.', 'kastalabs' ); ?>
 		</h1>
-		<p class="text-muted text-lg md:text-xl mt-8 max-w-2xl leading-relaxed">
+		<p class="type-body-lg measure-copy text-muted mt-8">
 			<?php esc_html_e( 'Berbagai insight, pemikiran, dan eksplorasi mengenai desain, teknologi, strategi digital, serta proses kreatif di balik Kastalabs.', 'kastalabs' ); ?>
 		</p>
 	</header>
@@ -30,7 +30,7 @@ get_header(); ?>
 						</a>
 					<?php endif; ?>
 					<p class="eyebrow"><?php echo esc_html( get_the_date() ); ?></p>
-					<h2 class="text-xl font-semibold mt-2 leading-snug">
+					<h2 class="type-h4 mt-2">
 						<a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
 					</h2>
 				</article>

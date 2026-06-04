@@ -30,14 +30,14 @@ $hero_secondary_url   = kasta_site_url_option( 'hero_secondary_url', '/portfolio
 		</div>
 
 		<h1
-			class="font-display font-extrabold tracking-tight leading-[0.92] mt-8 text-5xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] max-w-[16ch]"
+			class="type-display-xl measure-heading mt-8"
 			data-hero-headline
 		>
 			<?php echo esc_html( $hero_heading ); ?>
 		</h1>
 
 		<p
-			class="text-lg md:text-xl text-muted mt-8 max-w-2xl leading-relaxed"
+			class="type-body-lg measure-copy text-muted mt-8"
 			data-hero-subtitle
 		>
 			<?php echo esc_html( $hero_body ); ?>
@@ -63,7 +63,7 @@ $hero_secondary_url   = kasta_site_url_option( 'hero_secondary_url', '/portfolio
 
 	<!-- Scroll indicator -->
 	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden flex-col items-center gap-2 text-muted z-10 md:flex">
-		<span class="text-xs font-mono uppercase tracking-widest"><?php esc_html_e( 'Scroll', 'kastalabs' ); ?></span>
+		<span class="type-label"><?php esc_html_e( 'Scroll', 'kastalabs' ); ?></span>
 		<div class="w-px h-16 relative overflow-hidden">
 			<div class="absolute inset-0 bg-primary-500 animate-[scrollDown_2s_ease-in-out_infinite]"></div>
 		</div>

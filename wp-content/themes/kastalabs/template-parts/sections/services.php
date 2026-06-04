@@ -46,7 +46,7 @@ $fallback_services = array(
 	<div class="container-x">
 		<div class="mb-14 max-w-2xl" data-reveal>
 			<?php kasta_eyebrow( __( 'Layanan', 'kastalabs' ) ); ?>
-			<h2 class="text-3xl md:text-5xl font-bold mt-4 leading-tight">
+			<h2 class="type-h2 mt-4">
 				<?php esc_html_e( 'Services built around clarity, creativity, and systems thinking.', 'kastalabs' ); ?>
 			</h2>
 		</div>
@@ -62,11 +62,11 @@ $fallback_services = array(
 						class="group relative min-h-72 rounded-lg border border-hairline bg-bg p-7 transition-colors duration-300 hover:border-primary-500/40"
 						data-service-card
 					>
-						<span class="font-mono text-sm text-primary-600 font-bold"><?php echo esc_html( sprintf( '%02d', $services_query->current_post + 1 ) ); ?></span>
-						<h3 class="text-xl font-bold mt-10 mb-3 group-hover:text-primary-600 transition-colors">
+						<span class="type-label text-primary-600"><?php echo esc_html( sprintf( '%02d', $services_query->current_post + 1 ) ); ?></span>
+						<h3 class="type-h4 mt-10 mb-3 group-hover:text-primary-600 transition-colors">
 							<?php the_title(); ?>
 						</h3>
-						<p class="text-muted text-sm leading-relaxed">
+						<p class="type-body-sm text-muted">
 							<?php echo esc_html( $overview ?: get_the_excerpt() ); ?>
 						</p>
 					</article>
@@ -78,11 +78,11 @@ $fallback_services = array(
 					class="group relative min-h-72 rounded-lg border border-hairline bg-bg p-7 transition-colors duration-300 hover:border-primary-500/40"
 					data-service-card
 				>
-					<span class="font-mono text-sm text-primary-600 font-bold"><?php echo esc_html( $service['icon'] ); ?></span>
-					<h3 class="text-xl font-bold mt-10 mb-3 group-hover:text-primary-600 transition-colors">
+					<span class="type-label text-primary-600"><?php echo esc_html( $service['icon'] ); ?></span>
+					<h3 class="type-h4 mt-10 mb-3 group-hover:text-primary-600 transition-colors">
 						<?php echo esc_html( $service['title'] ); ?>
 					</h3>
-					<p class="text-muted text-sm leading-relaxed">
+					<p class="type-body-sm text-muted">
 						<?php echo esc_html( $service['desc'] ); ?>
 					</p>
 				</article>
@@ -91,7 +91,7 @@ $fallback_services = array(
 		</div>
 
 		<div class="mt-10">
-			<a href="<?php echo esc_url( home_url( '/services/' ) ); ?>" class="btn-ghost text-sm" data-magnetic>
+			<a href="<?php echo esc_url( home_url( '/services/' ) ); ?>" class="btn-ghost" data-magnetic>
 				<?php esc_html_e( 'View All Services', 'kastalabs' ); ?>
 			</a>
 		</div>

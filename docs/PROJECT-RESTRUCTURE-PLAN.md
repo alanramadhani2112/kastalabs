@@ -226,9 +226,9 @@ Required reset:
 - Reduce heavy gradients, glow layers, custom cursor, and aggressive parallax.
 
 Typography:
-- Keep Plus Jakarta Sans if brand approves.
+- Use Plus Jakarta Sans across the website.
 - Self-host fonts in production.
-- Build clear heading/body scale and spacing rhythm.
+- Build clear heading/body scale and spacing rhythm. Done 2026-06-04; see `docs/TYPOGRAPHY-SYSTEM.md`.
 
 Components:
 - buttons: precise, modern, not overly rounded
@@ -348,6 +348,7 @@ Tasks:
 - Remove or tone down noisy visual effects. Started 2026-06-04; custom cursor, hero glow/orbs, pinned hero, 3D service card tilt, and heavy hero motion were removed or toned down.
 - Align homepage and primary page surfaces. Continued 2026-06-04; Home sections, About, Services, Contact, Portfolio detail, Insight detail, footer, and 404 received a light-system pass.
 - Move homepage Featured Work toward final content model. Continued 2026-06-04; homepage now reads Portfolio items instead of legacy Work.
+- Implement responsive typography tokens. Done 2026-06-04; semantic classes now cover display, heading, body, label, and button text using Plus Jakarta Sans.
 - Self-host fonts.
 - Keep motion subtle.
 

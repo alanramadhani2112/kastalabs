@@ -18,7 +18,7 @@ get_header(); ?>
 	<section class="container-x pt-28 pb-16 md:pt-40 md:pb-24">
 		<div class="max-w-5xl" data-reveal>
 			<?php kasta_eyebrow( __( 'Contact', 'kastalabs' ) ); ?>
-			<h1 class="font-display font-extrabold text-5xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9] mt-6">
+			<h1 class="type-display-lg mt-6">
 				<?php esc_html_e( 'Ceritakan proyek yang ingin Anda bangun.', 'kastalabs' ); ?>
 			</h1>
 		</div>
@@ -93,13 +93,13 @@ get_header(); ?>
 
 			<aside class="rounded-lg border border-hairline bg-surface p-6 lg:sticky lg:top-28 self-start" data-reveal data-reveal-delay="0.12">
 				<h2 class="eyebrow"><?php esc_html_e( 'Direct line', 'kastalabs' ); ?></h2>
-				<a class="mt-4 block text-2xl font-bold hover:text-primary-600" href="<?php echo esc_url( 'mailto:' . $contact_email ); ?>"><?php echo esc_html( antispambot( $contact_email ) ); ?></a>
+				<a class="type-h4 mt-4 block hover:text-primary-600" href="<?php echo esc_url( 'mailto:' . $contact_email ); ?>"><?php echo esc_html( antispambot( $contact_email ) ); ?></a>
 				<?php if ( $whatsapp_url ) : ?>
-					<a class="mt-3 inline-flex text-sm font-semibold text-primary-600 hover:text-primary-700" href="<?php echo esc_url( $whatsapp_url ); ?>" target="_blank" rel="noopener noreferrer">
+					<a class="type-button mt-3 inline-flex text-primary-600 hover:text-primary-700" href="<?php echo esc_url( $whatsapp_url ); ?>" target="_blank" rel="noopener noreferrer">
 						<?php esc_html_e( 'Chat via WhatsApp', 'kastalabs' ); ?>
 					</a>
 				<?php endif; ?>
-				<p class="mt-8 text-muted leading-relaxed">
+				<p class="type-body mt-8 text-muted">
 					<?php
 					printf(
 						/* translators: %s: company location. */

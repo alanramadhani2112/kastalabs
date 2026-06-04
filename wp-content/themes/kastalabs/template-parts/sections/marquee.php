@@ -25,7 +25,7 @@ $items = array(
 	<div data-marquee data-marquee-speed="40" data-marquee-pause-hover>
 		<div data-marquee-track class="flex items-center gap-12">
 			<?php foreach ( $items as $item ) : ?>
-				<span class="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-fg/20 whitespace-nowrap flex items-center gap-12">
+				<span class="type-h3 text-fg/20 whitespace-nowrap flex items-center gap-12">
 					<?php echo esc_html( $item ); ?>
 					<span class="inline-block w-2 h-2 rounded-full bg-primary-500" aria-hidden="true"></span>
 				</span>

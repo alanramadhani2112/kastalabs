@@ -32,13 +32,13 @@ $placeholders = array(
 		<div class="flex items-end justify-between mb-16">
 			<div data-reveal>
 				<?php kasta_eyebrow( __( 'Selected Work', 'kastalabs' ) ); ?>
-				<h2 class="text-3xl md:text-5xl font-bold mt-4">
+				<h2 class="type-h2 mt-4">
 					<?php esc_html_e( 'Karya yang dibuat untuk meninggalkan kesan.', 'kastalabs' ); ?>
 				</h2>
 			</div>
 			<a
 				href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ) ); ?>"
-				class="btn-ghost text-sm hidden md:inline-flex"
+				class="btn-ghost hidden md:inline-flex"
 				data-magnetic
 			>
 				<?php esc_html_e( 'Lihat semua portfolio', 'kastalabs' ); ?>
@@ -63,7 +63,7 @@ $placeholders = array(
 									?>
 								<?php else : ?>
 									<div class="flex h-full w-full items-center justify-center bg-surface">
-										<span class="font-mono text-sm text-muted"><?php esc_html_e( 'Portfolio', 'kastalabs' ); ?></span>
+										<span class="type-label text-muted"><?php esc_html_e( 'Portfolio', 'kastalabs' ); ?></span>
 									</div>
 								<?php endif; ?>
 							</div>
@@ -76,11 +76,11 @@ $placeholders = array(
 									<?php echo esc_html( $categories[0]->name ); ?>
 								</span>
 							<?php endif; ?>
-							<h3 class="text-xl md:text-2xl font-bold group-hover:text-primary-600 transition-colors">
+							<h3 class="type-h4 group-hover:text-primary-600 transition-colors">
 								<?php the_title(); ?>
 							</h3>
 							<?php if ( has_excerpt() ) : ?>
-								<p class="mt-4 text-sm leading-relaxed text-muted"><?php echo esc_html( get_the_excerpt() ); ?></p>
+								<p class="type-body-sm mt-4 text-muted"><?php echo esc_html( get_the_excerpt() ); ?></p>
 							<?php endif; ?>
 							</div>
 						</a>
@@ -91,11 +91,11 @@ $placeholders = array(
 				<?php foreach ( $placeholders as $ph ) : ?>
 					<article class="overflow-hidden rounded-lg border border-hairline bg-bg shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-work-item>
 						<div class="flex aspect-[4/3] w-full items-center justify-center bg-surface" data-work-media>
-							<span class="font-mono text-sm text-muted"><?php echo esc_html( $ph['cat'] ); ?></span>
+							<span class="type-label text-muted"><?php echo esc_html( $ph['cat'] ); ?></span>
 						</div>
 						<div class="p-6 md:p-8">
 							<span class="eyebrow text-primary-600 mb-2 block"><?php echo esc_html( $ph['cat'] ); ?></span>
-							<h3 class="text-xl md:text-2xl font-bold"><?php echo esc_html( $ph['title'] ); ?></h3>
+							<h3 class="type-h4"><?php echo esc_html( $ph['title'] ); ?></h3>
 						</div>
 					</article>
 				<?php endforeach; ?>
@@ -105,7 +105,7 @@ $placeholders = array(
 		<div class="mt-10 text-center md:hidden">
 			<a
 				href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ) ); ?>"
-				class="btn-ghost text-sm"
+				class="btn-ghost"
 				data-magnetic
 			>
 				<?php esc_html_e( 'Lihat semua portfolio', 'kastalabs' ); ?>

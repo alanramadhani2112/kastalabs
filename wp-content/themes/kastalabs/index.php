@@ -11,15 +11,15 @@ get_header(); ?>
 
 <main id="main" class="container-x py-24" role="main">
 	<header class="mb-12">
-		<p class="text-xs uppercase tracking-[0.18em] text-muted font-mono"><?php esc_html_e( 'Index', 'kastalabs' ); ?></p>
-		<h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mt-4"><?php single_post_title(); ?></h1>
+		<p class="eyebrow"><?php esc_html_e( 'Index', 'kastalabs' ); ?></p>
+		<h1 class="type-h1 mt-4"><?php single_post_title(); ?></h1>
 	</header>
 
 	<?php if ( have_posts() ) : ?>
 		<div class="grid gap-12">
 			<?php while ( have_posts() ) : the_post(); ?>
 				<article class="border-b border-hairline pb-12">
-					<h2 class="text-2xl md:text-3xl font-bold mb-3">
+					<h2 class="type-h3 mb-3">
 						<a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
 					</h2>
 					<div class="prose max-w-none">

@@ -33,11 +33,11 @@ get_header(); ?>
 							echo esc_html( $eyebrow ?: __( 'Portfolio Project', 'kastalabs' ) );
 							?>
 						</p>
-						<h1 class="font-display font-extrabold text-5xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9] mt-6">
+						<h1 class="type-display-lg mt-6">
 							<?php the_title(); ?>
 						</h1>
 						<?php if ( has_excerpt() ) : ?>
-							<p class="text-muted text-lg md:text-xl mt-8 max-w-3xl leading-relaxed">
+							<p class="type-body-lg measure-copy text-muted mt-8">
 								<?php echo esc_html( get_the_excerpt() ); ?>
 							</p>
 						<?php endif; ?>
@@ -83,7 +83,7 @@ get_header(); ?>
 								<h2 class="eyebrow"><?php esc_html_e( 'Category', 'kastalabs' ); ?></h2>
 								<div class="mt-4 flex flex-wrap gap-2">
 									<?php foreach ( $categories as $category ) : ?>
-										<a class="rounded-md border border-hairline px-3 py-1 text-sm text-muted hover:border-primary-500 hover:text-primary-600" href="<?php echo esc_url( get_term_link( $category ) ); ?>">
+										<a class="type-body-sm rounded-md border border-hairline px-3 py-1 text-muted hover:border-primary-500 hover:text-primary-600" href="<?php echo esc_url( get_term_link( $category ) ); ?>">
 											<?php echo esc_html( $category->name ); ?>
 										</a>
 									<?php endforeach; ?>
@@ -96,7 +96,7 @@ get_header(); ?>
 								<h2 class="eyebrow"><?php esc_html_e( 'Tags', 'kastalabs' ); ?></h2>
 								<div class="mt-4 flex flex-wrap gap-2">
 									<?php foreach ( $tags as $tag ) : ?>
-										<a class="rounded-md bg-surface px-3 py-1 text-sm text-muted hover:bg-primary-500 hover:text-white" href="<?php echo esc_url( get_term_link( $tag ) ); ?>">
+										<a class="type-body-sm rounded-md bg-surface px-3 py-1 text-muted hover:bg-primary-500 hover:text-white" href="<?php echo esc_url( get_term_link( $tag ) ); ?>">
 											<?php echo esc_html( $tag->name ); ?>
 										</a>
 									<?php endforeach; ?>

@@ -23,11 +23,11 @@ $contact_email     = kasta_contact_email();
 			<div class="relative z-10">
 				<?php kasta_eyebrow( $cta_eyebrow ); ?>
 
-				<h2 class="text-3xl md:text-5xl lg:text-6xl font-bold mt-6 max-w-3xl mx-auto leading-tight">
+				<h2 class="type-h2 mt-6 max-w-3xl mx-auto">
 					<?php echo esc_html( $cta_heading ); ?>
 				</h2>
 
-				<p class="text-lg text-white/70 mt-6 max-w-xl mx-auto">
+				<p class="type-body-lg text-white/70 mt-6 max-w-xl mx-auto">
 					<?php echo esc_html( $cta_body ); ?>
 				</p>
 

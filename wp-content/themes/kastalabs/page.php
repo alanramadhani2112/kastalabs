@@ -13,7 +13,7 @@ get_header(); ?>
 	<?php while ( have_posts() ) : the_post(); ?>
 		<article>
 			<header class="mb-12 max-w-3xl" data-reveal>
-				<h1 class="font-display font-extrabold text-4xl md:text-7xl tracking-tight leading-tight">
+				<h1 class="type-h1">
 					<?php the_title(); ?>
 				</h1>
 			</header>
