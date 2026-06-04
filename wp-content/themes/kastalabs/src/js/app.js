@@ -10,6 +10,7 @@ import './../css/app.css';
 import { initGsap } from './lib/gsap-init.js';
 import { isReducedMotion } from './lib/reduced-motion.js';
 import { initReveal } from './components/reveal.js';
+import { initMobileMenu } from './components/mobile-menu.js';
 
 const PAGE_LOADERS = {
   'home':         () => import('./pages/home.js'),
@@ -22,6 +23,7 @@ const PAGE_LOADERS = {
 function bootstrap() {
   initGsap();
   initReveal();
+  initMobileMenu();
 
   if (isReducedMotion()) {
     document.documentElement.dataset.motion = 'reduced';

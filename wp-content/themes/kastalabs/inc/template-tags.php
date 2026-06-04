@@ -106,6 +106,30 @@ function kastalabs_primary_nav_fallback(): void {
 }
 
 /**
+ * Fallback mobile navigation with larger tap targets.
+ */
+function kastalabs_mobile_nav_fallback(): void {
+	$items = array(
+		__( 'Home', 'kastalabs' )      => home_url( '/' ),
+		__( 'About', 'kastalabs' )     => home_url( '/about/' ),
+		__( 'Services', 'kastalabs' )  => home_url( '/services/' ),
+		__( 'Portfolio', 'kastalabs' ) => get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ),
+		__( 'Insights', 'kastalabs' )  => get_post_type_archive_link( 'insight' ) ?: home_url( '/insights/' ),
+		__( 'Contact', 'kastalabs' )   => home_url( '/contact/' ),
+	);
+
+	echo '<ul class="site-mobile-menu__list">';
+	foreach ( $items as $label => $url ) {
+		printf(
+			'<li><a href="%s">%s</a></li>',
+			esc_url( $url ),
+			esc_html( $label )
+		);
+	}
+	echo '</ul>';
+}
+
+/**
  * Fallback footer navigation.
  */
 function kasta_footer_nav_fallback(): void {
