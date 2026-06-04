@@ -349,7 +349,7 @@ Tasks:
 - Align homepage and primary page surfaces. Continued 2026-06-04; Home sections, About, Services, Contact, Portfolio detail, Insight detail, footer, and 404 received a light-system pass.
 - Move homepage Featured Work toward final content model. Continued 2026-06-04; homepage now reads Portfolio items instead of legacy Work.
 - Implement responsive typography tokens. Done 2026-06-04; semantic classes now cover display, heading, body, label, and button text using Plus Jakarta Sans.
-- Self-host fonts.
+- Self-host fonts. Done 2026-06-04; Plus Jakarta Sans WOFF2 files now live in the theme source and are bundled by Vite.
 - Keep motion subtle.
 
 Definition of done:

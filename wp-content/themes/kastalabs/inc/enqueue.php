@@ -1,6 +1,6 @@
 <?php
 /**
- * Enqueue: stylesheet + JS module dari Vite manifest, plus font preconnect.
+ * Enqueue: stylesheet + JS module dari Vite manifest.
  *
  * @package Kastalabs
  */
@@ -126,18 +126,4 @@ add_action(
 		}
 	},
 	1
-);
-
-/**
- * Preconnect ke Google Fonts (kalau Plus Jakarta Sans masih dari CDN — sementara).
- * Setelah font self-host (M2+), preconnect ini bisa dilepas.
- */
-add_action(
-	'wp_head',
-	function () {
-		echo "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n";
-		echo "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n";
-		echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap\">\n";
-	},
-	2
 );
