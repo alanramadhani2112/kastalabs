@@ -54,15 +54,16 @@ function kastalabs_register_structured_meta(): void {
 	kastalabs_register_meta_fields(
 		'kasta_inquiry',
 		array(
-			'inquiry_name' => 'string',
-			'email'        => 'string',
-			'company'      => 'string',
-			'budget'       => 'string',
-			'project_type' => 'string',
-			'email_status' => 'string',
-			'source_url'   => 'url',
-			'user_ip_hash' => 'string',
-			'user_agent'   => 'string',
+			'inquiry_name'   => 'string',
+			'email'          => 'string',
+			'company'        => 'string',
+			'budget'         => 'string',
+			'project_type'   => 'string',
+			'inquiry_status' => 'string',
+			'email_status'   => 'string',
+			'source_url'     => 'url',
+			'user_ip_hash'   => 'string',
+			'user_agent'     => 'string',
 		)
 	);
 }

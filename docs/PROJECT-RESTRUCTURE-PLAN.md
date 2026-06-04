@@ -399,7 +399,7 @@ Goal:
 Tasks:
 - Install/configure one SEO plugin: Rank Math or Yoast.
 - Add schema for Organization, Portfolio/CreativeWork, Articles. Started 2026-06-04; theme now outputs Organization, WebSite, CreativeWork, and Article JSON-LD baseline.
-- Validate contact form nonce/sanitization. Continued 2026-06-04; contact form uses nonce, honeypot, sanitization, lightweight IP throttling, and private Inquiry storage with email delivery status.
+- Validate contact form nonce/sanitization. Continued 2026-06-05; contact form uses nonce, honeypot, sanitization, lightweight IP throttling, private Inquiry storage, email delivery status, and admin lead status workflow.
 - Add analytics placeholder/integration. Started 2026-06-04; Google Analytics Measurement ID can be set from Kastalabs Settings and only loads when configured.
 - Optimize image sizes and WebP workflow. Started 2026-06-04; theme now has media performance helpers for upload cap, image quality, WebP/AVIF uploads, async decoding, lazy defaults, responsive `sizes`, and priority featured images; see `docs/IMAGE-WORKFLOW.md`.
 - Run Lighthouse checks.
