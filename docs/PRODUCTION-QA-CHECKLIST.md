@@ -33,6 +33,9 @@ Use this before launch or deployment review.
   - `X-Frame-Options`
   - `Referrer-Policy`
   - `Permissions-Policy`
+- Confirm XML-RPC is disabled unless an approved integration needs it.
+- Confirm anonymous REST API does not expose `/wp/v2/users`.
+- Confirm frontend source does not expose WordPress generator, RSD, WLW, or shortlink metadata.
 - Confirm `wp-config.php`, uploads, build output, and local artifacts are ignored.
 
 ## Performance
