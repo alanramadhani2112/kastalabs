@@ -41,8 +41,9 @@ $fallback_services = array(
 ?>
 
 <main id="main" role="main" data-page="services">
-	<section class="container-x pt-28 pb-16 md:pt-40 md:pb-24">
-		<div class="max-w-5xl" data-reveal>
+	<section class="zoom-page-hero py-24 md:py-32">
+		<div class="container-x">
+		<div class="zoom-page-hero__content" data-reveal>
 			<?php kasta_eyebrow( __( 'Services', 'kastalabs' ) ); ?>
 			<h1 class="type-display-lg mt-6">
 				<?php esc_html_e( 'Digital services designed with clarity and purpose.', 'kastalabs' ); ?>
@@ -51,9 +52,15 @@ $fallback_services = array(
 				<?php esc_html_e( 'Kami membantu bisnis membangun identitas, pengalaman, dan sistem digital yang lebih modern, efektif, dan scalable.', 'kastalabs' ); ?>
 			</p>
 		</div>
+		<div class="zoom-page-hero__meta mt-10" data-reveal data-reveal-delay="0.1">
+			<span class="zoom-meta-pill type-label"><?php esc_html_e( 'Brand', 'kastalabs' ); ?></span>
+			<span class="zoom-meta-pill type-label"><?php esc_html_e( 'Experience', 'kastalabs' ); ?></span>
+			<span class="zoom-meta-pill type-label"><?php esc_html_e( 'Engineering', 'kastalabs' ); ?></span>
+		</div>
+		</div>
 	</section>
 
-	<section class="container-x pb-24 md:pb-32">
+	<section class="container-x py-24 md:py-32">
 		<div class="grid gap-6 md:grid-cols-2">
 			<?php if ( $services->have_posts() ) : ?>
 				<?php
@@ -61,7 +68,7 @@ $fallback_services = array(
 					$services->the_post();
 					$overview = (string) get_post_meta( get_the_ID(), 'overview', true );
 					?>
-					<article class="rounded-lg border border-hairline bg-bg p-8 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal>
+					<article class="zoom-card <?php echo esc_attr( 3 === $services->current_post ? 'zoom-card--solid' : 'zoom-card--soft' ); ?> p-8" data-reveal>
 						<p class="eyebrow"><?php echo esc_html( sprintf( '%02d', $services->current_post + 1 ) ); ?></p>
 						<h2 class="type-h3 mt-10"><?php the_title(); ?></h2>
 						<p class="type-body mt-5 text-muted">
@@ -77,7 +84,7 @@ $fallback_services = array(
 				<?php wp_reset_postdata(); ?>
 			<?php else : ?>
 				<?php foreach ( $fallback_services as $index => $service ) : ?>
-					<article class="rounded-lg border border-hairline bg-bg p-8 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
+					<article class="zoom-card <?php echo esc_attr( 3 === $index ? 'zoom-card--solid' : 'zoom-card--soft' ); ?> p-8" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
 						<p class="eyebrow"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></p>
 						<h2 class="type-h3 mt-10"><?php echo esc_html( $service['title'] ); ?></h2>
 						<p class="type-body mt-5 text-muted"><?php echo esc_html( $service['body'] ); ?></p>

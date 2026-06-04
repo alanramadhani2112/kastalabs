@@ -14,8 +14,9 @@ get_header(); ?>
 
 	<?php while ( have_posts() ) : the_post(); ?>
 		<article data-reading-article>
-			<header class="container-x pt-28 pb-14 md:pt-40 md:pb-20">
-				<div class="max-w-4xl" data-reveal>
+			<header class="zoom-page-hero py-24 md:py-32">
+				<div class="container-x">
+				<div class="zoom-page-hero__content max-w-4xl" data-reveal>
 					<p class="eyebrow">
 						<?php echo esc_html( get_the_date() ); ?> / <?php echo esc_html( kasta_reading_time() ); ?> <?php esc_html_e( 'menit baca', 'kastalabs' ); ?>
 					</p>
@@ -28,11 +29,12 @@ get_header(); ?>
 						</p>
 					<?php endif; ?>
 				</div>
+				</div>
 			</header>
 
 			<?php if ( has_post_thumbnail() ) : ?>
 				<figure class="container-x" data-reveal data-reveal-delay="0.1">
-					<div class="overflow-hidden rounded-lg border border-hairline bg-surface">
+					<div class="zoom-card overflow-hidden bg-surface">
 						<?php the_post_thumbnail( 'kasta-cover', array( 'class' => 'w-full h-auto object-cover' ) ); ?>
 					</div>
 				</figure>

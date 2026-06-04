@@ -24,8 +24,8 @@ get_header(); ?>
 		?>
 
 		<article class="overflow-hidden">
-			<header class="container-x pt-28 pb-14 md:pt-40 md:pb-20">
-				<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
+			<header class="zoom-page-hero py-24 md:py-32">
+				<div class="container-x grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
 					<div class="max-w-5xl" data-reveal>
 						<p class="eyebrow">
 							<?php
@@ -43,7 +43,7 @@ get_header(); ?>
 						<?php endif; ?>
 					</div>
 
-					<aside class="rounded-lg border border-hairline bg-bg p-6 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal data-reveal-delay="0.15" aria-label="<?php esc_attr_e( 'Project summary', 'kastalabs' ); ?>">
+					<aside class="zoom-card bg-bg p-6" data-reveal data-reveal-delay="0.15" aria-label="<?php esc_attr_e( 'Project summary', 'kastalabs' ); ?>">
 						<dl class="grid gap-5">
 							<?php if ( $client ) : ?>
 								<div>
@@ -82,7 +82,7 @@ get_header(); ?>
 
 			<?php if ( has_post_thumbnail() ) : ?>
 				<figure class="container-x" data-reveal data-reveal-delay="0.1">
-					<div class="overflow-hidden rounded-lg border border-hairline bg-surface">
+					<div class="zoom-card overflow-hidden bg-surface">
 						<?php the_post_thumbnail( 'kasta-cover', array( 'class' => 'w-full h-auto object-cover' ) ); ?>
 					</div>
 				</figure>
@@ -96,7 +96,7 @@ get_header(); ?>
 						</a>
 
 						<?php if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) : ?>
-							<div class="mt-10">
+							<div class="zoom-card zoom-card--soft mt-10 p-5">
 								<h2 class="eyebrow"><?php esc_html_e( 'Category', 'kastalabs' ); ?></h2>
 								<div class="mt-4 flex flex-wrap gap-2">
 									<?php foreach ( $categories as $category ) : ?>
@@ -109,7 +109,7 @@ get_header(); ?>
 						<?php endif; ?>
 
 						<?php if ( ! is_wp_error( $tags ) && ! empty( $tags ) ) : ?>
-							<div class="mt-8">
+							<div class="zoom-card mt-8 p-5">
 								<h2 class="eyebrow"><?php esc_html_e( 'Tags', 'kastalabs' ); ?></h2>
 								<div class="mt-4 flex flex-wrap gap-2">
 									<?php foreach ( $tags as $tag ) : ?>
@@ -128,12 +128,12 @@ get_header(); ?>
 				</div>
 			</section>
 
-			<nav class="container-x border-t border-hairline py-12" aria-label="<?php esc_attr_e( 'Adjacent case studies', 'kastalabs' ); ?>">
+			<nav class="container-x py-12" aria-label="<?php esc_attr_e( 'Adjacent case studies', 'kastalabs' ); ?>">
 				<div class="grid gap-4 md:grid-cols-2">
-					<div>
+					<div class="zoom-card p-5">
 						<?php previous_post_link( '%link', '<span class="eyebrow">' . esc_html__( 'Previous', 'kastalabs' ) . '</span><span class="type-h4 mt-2 block">%title</span>' ); ?>
 					</div>
-					<div class="md:text-right">
+					<div class="zoom-card p-5 md:text-right">
 						<?php next_post_link( '%link', '<span class="eyebrow">' . esc_html__( 'Next', 'kastalabs' ) . '</span><span class="type-h4 mt-2 block">%title</span>' ); ?>
 					</div>
 				</div>

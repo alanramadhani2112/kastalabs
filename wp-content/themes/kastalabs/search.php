@@ -9,8 +9,9 @@ defined( 'ABSPATH' ) || exit;
 
 get_header(); ?>
 
-<main id="main" class="container-x py-24" role="main">
-	<header class="mb-12">
+<main id="main" role="main">
+	<header class="zoom-page-hero py-24 md:py-32">
+		<div class="container-x">
 		<p class="eyebrow"><?php esc_html_e( 'Search', 'kastalabs' ); ?></p>
 		<h1 class="type-h1 mt-4 max-w-3xl">
 			<?php
@@ -21,12 +22,13 @@ get_header(); ?>
 			);
 			?>
 		</h1>
+		</div>
 	</header>
 
 	<?php if ( have_posts() ) : ?>
-		<div class="grid gap-8">
+		<div class="container-x grid gap-6 py-16 md:py-24">
 			<?php while ( have_posts() ) : the_post(); ?>
-				<article class="border-b border-hairline pb-8">
+				<article class="zoom-card p-6">
 					<h2 class="type-h4">
 						<a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
 					</h2>
@@ -34,9 +36,13 @@ get_header(); ?>
 				</article>
 			<?php endwhile; ?>
 		</div>
-		<?php the_posts_pagination( array( 'class' => 'mt-12' ) ); ?>
+		<div class="container-x">
+			<?php the_posts_pagination( array( 'class' => 'mt-12' ) ); ?>
+		</div>
 	<?php else : ?>
-		<p class="text-muted"><?php esc_html_e( 'Tidak ditemukan hasil.', 'kastalabs' ); ?></p>
+		<section class="container-x py-16">
+			<p class="text-muted"><?php esc_html_e( 'Tidak ditemukan hasil.', 'kastalabs' ); ?></p>
+		</section>
 	<?php endif; ?>
 </main>
 

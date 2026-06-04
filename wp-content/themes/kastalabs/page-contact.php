@@ -15,18 +15,25 @@ $whatsapp_url     = kasta_site_url_option( 'whatsapp_url' );
 get_header(); ?>
 
 <main id="main" role="main" data-page="contact">
-	<section class="container-x pt-28 pb-16 md:pt-40 md:pb-24">
-		<div class="max-w-5xl" data-reveal>
+	<section class="zoom-page-hero py-24 md:py-32">
+		<div class="container-x">
+		<div class="zoom-page-hero__content" data-reveal>
 			<?php kasta_eyebrow( __( 'Contact', 'kastalabs' ) ); ?>
 			<h1 class="type-display-lg mt-6">
 				<?php esc_html_e( 'Ceritakan proyek yang ingin Anda bangun.', 'kastalabs' ); ?>
 			</h1>
 		</div>
+		<div class="zoom-page-hero__meta mt-10" data-reveal data-reveal-delay="0.1">
+			<span class="zoom-meta-pill type-label"><?php esc_html_e( 'Project inquiry', 'kastalabs' ); ?></span>
+			<span class="zoom-meta-pill type-label"><?php esc_html_e( 'Remote friendly', 'kastalabs' ); ?></span>
+			<span class="zoom-meta-pill type-label"><?php esc_html_e( 'Indonesia based', 'kastalabs' ); ?></span>
+		</div>
+		</div>
 	</section>
 
-	<section class="container-x pb-24 md:pb-32">
+	<section class="container-x py-24 md:py-32">
 		<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem]">
-			<form class="contact-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" data-reveal>
+			<form class="contact-form zoom-card" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" data-reveal>
 				<input type="hidden" name="action" value="kasta_contact">
 				<?php wp_nonce_field( 'kasta_contact', 'kasta_contact_nonce' ); ?>
 
@@ -91,7 +98,7 @@ get_header(); ?>
 				</button>
 			</form>
 
-			<aside class="rounded-lg border border-hairline bg-surface p-6 lg:sticky lg:top-28 self-start" data-reveal data-reveal-delay="0.12">
+			<aside class="zoom-card zoom-card--soft p-6 lg:sticky lg:top-28 self-start" data-reveal data-reveal-delay="0.12">
 				<h2 class="eyebrow"><?php esc_html_e( 'Direct line', 'kastalabs' ); ?></h2>
 				<a class="type-h4 mt-4 block hover:text-primary-600" href="<?php echo esc_url( 'mailto:' . $contact_email ); ?>"><?php echo esc_html( antispambot( $contact_email ) ); ?></a>
 				<?php if ( $whatsapp_url ) : ?>

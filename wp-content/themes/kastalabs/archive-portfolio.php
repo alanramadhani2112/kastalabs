@@ -10,8 +10,9 @@ defined( 'ABSPATH' ) || exit;
 get_header(); ?>
 
 <main id="main" class="work-archive" role="main" data-page="work-archive">
-	<section class="container-x pt-32 pb-20 md:pt-44 md:pb-28">
-		<div class="max-w-5xl">
+	<section class="zoom-page-hero py-24 md:py-32">
+		<div class="container-x">
+		<div class="zoom-page-hero__content">
 			<p class="eyebrow" data-reveal><?php esc_html_e( 'Portfolio', 'kastalabs' ); ?></p>
 			<h1 class="type-display-lg mt-6" data-reveal data-reveal-delay="0.1">
 				<?php esc_html_e( 'Selected projects built with strategy and intention.', 'kastalabs' ); ?>
@@ -19,6 +20,7 @@ get_header(); ?>
 			<p class="type-body-lg measure-copy text-muted mt-8" data-reveal data-reveal-delay="0.2">
 				<?php esc_html_e( 'Kami percaya setiap project memiliki konteks dan tantangan yang berbeda. Karena itu setiap solusi dibangun melalui pendekatan yang terstruktur dan relevan.', 'kastalabs' ); ?>
 			</p>
+		</div>
 		</div>
 	</section>
 
@@ -31,7 +33,7 @@ get_header(); ?>
 	);
 	?>
 	<?php if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) : ?>
-		<section class="container-x pb-12" data-work-filters>
+		<section class="container-x py-12" data-work-filters>
 			<div class="flex flex-wrap gap-3" role="tablist" aria-label="<?php esc_attr_e( 'Filter projects', 'kastalabs' ); ?>">
 				<button class="filter-chip is-active" data-filter="*" role="tab" aria-selected="true">
 					<?php esc_html_e( 'Semua', 'kastalabs' ); ?>

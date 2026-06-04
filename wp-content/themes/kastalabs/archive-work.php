@@ -13,8 +13,9 @@ get_header(); ?>
 <main id="main" class="work-archive" role="main" data-page="work-archive">
 
 	<!-- Hero Section -->
-	<section class="container-x pt-32 pb-20 md:pt-44 md:pb-28" data-work-hero>
-		<div class="max-w-5xl">
+	<section class="zoom-page-hero py-24 md:py-32" data-work-hero>
+		<div class="container-x">
+		<div class="zoom-page-hero__content">
 			<p class="eyebrow" data-reveal><?php esc_html_e( 'Portfolio', 'kastalabs' ); ?></p>
 			<h1 class="type-display-lg mt-6" data-reveal data-reveal-delay="0.1">
 				<?php esc_html_e( 'Selected work', 'kastalabs' ); ?>
@@ -22,6 +23,7 @@ get_header(); ?>
 			<p class="type-body-lg measure-copy text-muted mt-8" data-reveal data-reveal-delay="0.2">
 				<?php esc_html_e( 'Koleksi proyek terpilih yang menunjukkan pendekatan kami dalam branding, desain digital, dan pengembangan web.', 'kastalabs' ); ?>
 			</p>
+		</div>
 		</div>
 	</section>
 
@@ -35,7 +37,7 @@ get_header(); ?>
 	);
 	?>
 	<?php if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) : ?>
-		<section class="container-x pb-12" data-work-filters>
+		<section class="container-x py-12" data-work-filters>
 			<div class="flex flex-wrap gap-3" role="tablist" aria-label="<?php esc_attr_e( 'Filter projects', 'kastalabs' ); ?>">
 				<button
 					class="filter-chip is-active"
@@ -136,7 +138,7 @@ get_header(); ?>
 		</section>
 	<?php else : ?>
 		<section class="container-x pb-32">
-			<div class="text-center py-20">
+			<div class="zoom-card py-20 text-center">
 				<p class="type-body-lg text-muted"><?php esc_html_e( 'Belum ada karya yang dipublikasi.', 'kastalabs' ); ?></p>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn-primary mt-8">
 					<?php esc_html_e( 'Kembali ke beranda', 'kastalabs' ); ?>

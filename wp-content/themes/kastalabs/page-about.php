@@ -11,16 +11,23 @@ get_header(); ?>
 
 <main id="main" role="main" data-page="about">
 	<?php while ( have_posts() ) : the_post(); ?>
-		<section class="container-x pt-28 pb-16 md:pt-40 md:pb-24">
-			<div class="max-w-5xl" data-reveal>
+		<section class="zoom-page-hero py-24 md:py-32">
+			<div class="container-x">
+			<div class="zoom-page-hero__content" data-reveal>
 				<?php kasta_eyebrow( __( 'About Kastalabs', 'kastalabs' ) ); ?>
 				<h1 class="type-display-lg mt-6">
 					<?php esc_html_e( 'Studio kecil untuk brand yang ingin bergerak lebih tajam.', 'kastalabs' ); ?>
 				</h1>
 			</div>
+			<div class="zoom-page-hero__meta mt-10" data-reveal data-reveal-delay="0.1">
+				<span class="zoom-meta-pill type-label"><?php esc_html_e( 'Strategy first', 'kastalabs' ); ?></span>
+				<span class="zoom-meta-pill type-label"><?php esc_html_e( 'Visual systems', 'kastalabs' ); ?></span>
+				<span class="zoom-meta-pill type-label"><?php esc_html_e( 'Built to ship', 'kastalabs' ); ?></span>
+			</div>
+			</div>
 		</section>
 
-		<section class="container-x py-16 border-y border-hairline">
+		<section class="container-x py-16">
 			<div class="grid gap-10 md:grid-cols-[1fr_1.4fr] md:items-start">
 				<div data-reveal>
 					<p class="eyebrow"><?php esc_html_e( 'Our posture', 'kastalabs' ); ?></p>
@@ -54,7 +61,7 @@ get_header(); ?>
 				);
 				foreach ( $values as $index => $value ) :
 					?>
-					<article class="rounded-lg border border-hairline bg-bg p-6 shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
+					<article class="zoom-card zoom-card--soft p-6" data-reveal data-reveal-delay="<?php echo esc_attr( (string) ( $index * 0.08 ) ); ?>">
 						<p class="type-label text-primary-600"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></p>
 						<h2 class="type-h4 mt-8"><?php echo esc_html( $value['title'] ); ?></h2>
 						<p class="type-body mt-4 text-muted"><?php echo esc_html( $value['body'] ); ?></p>
@@ -80,7 +87,7 @@ get_header(); ?>
 					);
 					foreach ( $capabilities as $capability ) :
 						?>
-						<p class="type-h4 border-b border-hairline py-4"><?php echo esc_html( $capability ); ?></p>
+						<p class="zoom-card bg-bg p-5 type-h4"><?php echo esc_html( $capability ); ?></p>
 					<?php endforeach; ?>
 				</div>
 			</div>
