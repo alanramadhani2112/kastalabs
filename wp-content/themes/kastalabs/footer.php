@@ -17,17 +17,17 @@ $social_links = array_filter(
 );
 ?>
 
-<footer class="site-footer border-t border-hairline mt-24" role="contentinfo">
+<footer class="site-footer mt-24 bg-navy text-white" role="contentinfo">
 	<div class="container-x py-16 grid gap-12 md:grid-cols-4">
 		<div class="md:col-span-2">
 			<?php echo kasta_site_logo(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			<p class="type-body-sm text-muted mt-4 max-w-md">
+			<p class="type-body-sm mt-4 max-w-md text-white/70">
 				<?php echo esc_html( $footer_copy ); ?>
 			</p>
 		</div>
 
 		<nav aria-label="<?php esc_attr_e( 'Footer', 'kastalabs' ); ?>">
-			<h2 class="eyebrow mb-4"><?php esc_html_e( 'Navigation', 'kastalabs' ); ?></h2>
+			<h2 class="type-label mb-4 text-white/55"><?php esc_html_e( 'Navigation', 'kastalabs' ); ?></h2>
 			<?php
 			wp_nav_menu(
 				array(
@@ -42,7 +42,7 @@ $social_links = array_filter(
 		</nav>
 
 		<nav aria-label="<?php esc_attr_e( 'Social', 'kastalabs' ); ?>">
-			<h2 class="eyebrow mb-4"><?php esc_html_e( 'Connect', 'kastalabs' ); ?></h2>
+			<h2 class="type-label mb-4 text-white/55"><?php esc_html_e( 'Connect', 'kastalabs' ); ?></h2>
 			<?php if ( has_nav_menu( 'social' ) ) : ?>
 				<?php
 				wp_nav_menu(
@@ -65,7 +65,7 @@ $social_links = array_filter(
 		</nav>
 	</div>
 
-	<div class="type-label container-x flex items-center justify-between text-muted py-6 border-t border-hairline">
+	<div class="type-label container-x flex items-center justify-between border-t border-white/15 py-6 text-white/55">
 		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
 		<p><?php esc_html_e( 'kasta.theme v', 'kastalabs' ); ?><?php echo esc_html( KASTA_VERSION ); ?></p>
 	</div>

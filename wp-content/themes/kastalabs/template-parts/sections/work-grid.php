@@ -29,26 +29,32 @@ $placeholders = array(
 
 <section class="py-24 md:py-32 bg-bg" data-work-grid>
 	<div class="container-x">
-		<div class="flex items-end justify-between mb-16">
+		<div class="zoom-section-heading mb-14">
 			<div data-reveal>
 				<?php kasta_eyebrow( __( 'Selected Work', 'kastalabs' ) ); ?>
 				<h2 class="type-h2 mt-4">
 					<?php esc_html_e( 'Karya yang dibuat untuk meninggalkan kesan.', 'kastalabs' ); ?>
 				</h2>
+				<p class="type-body mt-5 text-muted">
+					<?php esc_html_e( 'Beberapa contoh bagaimana strategi, visual, dan teknologi disusun menjadi pengalaman digital yang lebih mudah dipercaya.', 'kastalabs' ); ?>
+				</p>
 			</div>
+		</div>
+
+		<div class="mb-10 hidden justify-center md:flex">
 			<a
 				href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ) ); ?>"
-				class="btn-ghost hidden md:inline-flex"
+				class="btn-ghost"
 				data-magnetic
 			>
 				<?php esc_html_e( 'Lihat semua portfolio', 'kastalabs' ); ?>
 			</a>
 		</div>
 
-		<div class="grid gap-8 md:grid-cols-2">
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 			<?php if ( $portfolio_query->have_posts() ) : ?>
 				<?php while ( $portfolio_query->have_posts() ) : $portfolio_query->the_post(); ?>
-					<article class="group overflow-hidden rounded-lg border border-hairline bg-bg shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-work-item>
+					<article class="zoom-card group overflow-hidden" data-work-item>
 						<a href="<?php the_permalink(); ?>" class="block text-inherit">
 							<div class="aspect-[4/3] overflow-hidden bg-surface" data-work-media>
 								<?php if ( has_post_thumbnail() ) : ?>
@@ -67,7 +73,7 @@ $placeholders = array(
 									</div>
 								<?php endif; ?>
 							</div>
-							<div class="p-6 md:p-8">
+							<div class="p-6">
 							<?php
 							$categories = get_the_terms( get_the_ID(), 'portfolio_category' );
 							if ( $categories && ! is_wp_error( $categories ) ) :
@@ -89,11 +95,11 @@ $placeholders = array(
 				<?php wp_reset_postdata(); ?>
 			<?php else : ?>
 				<?php foreach ( $placeholders as $ph ) : ?>
-					<article class="overflow-hidden rounded-lg border border-hairline bg-bg shadow-[0_18px_40px_rgb(0_12_26_/_0.04)]" data-work-item>
+					<article class="zoom-card overflow-hidden" data-work-item>
 						<div class="flex aspect-[4/3] w-full items-center justify-center bg-surface" data-work-media>
 							<span class="type-label text-muted"><?php echo esc_html( $ph['cat'] ); ?></span>
 						</div>
-						<div class="p-6 md:p-8">
+						<div class="p-6">
 							<span class="eyebrow text-primary-600 mb-2 block"><?php echo esc_html( $ph['cat'] ); ?></span>
 							<h3 class="type-h4"><?php echo esc_html( $ph['title'] ); ?></h3>
 						</div>

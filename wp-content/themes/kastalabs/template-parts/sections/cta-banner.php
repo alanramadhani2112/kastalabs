@@ -19,11 +19,11 @@ $contact_email     = kasta_contact_email();
 
 <section class="py-24 md:py-32 bg-bg" data-cta-banner>
 	<div class="container-x">
-		<div class="relative overflow-hidden rounded-lg border border-hairline bg-navy p-10 text-center text-white md:p-16" data-cta-panel>
+		<div class="zoom-card relative overflow-hidden bg-navy p-10 text-center text-white md:p-16" data-cta-panel>
 			<div class="relative z-10">
-				<?php kasta_eyebrow( $cta_eyebrow ); ?>
+				<span class="type-label text-white/60"><?php echo esc_html( $cta_eyebrow ); ?></span>
 
-				<h2 class="type-h2 mt-6 max-w-3xl mx-auto">
+				<h2 class="type-h2 mt-6 max-w-3xl mx-auto text-white">
 					<?php echo esc_html( $cta_heading ); ?>
 				</h2>
 

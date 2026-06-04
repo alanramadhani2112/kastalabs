@@ -27,23 +27,24 @@ $faqs = array(
 );
 ?>
 
-<section class="py-24 md:py-32 bg-surface/55" data-faq>
+<section class="py-24 md:py-32 bg-bg" data-faq>
 	<div class="container-x">
-		<div class="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-			<div data-reveal>
+		<div class="mx-auto max-w-4xl">
+			<div class="zoom-section-heading mb-10" data-reveal>
 				<?php kasta_eyebrow( __( 'FAQ', 'kastalabs' ) ); ?>
 				<h2 class="type-h2 mt-4">
 					<?php esc_html_e( 'Pertanyaan yang sering muncul.', 'kastalabs' ); ?>
 				</h2>
 			</div>
 
-			<div class="grid gap-3" data-reveal data-reveal-delay="0.1">
+			<div class="grid gap-0 divide-y divide-hairline" data-reveal data-reveal-delay="0.1">
 				<?php foreach ( $faqs as $index => $faq ) : ?>
-					<details class="group rounded-lg border border-hairline bg-bg p-5" <?php echo 0 === $index ? 'open' : ''; ?>>
-						<summary class="type-h4 cursor-pointer list-none marker:hidden">
-							<?php echo esc_html( $faq['q'] ); ?>
+					<details class="group py-5" <?php echo 0 === $index ? 'open' : ''; ?>>
+						<summary class="type-body flex cursor-pointer list-none items-center justify-between gap-6 marker:hidden">
+							<span><?php echo esc_html( $faq['q'] ); ?></span>
+							<span class="grid h-7 w-7 flex-none place-items-center rounded-full bg-surface text-primary-600 group-open:rotate-45">+</span>
 						</summary>
-						<p class="type-body mt-4 text-muted">
+						<p class="type-body mt-4 max-w-3xl text-muted">
 							<?php echo esc_html( $faq['a'] ); ?>
 						</p>
 					</details>

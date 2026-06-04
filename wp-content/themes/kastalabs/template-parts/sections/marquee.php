@@ -21,13 +21,13 @@ $items = array(
 );
 ?>
 
-<section class="py-12 border-y border-hairline bg-bg overflow-hidden" aria-label="<?php esc_attr_e( 'Kapabilitas Kastalabs', 'kastalabs' ); ?>">
+<section class="py-10 bg-bg overflow-hidden" aria-label="<?php esc_attr_e( 'Kapabilitas Kastalabs', 'kastalabs' ); ?>">
 	<div data-marquee data-marquee-speed="40" data-marquee-pause-hover>
 		<div data-marquee-track class="flex items-center gap-12">
 			<?php foreach ( $items as $item ) : ?>
-				<span class="type-h3 text-fg/20 whitespace-nowrap flex items-center gap-12">
+				<span class="type-label text-muted whitespace-nowrap flex items-center gap-12">
 					<?php echo esc_html( $item ); ?>
-					<span class="inline-block w-2 h-2 rounded-full bg-primary-500" aria-hidden="true"></span>
+					<span class="inline-block h-1.5 w-1.5 rounded-full bg-primary-500" aria-hidden="true"></span>
 				</span>
 			<?php endforeach; ?>
 		</div>
