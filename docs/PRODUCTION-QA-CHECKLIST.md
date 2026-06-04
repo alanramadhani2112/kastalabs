@@ -23,6 +23,7 @@ Use this before launch or deployment review.
 - Confirm Inquiry records show sender, email, project type, and email delivery status in wp-admin.
 - Confirm Inquiry records can be filtered by lead status.
 - Confirm Inquiry lead status can be updated from the detail screen and bulk actions.
+- Confirm Inquiry CSV export works for all leads and filtered lead statuses.
 - Verify security headers:
   - `X-Content-Type-Options`
   - `X-Frame-Options`

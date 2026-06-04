@@ -19,6 +19,7 @@ add_filter( 'handle_bulk_actions-edit-kasta_inquiry', 'kastalabs_handle_inquiry_
 add_action( 'admin_notices', 'kastalabs_render_inquiry_bulk_action_notice' );
 add_action( 'add_meta_boxes_kasta_inquiry', 'kastalabs_register_inquiry_meta_boxes' );
 add_action( 'save_post_kasta_inquiry', 'kastalabs_save_inquiry_status_meta_box' );
+add_action( 'admin_post_kastalabs_export_inquiries', 'kastalabs_export_inquiries_csv' );
 
 /**
  * Register private Inquiry CPT for contact submissions.
@@ -205,6 +206,19 @@ function kastalabs_render_inquiry_status_filter( string $post_type ): void {
 	}
 
 	$current = isset( $_GET['inquiry_status'] ) ? sanitize_key( wp_unslash( $_GET['inquiry_status'] ) ) : '';
+	$export_url = wp_nonce_url(
+		add_query_arg(
+			array_filter(
+				array(
+					'action'         => 'kastalabs_export_inquiries',
+					'inquiry_status' => $current,
+				),
+				static fn( string $value ): bool => '' !== $value
+			),
+			admin_url( 'admin-post.php' )
+		),
+		'kastalabs_export_inquiries'
+	);
 	?>
 	<label class="screen-reader-text" for="kastalabs_inquiry_status_filter">
 		<?php esc_html_e( 'Filter by inquiry status', 'kastalabs' ); ?>
@@ -217,6 +231,9 @@ function kastalabs_render_inquiry_status_filter( string $post_type ): void {
 			</option>
 		<?php endforeach; ?>
 	</select>
+	<a class="button" href="<?php echo esc_url( $export_url ); ?>">
+		<?php esc_html_e( 'Export CSV', 'kastalabs' ); ?>
+	</a>
 	<?php
 }
 
@@ -325,4 +342,93 @@ function kastalabs_render_inquiry_bulk_action_notice(): void {
 			)
 		)
 	);
+}
+
+/**
+ * Export Inquiry records as CSV for backend lead operations.
+ */
+function kastalabs_export_inquiries_csv(): void {
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_die( esc_html__( 'You do not have permission to export inquiries.', 'kastalabs' ) );
+	}
+
+	check_admin_referer( 'kastalabs_export_inquiries' );
+
+	$status = isset( $_GET['inquiry_status'] ) ? sanitize_key( wp_unslash( $_GET['inquiry_status'] ) ) : '';
+	if ( '' !== $status && ! array_key_exists( $status, kastalabs_inquiry_statuses() ) ) {
+		$status = '';
+	}
+
+	$filename = 'kastalabs-inquiries-' . wp_date( 'Y-m-d-His' ) . '.csv';
+	nocache_headers();
+	header( 'Content-Type: text/csv; charset=utf-8' );
+	header( 'Content-Disposition: attachment; filename=' . $filename );
+
+	$output = fopen( 'php://output', 'w' );
+	if ( false === $output ) {
+		exit;
+	}
+
+	fputcsv(
+		$output,
+		array(
+			'Submitted At',
+			'Name',
+			'Email',
+			'Company',
+			'Budget',
+			'Project Type',
+			'Lead Status',
+			'Email Status',
+			'Source URL',
+			'Message',
+		)
+	);
+
+	foreach ( kastalabs_get_inquiries_for_export( $status ) as $post ) {
+		fputcsv(
+			$output,
+			array(
+				get_date_from_gmt( $post->post_date_gmt, 'Y-m-d H:i:s' ),
+				(string) get_post_meta( $post->ID, 'inquiry_name', true ),
+				(string) get_post_meta( $post->ID, 'email', true ),
+				(string) get_post_meta( $post->ID, 'company', true ),
+				(string) get_post_meta( $post->ID, 'budget', true ),
+				(string) get_post_meta( $post->ID, 'project_type', true ),
+				kastalabs_get_inquiry_status_label( (string) get_post_meta( $post->ID, 'inquiry_status', true ) ),
+				(string) get_post_meta( $post->ID, 'email_status', true ),
+				(string) get_post_meta( $post->ID, 'source_url', true ),
+				wp_strip_all_tags( $post->post_content ),
+			)
+		);
+	}
+
+	fclose( $output );
+	exit;
+}
+
+/**
+ * Return private Inquiry posts for CSV export.
+ *
+ * @return WP_Post[]
+ */
+function kastalabs_get_inquiries_for_export( string $status = '' ): array {
+	$args = array(
+		'post_type'      => 'kasta_inquiry',
+		'post_status'    => 'private',
+		'posts_per_page' => -1,
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+	);
+
+	if ( '' !== $status && array_key_exists( $status, kastalabs_inquiry_statuses() ) ) {
+		$args['meta_query'] = array(
+			array(
+				'key'   => 'inquiry_status',
+				'value' => $status,
+			),
+		);
+	}
+
+	return get_posts( $args );
 }
