@@ -10,6 +10,68 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Return the best available sitemap URL while the SEO plugin decision is open.
+ */
+function kasta_sitemap_url(): string {
+	return home_url( '/wp-sitemap.xml' );
+}
+
+add_action(
+	'template_redirect',
+	function (): void {
+		if ( is_admin() ) {
+			return;
+		}
+
+		$request_path = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
+		if ( 'sitemap.xml' !== trim( $request_path, '/' ) ) {
+			return;
+		}
+
+		wp_safe_redirect( kasta_sitemap_url(), 301 );
+		exit;
+	}
+);
+
+add_filter(
+	'robots_txt',
+	function ( string $output, bool $public ): string {
+		unset( $public );
+
+		$lines = preg_split( '/\r\n|\r|\n/', trim( $output ) );
+		$lines = is_array( $lines ) ? array_filter( $lines ) : array();
+
+		$has_user_agent = false;
+		foreach ( $lines as $line ) {
+			if ( str_starts_with( strtolower( trim( $line ) ), 'user-agent:' ) ) {
+				$has_user_agent = true;
+				break;
+			}
+		}
+
+		if ( ! $has_user_agent ) {
+			array_unshift( $lines, 'User-agent: *' );
+		}
+
+		$required = array(
+			'Disallow: /wp-admin/',
+			'Allow: /wp-admin/admin-ajax.php',
+			'Sitemap: ' . kasta_sitemap_url(),
+		);
+
+		foreach ( $required as $line ) {
+			if ( ! in_array( $line, $lines, true ) ) {
+				$lines[] = $line;
+			}
+		}
+
+		return implode( "\n", $lines ) . "\n";
+	},
+	10,
+	2
+);
+
+/**
  * Return configured default SEO title.
  */
 function kasta_seo_title(): string {
