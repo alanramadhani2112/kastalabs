@@ -66,6 +66,27 @@ function kastalabs_render_settings_page(): void {
 				<?php kastalabs_render_url_field( $options, 'hero_secondary_url', __( 'Secondary Button URL', 'kastalabs' ) ); ?>
 			</table>
 
+			<h2><?php esc_html_e( 'Homepage Services Section', 'kastalabs' ); ?></h2>
+			<table class="form-table" role="presentation">
+				<?php kastalabs_render_text_field( $options, 'services_eyebrow', __( 'Eyebrow', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'services_heading', __( 'Heading', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_textarea_field( $options, 'services_body', __( 'Body', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'services_pill_one', __( 'Pill One', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'services_pill_two', __( 'Pill Two', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'services_pill_three', __( 'Pill Three', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'services_cta_label', __( 'Button Label', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_url_field( $options, 'services_cta_url', __( 'Button URL', 'kastalabs' ) ); ?>
+			</table>
+
+			<h2><?php esc_html_e( 'Homepage Portfolio Section', 'kastalabs' ); ?></h2>
+			<table class="form-table" role="presentation">
+				<?php kastalabs_render_text_field( $options, 'portfolio_eyebrow', __( 'Eyebrow', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'portfolio_heading', __( 'Heading', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_textarea_field( $options, 'portfolio_body', __( 'Body', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'portfolio_cta_label', __( 'Button Label', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_url_field( $options, 'portfolio_cta_url', __( 'Button URL', 'kastalabs' ) ); ?>
+			</table>
+
 			<h2><?php esc_html_e( 'Global CTA', 'kastalabs' ); ?></h2>
 			<table class="form-table" role="presentation">
 				<?php kastalabs_render_text_field( $options, 'cta_eyebrow', __( 'Eyebrow', 'kastalabs' ) ); ?>

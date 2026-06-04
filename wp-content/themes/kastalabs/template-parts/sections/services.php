@@ -7,6 +7,19 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$services_eyebrow   = kasta_site_option( 'services_eyebrow', __( 'Layanan', 'kastalabs' ) );
+$services_heading   = kasta_site_option( 'services_heading', __( 'Services built around clarity, creativity, and systems thinking.', 'kastalabs' ) );
+$services_body      = kasta_site_option( 'services_body', __( 'Pilih titik mulai yang paling relevan. Setiap layanan bisa berdiri sendiri atau disusun menjadi satu sistem digital yang utuh.', 'kastalabs' ) );
+$services_cta_label = kasta_site_option( 'services_cta_label', __( 'View All Services', 'kastalabs' ) );
+$services_cta_url   = kasta_site_url_option( 'services_cta_url', '/services/' );
+$service_pills      = array_filter(
+	array(
+		kasta_site_option( 'services_pill_one', __( 'Branding', 'kastalabs' ) ),
+		kasta_site_option( 'services_pill_two', __( 'Product experience', 'kastalabs' ) ),
+		kasta_site_option( 'services_pill_three', __( 'Web systems', 'kastalabs' ) ),
+	)
+);
+
 $services_query = new WP_Query(
 	array(
 		'post_type'      => 'service',
@@ -45,20 +58,22 @@ $fallback_services = array(
 <section class="py-24 md:py-32 bg-bg" data-services>
 	<div class="container-x">
 		<div class="zoom-section-heading mb-8" data-reveal>
-			<?php kasta_eyebrow( __( 'Layanan', 'kastalabs' ) ); ?>
+			<?php kasta_eyebrow( $services_eyebrow ); ?>
 			<h2 class="type-h2 mt-4">
-				<?php esc_html_e( 'Services built around clarity, creativity, and systems thinking.', 'kastalabs' ); ?>
+				<?php echo esc_html( $services_heading ); ?>
 			</h2>
 			<p class="type-body mt-5 text-muted">
-				<?php esc_html_e( 'Pilih titik mulai yang paling relevan. Setiap layanan bisa berdiri sendiri atau disusun menjadi satu sistem digital yang utuh.', 'kastalabs' ); ?>
+				<?php echo esc_html( $services_body ); ?>
 			</p>
 		</div>
 
-		<div class="zoom-pill-row mb-10 justify-center" aria-label="<?php esc_attr_e( 'Service categories', 'kastalabs' ); ?>">
-			<span class="zoom-pill type-label"><?php esc_html_e( 'Branding', 'kastalabs' ); ?></span>
-			<span class="zoom-pill type-label"><?php esc_html_e( 'Product experience', 'kastalabs' ); ?></span>
-			<span class="zoom-pill type-label"><?php esc_html_e( 'Web systems', 'kastalabs' ); ?></span>
-		</div>
+		<?php if ( $service_pills ) : ?>
+			<div class="zoom-pill-row mb-10 justify-center" aria-label="<?php esc_attr_e( 'Service categories', 'kastalabs' ); ?>">
+				<?php foreach ( $service_pills as $service_pill ) : ?>
+					<span class="zoom-pill type-label"><?php echo esc_html( $service_pill ); ?></span>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
 
 		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 			<?php if ( $services_query->have_posts() ) : ?>
@@ -100,8 +115,8 @@ $fallback_services = array(
 		</div>
 
 		<div class="mt-10 text-center">
-			<a href="<?php echo esc_url( home_url( '/services/' ) ); ?>" class="btn-ghost" data-magnetic>
-				<?php esc_html_e( 'View All Services', 'kastalabs' ); ?>
+			<a href="<?php echo esc_url( $services_cta_url ); ?>" class="btn-ghost" data-magnetic>
+				<?php echo esc_html( $services_cta_label ); ?>
 			</a>
 		</div>
 	</div>

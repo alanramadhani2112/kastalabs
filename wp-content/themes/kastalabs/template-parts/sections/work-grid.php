@@ -9,6 +9,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$portfolio_eyebrow   = kasta_site_option( 'portfolio_eyebrow', __( 'Selected Work', 'kastalabs' ) );
+$portfolio_heading   = kasta_site_option( 'portfolio_heading', __( 'Karya yang dibuat untuk meninggalkan kesan.', 'kastalabs' ) );
+$portfolio_body      = kasta_site_option( 'portfolio_body', __( 'Beberapa contoh bagaimana strategi, visual, dan teknologi disusun menjadi pengalaman digital yang lebih mudah dipercaya.', 'kastalabs' ) );
+$portfolio_cta_label = kasta_site_option( 'portfolio_cta_label', __( 'Lihat semua portfolio', 'kastalabs' ) );
+$portfolio_cta_url   = kasta_site_url_option( 'portfolio_cta_url', get_post_type_archive_link( 'portfolio' ) ?: '/portfolio/' );
+
 $portfolio_query = new WP_Query(
 	array(
 		'post_type'      => 'portfolio',
@@ -31,23 +37,23 @@ $placeholders = array(
 	<div class="container-x">
 		<div class="zoom-section-heading mb-14">
 			<div data-reveal>
-				<?php kasta_eyebrow( __( 'Selected Work', 'kastalabs' ) ); ?>
+				<?php kasta_eyebrow( $portfolio_eyebrow ); ?>
 				<h2 class="type-h2 mt-4">
-					<?php esc_html_e( 'Karya yang dibuat untuk meninggalkan kesan.', 'kastalabs' ); ?>
+					<?php echo esc_html( $portfolio_heading ); ?>
 				</h2>
 				<p class="type-body mt-5 text-muted">
-					<?php esc_html_e( 'Beberapa contoh bagaimana strategi, visual, dan teknologi disusun menjadi pengalaman digital yang lebih mudah dipercaya.', 'kastalabs' ); ?>
+					<?php echo esc_html( $portfolio_body ); ?>
 				</p>
 			</div>
 		</div>
 
 		<div class="mb-10 hidden justify-center md:flex">
 			<a
-				href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ) ); ?>"
+				href="<?php echo esc_url( $portfolio_cta_url ); ?>"
 				class="btn-ghost"
 				data-magnetic
 			>
-				<?php esc_html_e( 'Lihat semua portfolio', 'kastalabs' ); ?>
+				<?php echo esc_html( $portfolio_cta_label ); ?>
 			</a>
 		</div>
 
@@ -110,11 +116,11 @@ $placeholders = array(
 
 		<div class="mt-10 text-center md:hidden">
 			<a
-				href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ) ); ?>"
+				href="<?php echo esc_url( $portfolio_cta_url ); ?>"
 				class="btn-ghost"
 				data-magnetic
 			>
-				<?php esc_html_e( 'Lihat semua portfolio', 'kastalabs' ); ?>
+				<?php echo esc_html( $portfolio_cta_label ); ?>
 			</a>
 		</div>
 	</div>

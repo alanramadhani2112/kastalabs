@@ -362,10 +362,10 @@ Goal:
 - Make main site content editable without code changes.
 
 Tasks:
-- Implement theme options. Started 2026-06-04; `kastalabs-core` now provides fallback WordPress options through Settings > Kastalabs Settings.
-- Wire homepage copy to dynamic fields. Started 2026-06-04; homepage hero and global CTA now read editable options.
-- Wire services section to Service CPT.
-- Wire featured portfolio to Portfolio CPT.
+- Implement theme options. Continued 2026-06-04; `kastalabs-core` now provides fallback WordPress options through Settings > Kastalabs Settings, including hero, homepage Services, homepage Portfolio, CTA, contact, footer, and analytics fields.
+- Wire homepage copy to dynamic fields. Continued 2026-06-04; homepage hero, Services intro/pills/CTA, Featured Portfolio intro/CTA, and global CTA now read editable options.
+- Wire services section to Service CPT. Done 2026-06-04; homepage and `/services/` read Service posts with fallback copy when content is empty.
+- Wire featured portfolio to Portfolio CPT. Done 2026-06-04; homepage Featured Portfolio reads Portfolio posts and editable section copy.
 - Wire contact information to theme options. Started 2026-06-04; contact email, WhatsApp URL, location, social links, and footer copy now read editable options.
 - Replace placeholder testimonials or hide testimonials until real content exists. Started 2026-06-04; placeholder testimonial section is hidden from the homepage.
 
