@@ -10,12 +10,70 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Return configured default SEO title.
+ */
+function kasta_seo_title(): string {
+	if ( is_singular() ) {
+		$post = get_queried_object();
+		if ( $post instanceof WP_Post ) {
+			$title = (string) get_post_meta( $post->ID, 'seo_title', true );
+			if ( '' !== trim( $title ) ) {
+				return trim( $title );
+			}
+		}
+	}
+
+	if ( function_exists( 'kasta_site_option' ) ) {
+		$title = kasta_site_option( 'seo_title' );
+		if ( '' !== trim( $title ) ) {
+			return trim( $title );
+		}
+	}
+
+	return wp_get_document_title();
+}
+
+add_filter(
+	'document_title_parts',
+	function ( array $title ): array {
+		if ( is_admin() ) {
+			return $title;
+		}
+
+		if ( is_singular() ) {
+			$post = get_queried_object();
+			if ( $post instanceof WP_Post ) {
+				$seo_title = (string) get_post_meta( $post->ID, 'seo_title', true );
+				if ( '' !== trim( $seo_title ) ) {
+					$title['title'] = trim( $seo_title );
+					return $title;
+				}
+			}
+		}
+
+		if ( is_front_page() && function_exists( 'kasta_site_option' ) ) {
+			$seo_title = kasta_site_option( 'seo_title' );
+			if ( '' !== trim( $seo_title ) ) {
+				$title['title'] = trim( $seo_title );
+			}
+		}
+
+		return $title;
+	}
+);
+
+/**
  * Return a concise page description.
  */
 function kasta_seo_description(): string {
 	if ( is_singular() ) {
 		$post = get_queried_object();
 		if ( $post instanceof WP_Post ) {
+			$meta_description = (string) get_post_meta( $post->ID, 'seo_description', true );
+			if ( '' !== trim( $meta_description ) ) {
+				return trim( $meta_description );
+			}
+
 			$description = has_excerpt( $post ) ? get_the_excerpt( $post ) : wp_trim_words( wp_strip_all_tags( (string) $post->post_content ), 30 );
 			if ( '' !== trim( $description ) ) {
 				return trim( $description );
@@ -29,6 +87,13 @@ function kasta_seo_description(): string {
 
 	if ( is_post_type_archive( 'insight' ) ) {
 		return __( 'Insights Kastalabs seputar desain, teknologi, strategi digital, dan proses kreatif.', 'kastalabs' );
+	}
+
+	if ( function_exists( 'kasta_site_option' ) ) {
+		$description = kasta_site_option( 'seo_description' );
+		if ( '' !== trim( $description ) ) {
+			return trim( $description );
+		}
 	}
 
 	return get_bloginfo( 'description' );
@@ -52,6 +117,67 @@ add_action(
 		);
 	},
 	4
+);
+
+add_action(
+	'wp_head',
+	function (): void {
+		if ( is_admin() ) {
+			return;
+		}
+
+		$title       = kasta_seo_title();
+		$description = kasta_seo_description();
+		$image       = '';
+
+		if ( is_singular() ) {
+			$post = get_queried_object();
+			if ( $post instanceof WP_Post ) {
+				$image = (string) get_the_post_thumbnail_url( $post, 'kasta-cover' );
+			}
+		}
+
+		if ( '' === $image && function_exists( 'kasta_site_url_option' ) ) {
+			$image = kasta_site_url_option( 'og_image_url' );
+		}
+
+		$url = is_singular() ? get_permalink() : home_url( '/' );
+		if ( ! is_front_page() && ! is_home() && isset( $GLOBALS['wp']->request ) && '' !== $GLOBALS['wp']->request ) {
+			$url = home_url( '/' . trim( (string) $GLOBALS['wp']->request, '/' ) . '/' );
+		}
+
+		$tags = array(
+			'og:title'       => $title,
+			'og:description' => $description,
+			'og:url'         => $url,
+			'og:site_name'   => get_bloginfo( 'name' ),
+			'og:type'        => is_singular( array( 'post', 'insight' ) ) ? 'article' : 'website',
+			'twitter:card'        => $image ? 'summary_large_image' : 'summary',
+			'twitter:title'       => $title,
+			'twitter:description' => $description,
+		);
+
+		if ( $image ) {
+			$tags['og:image']      = $image;
+			$tags['twitter:image'] = $image;
+		}
+
+		foreach ( $tags as $property => $content ) {
+			if ( '' === trim( (string) $content ) ) {
+				continue;
+			}
+
+			$attribute = str_starts_with( $property, 'twitter:' ) ? 'name' : 'property';
+			printf(
+				"\n<meta %s=\"%s\" content=\"%s\">",
+				esc_attr( $attribute ),
+				esc_attr( $property ),
+				esc_attr( $content )
+			);
+		}
+		echo "\n";
+	},
+	5
 );
 
 add_action(

@@ -44,6 +44,9 @@ function kastalabs_default_options(): array {
 		'instagram_url'       => '',
 		'linkedin_url'        => '',
 		'behance_url'         => '',
+		'seo_title'           => '',
+		'seo_description'     => '',
+		'og_image_url'        => '',
 		'analytics_id'        => '',
 	);
 }
@@ -106,7 +109,7 @@ function kastalabs_sanitize_options( mixed $input ): array {
 			continue;
 		}
 
-		if ( str_contains( $key, 'body' ) || 'footer_copy' === $key ) {
+		if ( str_contains( $key, 'body' ) || 'footer_copy' === $key || 'seo_description' === $key ) {
 			$output[ $key ] = sanitize_textarea_field( (string) $value );
 			continue;
 		}

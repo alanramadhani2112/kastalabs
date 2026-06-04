@@ -5,7 +5,9 @@ Use this before launch or deployment review.
 ## SEO
 
 - Confirm one SEO plugin decision: Rank Math or Yoast.
+- Confirm Kastalabs SEO Defaults are configured in Settings.
 - Verify meta title and meta description for Home, About, Services, Portfolio, Insights, and Contact.
+- Verify OG/Twitter title, description, URL, and image output.
 - Validate JSON-LD with Rich Results Test:
   - Organization
   - WebSite

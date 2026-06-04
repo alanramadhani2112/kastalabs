@@ -78,23 +78,26 @@ function kastalabs_register_acf_field_groups(): void {
 		)
 	);
 
+	$seo_locations = array();
+	foreach ( array( 'page', 'post', 'portfolio', 'service', 'insight' ) as $post_type ) {
+		$seo_locations[] = array(
+			array(
+				'param'    => 'post_type',
+				'operator' => '==',
+				'value'    => $post_type,
+			),
+		);
+	}
+
 	acf_add_local_field_group(
 		array(
-			'key'      => 'group_kastalabs_insight_seo',
-			'title'    => __( 'Insight SEO', 'kastalabs' ),
+			'key'      => 'group_kastalabs_seo',
+			'title'    => __( 'SEO', 'kastalabs' ),
 			'fields'   => array(
 				kastalabs_acf_text_field( 'seo_title', __( 'SEO Title', 'kastalabs' ) ),
 				kastalabs_acf_textarea_field( 'seo_description', __( 'SEO Description', 'kastalabs' ) ),
 			),
-			'location' => array(
-				array(
-					array(
-						'param'    => 'post_type',
-						'operator' => '==',
-						'value'    => 'insight',
-					),
-				),
-			),
+			'location' => $seo_locations,
 		)
 	);
 }

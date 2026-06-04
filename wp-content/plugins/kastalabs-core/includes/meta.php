@@ -43,13 +43,15 @@ function kastalabs_register_structured_meta(): void {
 		)
 	);
 
-	kastalabs_register_meta_fields(
-		'insight',
-		array(
-			'seo_title'       => 'string',
-			'seo_description' => 'textarea',
-		)
-	);
+	foreach ( array( 'page', 'post', 'portfolio', 'service', 'insight' ) as $seo_post_type ) {
+		kastalabs_register_meta_fields(
+			$seo_post_type,
+			array(
+				'seo_title'       => 'string',
+				'seo_description' => 'textarea',
+			)
+		);
+	}
 
 	kastalabs_register_meta_fields(
 		'kasta_inquiry',
