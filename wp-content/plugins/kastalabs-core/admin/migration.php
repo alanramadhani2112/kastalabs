@@ -51,6 +51,28 @@ function kastalabs_render_migration_page(): void {
 			: __( 'Default services were skipped because Service content already exists.', 'kastalabs' );
 	}
 
+	if ( isset( $_POST['kastalabs_seed_portfolio'] ) && check_admin_referer( 'kastalabs_seed_portfolio' ) ) {
+		$count   = kastalabs_seed_default_portfolio();
+		$message = $count
+			? sprintf(
+				/* translators: %d: seeded count. */
+				_n( '%d starter portfolio project created.', '%d starter portfolio projects created.', $count, 'kastalabs' ),
+				$count
+			)
+			: __( 'Starter portfolio content was skipped because all starter projects already exist.', 'kastalabs' );
+	}
+
+	if ( isset( $_POST['kastalabs_seed_insights'] ) && check_admin_referer( 'kastalabs_seed_insights' ) ) {
+		$count   = kastalabs_seed_default_insights();
+		$message = $count
+			? sprintf(
+				/* translators: %d: seeded count. */
+				_n( '%d starter insight created.', '%d starter insights created.', $count, 'kastalabs' ),
+				$count
+			)
+			: __( 'Starter insights were skipped because all starter articles already exist.', 'kastalabs' );
+	}
+
 	?>
 	<div class="wrap">
 		<h1><?php esc_html_e( 'Kastalabs Migration', 'kastalabs' ); ?></h1>
@@ -71,6 +93,24 @@ function kastalabs_render_migration_page(): void {
 		<form method="post">
 			<?php wp_nonce_field( 'kastalabs_seed_services' ); ?>
 			<?php submit_button( __( 'Seed Default Services', 'kastalabs' ), 'secondary', 'kastalabs_seed_services' ); ?>
+		</form>
+
+		<hr>
+
+		<h2><?php esc_html_e( 'Starter Portfolio Content', 'kastalabs' ); ?></h2>
+		<p><?php esc_html_e( 'Create missing starter portfolio projects without overwriting existing Portfolio content.', 'kastalabs' ); ?></p>
+		<form method="post">
+			<?php wp_nonce_field( 'kastalabs_seed_portfolio' ); ?>
+			<?php submit_button( __( 'Seed Starter Portfolio', 'kastalabs' ), 'secondary', 'kastalabs_seed_portfolio' ); ?>
+		</form>
+
+		<hr>
+
+		<h2><?php esc_html_e( 'Starter Insight Content', 'kastalabs' ); ?></h2>
+		<p><?php esc_html_e( 'Create missing starter insight articles without overwriting existing Insight content.', 'kastalabs' ); ?></p>
+		<form method="post">
+			<?php wp_nonce_field( 'kastalabs_seed_insights' ); ?>
+			<?php submit_button( __( 'Seed Starter Insights', 'kastalabs' ), 'secondary', 'kastalabs_seed_insights' ); ?>
 		</form>
 	</div>
 	<?php

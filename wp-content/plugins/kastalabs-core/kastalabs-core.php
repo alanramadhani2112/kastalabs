@@ -49,6 +49,8 @@ register_activation_hook(
 		kastalabs_register_insight_taxonomies();
 		kastalabs_seed_default_options();
 		kastalabs_seed_default_services();
+		kastalabs_seed_default_portfolio();
+		kastalabs_seed_default_insights();
 		flush_rewrite_rules();
 	}
 );

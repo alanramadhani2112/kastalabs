@@ -418,8 +418,8 @@ Goal:
 
 Tasks:
 - Add real services.
-- Add 3-6 real portfolio projects.
-- Add initial insights/articles.
+- Add 3-6 real portfolio projects. Started 2026-06-04; `kastalabs-core` can now seed four missing starter Portfolio projects without overwriting existing content; local site seeded 4 starter projects.
+- Add initial insights/articles. Started 2026-06-04; `kastalabs-core` can now seed three missing starter Insight articles without overwriting existing content; local site seeded 3 starter articles.
 - Add real testimonials if available.
 - Add social/contact information.
 - Test responsive layouts.
