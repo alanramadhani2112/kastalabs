@@ -55,7 +55,16 @@ get_header(); ?>
 			<?php if ( has_post_thumbnail() ) : ?>
 				<figure class="container-x" data-reveal data-reveal-delay="0.1">
 					<div class="zoom-card overflow-hidden bg-surface">
-						<?php the_post_thumbnail( 'kasta-cover', array( 'class' => 'w-full h-auto object-cover' ) ); ?>
+						<?php
+						the_post_thumbnail(
+							'kasta-cover',
+							array(
+								'class'         => 'w-full h-auto object-cover',
+								'loading'       => 'eager',
+								'fetchpriority' => 'high',
+							)
+						);
+						?>
 					</div>
 				</figure>
 			<?php endif; ?>

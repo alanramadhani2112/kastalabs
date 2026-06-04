@@ -20,7 +20,7 @@ The implementation lives in:
 - `wp-content/themes/kastalabs/src/css/app.css`
 - `wp-content/themes/kastalabs/inc/enqueue.php`
 
-Google Fonts now loads only Plus Jakarta Sans. Former mono styling has been removed from labels, counters, navigation helpers, form labels, and code snippets so the whole site uses one consistent type family.
+Plus Jakarta Sans is self-hosted from `wp-content/themes/kastalabs/src/fonts` and bundled by Vite. Former mono styling has been removed from labels, counters, navigation helpers, form labels, and code snippets so the whole site uses one consistent type family.
 
 ## Semantic Classes
 
