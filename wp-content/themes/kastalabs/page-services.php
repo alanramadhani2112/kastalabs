@@ -22,21 +22,32 @@ $services = new WP_Query(
 
 $fallback_services = array(
 	array(
+		'icon'  => 'sparkles',
 		'title' => __( 'Branding Design', 'kastalabs' ),
 		'body'  => __( 'Membangun identitas visual yang tidak hanya terlihat menarik, tetapi juga mampu memperkuat positioning dan komunikasi brand secara konsisten — dari logo, palet warna, tipografi, sampai pedoman brand yang bisa dipakai tim internal.', 'kastalabs' ),
 	),
 	array(
+		'icon'  => 'eye',
 		'title' => __( 'UI/UX Design', 'kastalabs' ),
 		'body'  => __( 'Merancang pengalaman digital yang intuitif dan terasa natural — didasarkan pada riset pengguna, bukan sekadar asumsi estetika.', 'kastalabs' ),
 	),
 	array(
+		'icon'  => 'code-bracket',
 		'title' => __( 'Web Development', 'kastalabs' ),
 		'body'  => __( 'Mengembangkan website yang cepat, scalable, dan dikelola dengan mudah — menggunakan teknologi modern tanpa kehilangan fokus pada konten dan SEO.', 'kastalabs' ),
 	),
 	array(
+		'icon'  => 'puzzle-piece',
 		'title' => __( 'Custom Software Development', 'kastalabs' ),
 		'body'  => __( 'Membangun sistem digital custom yang sesuai dengan cara kerja bisnis Anda — bukan memaksa bisnis menyesuaikan dengan software yang kaku.', 'kastalabs' ),
 	),
+);
+
+$service_icons = array(
+	'branding-design'             => 'sparkles',
+	'ui-ux-design'                => 'eye',
+	'web-development'             => 'code-bracket',
+	'custom-software-development' => 'puzzle-piece',
 );
 ?>
 

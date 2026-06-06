@@ -335,6 +335,7 @@ Tasks:
 - Register related taxonomies. Done 2026-06-04.
 - Remove inactive theme-owned backend artifacts. Done 2026-06-07; legacy theme files for contact handling, CPTs, taxonomies, and meta registration were removed after confirming runtime ownership lives in `kastalabs-core`.
 - Improve Portfolio admin review workflow. Done 2026-06-07; Portfolio list table now exposes Client, Year, Scope, Featured state, sortable admin columns, and a Featured filter.
+- Improve Service admin review workflow. Done 2026-06-07; Service list table now exposes order, icon, overview, CTA state, sortable admin columns, and CTA completeness filtering.
 - Add migration helpers for existing `work` posts. Done 2026-06-04; first local migration copied 1 dummy Work item to Portfolio.
 - Add ACF field groups if ACF Pro exists. Done 2026-06-04; local ACF groups are conditionally registered when ACF is active.
 - Add safe fallbacks if ACF is not active. Done 2026-06-04; REST-exposed post meta and Custom Fields support remain available without ACF.
@@ -454,6 +455,7 @@ Completed on 2026-06-04:
 - Legacy Work retained temporarily to avoid breaking `/work/`.
 - Theme no longer carries inactive backend registration files; CPTs, taxonomies, structured meta, inquiry handling, and migration helpers are owned by `kastalabs-core`.
 - Portfolio admin list is easier to curate through project metadata columns and Featured filtering.
+- Service admin list is easier to curate through order, icon, overview, and CTA completeness columns.
 - New templates added: `/services/`, `/portfolio/`, `/portfolio/{slug}`, `/insights/`, `/insights/{slug}`.
 - Header fallback navigation now follows PRD IA.
 - Homepage Services section can read from Service CPT with fallback content.

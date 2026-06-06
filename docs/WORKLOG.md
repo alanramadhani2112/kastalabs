@@ -4,6 +4,33 @@ Purpose:
 - Record each meaningful development cycle.
 - Keep implementation, verification, and documentation traceable.
 
+## 2026-06-07 - Service Admin CMS Polish
+
+Scope:
+- Added Service admin columns for Order, Icon, Overview, and CTA.
+- Added sortable Service Order and Icon columns.
+- Added a CTA completeness filter for the Service admin list table.
+- Fixed the Services page icon mapping so Service CPT content can render without relying on an undefined variable.
+- Updated the restructure plan with the new Service CMS admin workflow.
+
+Why:
+- Services are a first-class CMS content area and need to be easy to review before frontend page polish.
+- Editors should be able to see ordering, icon labels, summaries, and CTA completeness without opening every Service post.
+
+Files:
+- `wp-content/plugins/kastalabs-core/post-types/service.php`
+- `wp-content/themes/kastalabs/page-services.php`
+- `docs/PROJECT-RESTRUCTURE-PLAN.md`
+- `docs/WORKLOG.md`
+
+Verification:
+- PHP lint passed for all plugin and theme PHP files.
+- `/services/` returned `200`, rendered service copy, and did not expose PHP warnings.
+- WordPress bootstrap confirmed the `service` CPT and Service admin hooks are registered.
+
+Status:
+- Completed in this cycle.
+
 ## 2026-06-07 - Backend Ownership And Portfolio Admin Cleanup
 
 Scope:
