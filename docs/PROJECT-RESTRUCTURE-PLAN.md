@@ -8,6 +8,7 @@ Source documents:
 - `C:\Users\LENOVO\Downloads\Documents\Kastalabs Visual Direction.pdf`
 - `C:\Users\LENOVO\Downloads\Documents\Kastalabs Website Copywriting.pdf`
 - `C:\Users\LENOVO\Downloads\Documents\Kastalabs Technical Architecture.pdf`
+- `docs/DEVELOPMENT-WORKFLOW.md`
 
 ## 1. New North Star
 
@@ -298,6 +299,11 @@ Reduce:
 - Lenis/custom cursor unless they clearly improve the experience
 
 ## 9. Development Roadmap
+
+Documentation workflow:
+- Every meaningful change must be documented in the same work cycle.
+- Use `docs/DEVELOPMENT-WORKFLOW.md` for the operating rules.
+- Use `docs/WORKLOG.md` for implementation notes, verification, and status.
 
 ### Phase 0 - Stabilize And Freeze Direction
 

@@ -8,6 +8,7 @@ Purpose:
 - Lock the frontend direction before more theme implementation.
 - Sequence the work from sitemap to copywriting, wireframe, hi-fi, then WordPress frontend.
 - Prevent visual experiments from drifting away from the actual landing page strategy.
+- Follow `docs/DEVELOPMENT-WORKFLOW.md`: every meaningful frontend change must update documentation in the same work cycle.
 
 Reference direction:
 - Visual tone: light, calm, structured, enterprise-clean, with blue CTA emphasis.
@@ -651,6 +652,10 @@ Use motion as progressive enhancement:
 - no animation that leaves content invisible in screenshots or browser QA
 
 ## 8. Frontend Implementation Checklist
+
+Documentation rule:
+- Before finishing a frontend change, update this document or `docs/WORKLOG.md`.
+- If the change affects launch QA, update `docs/PRODUCTION-QA-CHECKLIST.md`.
 
 ### 8.1 Before Editing Theme
 
