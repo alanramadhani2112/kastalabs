@@ -44,7 +44,7 @@ $status = $args['status'];
 			'template-parts/ui/alert',
 			null,
 			array(
-				'message' => __( 'Pesan terkirim. Kami akan membalas secepatnya.', 'kastalabs' ),
+				'message' => __( 'Inquiry berhasil dikirim. Kami akan menghubungi Anda secepatnya.', 'kastalabs' ),
 				'variant' => 'success',
 				'class'   => 'mb-6',
 			)
@@ -56,7 +56,7 @@ $status = $args['status'];
 			'template-parts/ui/alert',
 			null,
 			array(
-				'message' => __( 'Pesan belum terkirim. Periksa nama, email, dan pesan Anda.', 'kastalabs' ),
+				'message' => __( 'Inquiry belum bisa dikirim. Periksa kembali data Anda atau hubungi kami langsung lewat email.', 'kastalabs' ),
 				'variant' => 'error',
 				'class'   => 'mb-6',
 			)
@@ -70,7 +70,7 @@ $status = $args['status'];
 			'template-parts/ui/form-field',
 			null,
 			array(
-				'label'        => __( 'Name', 'kastalabs' ),
+				'label'        => __( 'Nama', 'kastalabs' ),
 				'name'         => 'name',
 				'type'         => 'text',
 				'autocomplete' => 'name',
@@ -102,7 +102,7 @@ $status = $args['status'];
 			'template-parts/ui/form-field',
 			null,
 			array(
-				'label'   => __( 'Budget', 'kastalabs' ),
+				'label'   => __( 'Estimasi budget', 'kastalabs' ),
 				'name'    => 'budget',
 				'type'    => 'select',
 				'options' => array(
@@ -154,7 +154,7 @@ $status = $args['status'];
 		'template-parts/ui/button',
 		null,
 		array(
-			'label'    => __( 'Kirim pesan', 'kastalabs' ),
+			'label'    => __( 'Kirim inquiry', 'kastalabs' ),
 			'variant'  => 'primary',
 			'class'    => 'mt-8',
 			'magnetic' => true,

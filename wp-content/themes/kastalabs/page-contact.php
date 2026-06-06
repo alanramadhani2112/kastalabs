@@ -23,9 +23,9 @@ get_header(); ?>
 			'eyebrow' => __( 'Hubungi kami', 'kastalabs' ),
 			'heading' => __( 'Ceritakan proyek yang ingin Anda bangun.', 'kastalabs' ),
 			'pills'   => array(
-				__( 'Project inquiry', 'kastalabs' ),
-				__( 'Remote friendly', 'kastalabs' ),
-				__( 'Indonesia based', 'kastalabs' ),
+				__( 'Inquiry proyek', 'kastalabs' ),
+				__( 'Siap remote', 'kastalabs' ),
+				__( 'Berbasis di Indonesia', 'kastalabs' ),
 			),
 		)
 	);

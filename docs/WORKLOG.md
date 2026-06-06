@@ -81,3 +81,28 @@ Verification:
 
 Status:
 - Committed in `Clean local development artifacts`.
+
+## 2026-06-06 - Contact Page Microcopy QA
+
+Scope:
+- Reviewed primary frontend pages from local rendered screenshots.
+- Updated Contact page hero pills to Indonesian-first labels.
+- Updated contact form labels and feedback messages to match the frontend planning copy.
+- Changed the form submit CTA from `Kirim pesan` to `Kirim inquiry`.
+
+Why:
+- Kastalabs copy direction is Indonesian-first with selective English industry terms.
+- The contact form is a conversion-critical surface and should clearly map to the backend Inquiry workflow.
+
+Files:
+- `wp-content/themes/kastalabs/page-contact.php`
+- `wp-content/themes/kastalabs/template-parts/forms/contact-form.php`
+- `docs/WORKLOG.md`
+
+Verification:
+- PHP lint passed for touched Contact PHP files.
+- Contact page HTML contains `Nama`, `Estimasi budget`, `Kirim inquiry`, `Inquiry proyek`, `Siap remote`, and `Berbasis di Indonesia`.
+- Mobile Contact screenshot checked at 390px width.
+
+Status:
+- Committed in `Improve contact page microcopy`.
