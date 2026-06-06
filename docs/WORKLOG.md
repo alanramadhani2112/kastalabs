@@ -4,6 +4,34 @@ Purpose:
 - Record each meaningful development cycle.
 - Keep implementation, verification, and documentation traceable.
 
+## 2026-06-06 - Portfolio Route SEO Alignment
+
+Scope:
+- Aligned SEO metadata with the final `Portfolio` route.
+- Added archive description support for `portfolio`.
+- Kept `/work/` reachable as a legacy route but marked it as temporary through archive copy and canonical output.
+- Expanded CreativeWork JSON-LD support from legacy `work` singles to final `portfolio` singles.
+- Updated the 404 portfolio CTA to point to the final `/portfolio/` archive.
+
+Why:
+- Frontend planning defines `/portfolio/` as the final public route while `/work/` remains active only for migration safety.
+- SEO and fallback CTAs should reinforce the final information architecture without forcing a redirect before migration is approved.
+
+Files:
+- `wp-content/themes/kastalabs/inc/seo.php`
+- `wp-content/themes/kastalabs/404.php`
+- `docs/FRONTEND-PLANNING.md`
+- `docs/WORKLOG.md`
+
+Verification:
+- PHP lint passed for touched theme files.
+- `/portfolio/` returned `200` and includes final Portfolio SEO description plus canonical `/portfolio/`.
+- `/work/` returned `200` and includes temporary legacy SEO description plus canonical `/portfolio/`.
+- A missing route returned `404` and the Portfolio CTA points to `/portfolio/`.
+
+Status:
+- Completed in this cycle.
+
 ## 2026-06-06 - Frontend Planning And Portfolio Stabilization
 
 Scope:

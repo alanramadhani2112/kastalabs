@@ -35,7 +35,7 @@ get_header(); ?>
 			null,
 			array(
 				'label'   => __( 'Lihat portfolio', 'kastalabs' ),
-				'url'     => home_url( '/work/' ),
+				'url'     => get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ),
 				'variant' => 'ghost',
 			)
 		);

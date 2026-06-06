@@ -143,8 +143,12 @@ function kasta_seo_description(): string {
 		}
 	}
 
-	if ( is_post_type_archive( 'work' ) ) {
+	if ( is_post_type_archive( 'portfolio' ) ) {
 		return __( 'Portfolio Kastalabs: project digital, brand, website, dan sistem pengalaman yang dibangun dengan strategi dan intensi.', 'kastalabs' );
+	}
+
+	if ( is_post_type_archive( 'work' ) ) {
+		return __( 'Portfolio legacy Kastalabs: arsip sementara project lama selama migrasi menuju struktur portfolio final.', 'kastalabs' );
 	}
 
 	if ( is_post_type_archive( 'insight' ) ) {
@@ -176,6 +180,35 @@ add_action(
 		printf(
 			"\n<meta name=\"description\" content=\"%s\">\n",
 			esc_attr( $description )
+		);
+	},
+	4
+);
+
+add_action(
+	'wp_head',
+	function (): void {
+		if ( is_admin() ) {
+			return;
+		}
+
+		$canonical_url = '';
+
+		if ( is_post_type_archive( 'portfolio' ) || is_singular( 'portfolio' ) ) {
+			$canonical_url = (string) ( is_singular( 'portfolio' ) ? get_permalink() : get_post_type_archive_link( 'portfolio' ) );
+		}
+
+		if ( is_post_type_archive( 'work' ) ) {
+			$canonical_url = (string) ( get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ) );
+		}
+
+		if ( '' === $canonical_url ) {
+			return;
+		}
+
+		printf(
+			"\n<link rel=\"canonical\" href=\"%s\">\n",
+			esc_url( $canonical_url )
 		);
 	},
 	4
@@ -306,7 +339,7 @@ add_action(
 add_action(
 	'wp_head',
 	function (): void {
-		if ( ! is_singular( array( 'work' ) ) ) {
+		if ( ! is_singular( array( 'portfolio', 'work' ) ) ) {
 			return;
 		}
 

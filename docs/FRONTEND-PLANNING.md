@@ -68,6 +68,7 @@ Migration rule:
 - Keep `/work/` alive while legacy content exists.
 - Final implementation should redirect `/work/` to `/portfolio/` after content migration is complete.
 - Do not expose both `Work` and `Portfolio` in navigation.
+- Current SEO rule: `/portfolio/` is the canonical final archive. `/work/` remains reachable for legacy compatibility and points its archive canonical to `/portfolio/` until redirect approval.
 
 ### 2.4 Footer Navigation
 
@@ -724,6 +725,8 @@ Progress on 2026-06-06:
 - Homepage selected portfolio now reads the `portfolio` CPT instead of legacy `work`.
 - `archive-portfolio.php` and `single-portfolio.php` were restored as intentional final-route templates.
 - Scroll reveal motion was adjusted so essential content remains visible instead of starting at `opacity: 0`.
+- Portfolio archive SEO now has final-route metadata, legacy `/work/` archive has temporary migration metadata, and `/work/` archive canonical points to `/portfolio/`.
+- 404 portfolio CTA now points to the final `/portfolio/` route.
 
 ## 10. Open Decisions
 
