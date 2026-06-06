@@ -20,9 +20,9 @@ function kastalabs_register_legacy_work_post_type(): void {
 		'work',
 		array(
 			'labels'              => array(
-				'name'                  => __( 'Work (Legacy)', 'kastalabs' ),
+				'name'                  => __( 'Portfolio', 'kastalabs' ),
 				'singular_name'         => __( 'Legacy Case Study', 'kastalabs' ),
-				'menu_name'             => __( 'Work (Legacy)', 'kastalabs' ),
+				'menu_name'             => __( 'Portfolio', 'kastalabs' ),
 				'add_new_item'          => __( 'Add New Legacy Case Study', 'kastalabs' ),
 				'edit_item'             => __( 'Edit Legacy Case Study', 'kastalabs' ),
 				'view_item'             => __( 'View Legacy Case Study', 'kastalabs' ),

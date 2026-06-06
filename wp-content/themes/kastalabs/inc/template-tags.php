@@ -20,14 +20,29 @@ function kasta_eyebrow( string $text ): void {
 /**
  * Site logo: kembalikan `<img>` markup atau text fallback.
  */
-function kasta_site_logo(): string {
+function kasta_site_logo( string $variant = 'dark' ): string {
 	if ( has_custom_logo() ) {
 		return get_custom_logo();
 	}
+
+	$suffix   = 'dark' === $variant ? 'logo-horizontal' : 'logo-horizontal-light';
+	$logo_path = KASTA_THEME_PATH . '/assets/' . $suffix . '.svg';
+	$logo_url  = KASTA_THEME_URI . '/assets/' . $suffix . '.svg';
+	$site_name = esc_html( get_bloginfo( 'name' ) );
+
+	if ( file_exists( $logo_path ) ) {
+		return sprintf(
+			'<a href="%s" class="site-logo" aria-label="%s">%s</a>',
+			esc_url( home_url( '/' ) ),
+			esc_attr( $site_name . ' — ' . __( 'Beranda', 'kastalabs' ) ),
+			file_get_contents( $logo_path )
+		);
+	}
+
 	return sprintf(
-		'<a href="%s" class="type-h4">%s</a>',
+		'<a href="%s" class="site-logo type-h4">%s</a>',
 		esc_url( home_url( '/' ) ),
-		esc_html( get_bloginfo( 'name' ) )
+		$site_name
 	);
 }
 
@@ -47,6 +62,10 @@ function kasta_site_option( string $key, string $fallback = '' ): string {
  */
 function kasta_site_url_option( string $key, string $fallback = '' ): string {
 	$url = kasta_site_option( $key, $fallback );
+
+	if ( in_array( $key, array( 'hero_primary_url', 'portfolio_cta_url' ), true ) && '/work/' === $url ) {
+		$url = '/portfolio/';
+	}
 
 	if ( '' === $url ) {
 		return '';
@@ -140,6 +159,28 @@ function kasta_footer_nav_fallback(): void {
 		__( 'Portfolio', 'kastalabs' ) => get_post_type_archive_link( 'portfolio' ) ?: home_url( '/portfolio/' ),
 		__( 'Insights', 'kastalabs' )  => get_post_type_archive_link( 'insight' ) ?: home_url( '/insights/' ),
 		__( 'Contact', 'kastalabs' )   => home_url( '/contact/' ),
+	);
+
+	echo '<ul class="type-body-sm flex flex-col gap-2">';
+	foreach ( $items as $label => $url ) {
+		printf(
+			'<li><a href="%s">%s</a></li>',
+			esc_url( $url ),
+			esc_html( $label )
+		);
+	}
+	echo '</ul>';
+}
+
+/**
+ * Fallback footer navigation — services column.
+ */
+function kasta_footer_services_fallback(): void {
+	$items = array(
+		__( 'Branding', 'kastalabs' )           => home_url( '/services/branding/' ),
+		__( 'UI/UX Design', 'kastalabs' )       => home_url( '/services/ui-ux-design/' ),
+		__( 'Web Development', 'kastalabs' )    => home_url( '/services/web-development/' ),
+		__( 'Custom Software', 'kastalabs' )    => home_url( '/services/custom-software/' ),
 	);
 
 	echo '<ul class="type-body-sm flex flex-col gap-2">';

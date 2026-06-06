@@ -6,9 +6,16 @@ export function initMobileMenu() {
   const menu = header.querySelector('[data-mobile-menu]');
   if (!toggle || !menu) return;
 
+  const iconOpen = toggle.querySelector('.menu-toggle-icon-open');
+  const iconClose = toggle.querySelector('.menu-toggle-icon-close');
+
   const setOpen = (open) => {
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     menu.hidden = !open;
+
+    if (iconOpen) iconOpen.classList.toggle('hidden', open);
+    if (iconClose) iconClose.classList.toggle('hidden', !open);
+
     document.documentElement.dataset.menu = open ? 'open' : 'closed';
   };
 

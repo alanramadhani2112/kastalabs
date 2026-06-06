@@ -7,7 +7,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-get_header(); ?>
+get_header();
+?>
 
 <main id="main" role="main" data-page="portfolio-single">
 	<?php
@@ -26,7 +27,7 @@ get_header(); ?>
 		<article class="overflow-hidden">
 			<header class="zoom-page-hero py-24 md:py-32">
 				<div class="container-x grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
-					<div class="max-w-5xl" data-reveal>
+					<div class="max-w-5xl">
 						<p class="eyebrow">
 							<?php
 							$eyebrow = trim( $client . ( $year ? ' / ' . $year : '' ) );
@@ -43,7 +44,7 @@ get_header(); ?>
 						<?php endif; ?>
 					</div>
 
-					<aside class="zoom-card bg-bg p-6" data-reveal data-reveal-delay="0.15">
+					<aside class="zoom-card bg-bg p-6">
 						<dl class="grid gap-5">
 							<?php foreach ( array( 'Client' => $client, 'Year' => $year, 'Role' => $role, 'Scope' => $scope ) as $label => $value ) : ?>
 								<?php if ( $value ) : ?>
@@ -55,7 +56,7 @@ get_header(); ?>
 							<?php endforeach; ?>
 						</dl>
 						<?php if ( $project_url ) : ?>
-							<a class="btn-primary mt-8 w-full justify-center" href="<?php echo esc_url( $project_url ); ?>" target="_blank" rel="noopener noreferrer" data-magnetic>
+							<a class="btn-primary mt-8 w-full justify-center" href="<?php echo esc_url( $project_url ); ?>" target="_blank" rel="noopener noreferrer">
 								<?php esc_html_e( 'Visit project', 'kastalabs' ); ?>
 							</a>
 						<?php endif; ?>
@@ -64,7 +65,7 @@ get_header(); ?>
 			</header>
 
 			<?php if ( has_post_thumbnail() ) : ?>
-				<figure class="container-x" data-reveal data-reveal-delay="0.1">
+				<figure class="container-x">
 					<div class="zoom-card overflow-hidden bg-surface">
 						<?php
 						the_post_thumbnail(
@@ -82,14 +83,14 @@ get_header(); ?>
 
 			<section class="container-x py-16 md:py-24">
 				<div class="grid gap-12 lg:grid-cols-[16rem_minmax(0,44rem)] lg:items-start">
-					<aside class="lg:sticky lg:top-28" data-reveal>
+					<aside class="lg:sticky lg:top-28">
 						<a class="eyebrow inline-flex hover:text-primary-600" href="<?php echo esc_url( get_post_type_archive_link( 'portfolio' ) ); ?>">
-							<?php esc_html_e( 'Back to portfolio', 'kastalabs' ); ?>
+							<?php esc_html_e( 'Kembali ke portfolio', 'kastalabs' ); ?>
 						</a>
 
 						<?php if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) : ?>
 							<div class="zoom-card zoom-card--soft mt-10 p-5">
-								<h2 class="eyebrow"><?php esc_html_e( 'Category', 'kastalabs' ); ?></h2>
+								<p class="eyebrow"><?php esc_html_e( 'Category', 'kastalabs' ); ?></p>
 								<div class="mt-4 flex flex-wrap gap-2">
 									<?php foreach ( $categories as $category ) : ?>
 										<a class="type-body-sm rounded-md border border-hairline px-3 py-1 text-muted hover:border-primary-500 hover:text-primary-600" href="<?php echo esc_url( get_term_link( $category ) ); ?>">
@@ -102,7 +103,7 @@ get_header(); ?>
 
 						<?php if ( ! is_wp_error( $tags ) && ! empty( $tags ) ) : ?>
 							<div class="zoom-card mt-8 p-5">
-								<h2 class="eyebrow"><?php esc_html_e( 'Tags', 'kastalabs' ); ?></h2>
+								<p class="eyebrow"><?php esc_html_e( 'Tags', 'kastalabs' ); ?></p>
 								<div class="mt-4 flex flex-wrap gap-2">
 									<?php foreach ( $tags as $tag ) : ?>
 										<a class="type-body-sm rounded-md bg-surface px-3 py-1 text-muted hover:bg-primary-500 hover:text-white" href="<?php echo esc_url( get_term_link( $tag ) ); ?>">
@@ -114,7 +115,7 @@ get_header(); ?>
 						<?php endif; ?>
 					</aside>
 
-					<div class="prose" data-reveal data-reveal-delay="0.15">
+					<div class="prose">
 						<?php the_content(); ?>
 					</div>
 				</div>
@@ -123,4 +124,5 @@ get_header(); ?>
 	<?php endwhile; ?>
 </main>
 
-<?php get_footer();
+<?php
+get_footer();

@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 get_header(); ?>
 
-<main id="main" class="container-x py-32 md:py-48" role="main">
+<main id="main" class="container-x py-28 md:py-36" role="main" data-page="404">
 	<p class="eyebrow"><?php esc_html_e( 'Error 404', 'kastalabs' ); ?></p>
 	<h1 class="type-display-lg mt-6">
 		<?php esc_html_e( 'Halaman tidak ditemukan.', 'kastalabs' ); ?>
@@ -18,13 +18,29 @@ get_header(); ?>
 		<?php esc_html_e( 'URL yang kamu buka mungkin sudah dipindah atau tidak pernah ada. Coba telusuri konten lain.', 'kastalabs' ); ?>
 	</p>
 	<div class="mt-10 flex flex-wrap gap-4">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn-primary">
-			<?php esc_html_e( 'Kembali ke beranda', 'kastalabs' ); ?>
-		</a>
-		<a href="<?php echo esc_url( home_url( '/portfolio/' ) ); ?>" class="btn-ghost">
-			<?php esc_html_e( 'Lihat portfolio', 'kastalabs' ); ?>
-		</a>
+		<?php
+		get_template_part(
+			'template-parts/ui/button',
+			null,
+			array(
+				'label'   => __( 'Kembali ke beranda', 'kastalabs' ),
+				'url'     => home_url( '/' ),
+				'variant' => 'primary',
+			)
+		);
+		?>
+		<?php
+		get_template_part(
+			'template-parts/ui/button',
+			null,
+			array(
+				'label'   => __( 'Lihat portfolio', 'kastalabs' ),
+				'url'     => home_url( '/work/' ),
+				'variant' => 'ghost',
+			)
+		);
+		?>
 	</div>
 </main>
 
-<?php get_footer();
+<?php get_footer(); ?>

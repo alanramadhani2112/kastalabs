@@ -7,69 +7,56 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$footer_copy = kasta_site_option( 'footer_copy', get_bloginfo( 'description' ) );
+$footer_copy = kasta_site_option(
+	'footer_copy',
+	sprintf(
+		/* translators: %s: site name */
+		__( '%s adalah studio digital strategis yang membantu brand bergerak lebih tajam — dari strategi, identitas visual, sampai sistem digital.', 'kastalabs' ),
+		get_bloginfo( 'name' )
+	)
+);
+
+$address = kasta_site_option(
+	'footer_address',
+	'Jakarta Selatan, Indonesia — Sepenuhnya remote'
+);
+
 $social_links = array_filter(
 	array(
-		'Instagram' => kasta_site_url_option( 'instagram_url' ),
-		'LinkedIn'  => kasta_site_url_option( 'linkedin_url' ),
-		'Behance'   => kasta_site_url_option( 'behance_url' ),
+		array(
+			'url'   => kasta_site_url_option( 'instagram_url' ),
+			'label' => 'Instagram',
+			'icon'  => 'camera',
+		),
+		array(
+			'url'   => kasta_site_url_option( 'linkedin_url' ),
+			'label' => 'LinkedIn',
+			'icon'  => 'briefcase',
+		),
+		array(
+			'url'   => kasta_site_url_option( 'behance_url' ),
+			'label' => 'Behance',
+			'icon'  => 'beaker',
+		),
+		array(
+			'url'   => kasta_site_url_option( 'email_url', 'mailto:' . kasta_contact_email() ),
+			'label' => 'Email',
+			'icon'  => 'envelope',
+		),
+	),
+	fn( $l ) => ! empty( $l['url'] )
+);
+
+get_template_part(
+	'template-parts/layout/footer',
+	null,
+	array(
+		'footer_copy'  => $footer_copy,
+		'address'      => $address,
+		'social_links' => array_values( $social_links ),
 	)
 );
 ?>
-
-<footer class="site-footer mt-24 bg-navy text-white" role="contentinfo">
-	<div class="container-x py-16 grid gap-12 md:grid-cols-4">
-		<div class="md:col-span-2">
-			<?php echo kasta_site_logo(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			<p class="type-body-sm mt-4 max-w-md text-white/70">
-				<?php echo esc_html( $footer_copy ); ?>
-			</p>
-		</div>
-
-		<nav aria-label="<?php esc_attr_e( 'Footer', 'kastalabs' ); ?>">
-			<h2 class="type-label mb-4 text-white/55"><?php esc_html_e( 'Navigation', 'kastalabs' ); ?></h2>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'footer',
-					'container'      => false,
-					'menu_class'     => 'type-body-sm flex flex-col gap-2',
-					'fallback_cb'    => 'kasta_footer_nav_fallback',
-					'depth'          => 1,
-				)
-			);
-			?>
-		</nav>
-
-		<nav aria-label="<?php esc_attr_e( 'Social', 'kastalabs' ); ?>">
-			<h2 class="type-label mb-4 text-white/55"><?php esc_html_e( 'Connect', 'kastalabs' ); ?></h2>
-			<?php if ( has_nav_menu( 'social' ) ) : ?>
-				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'social',
-						'container'      => false,
-						'menu_class'     => 'type-body-sm flex flex-col gap-2',
-						'fallback_cb'    => '__return_empty_string',
-						'depth'          => 1,
-					)
-				);
-				?>
-			<?php elseif ( $social_links ) : ?>
-				<ul class="type-body-sm flex flex-col gap-2">
-					<?php foreach ( $social_links as $label => $url ) : ?>
-						<li><a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $label ); ?></a></li>
-					<?php endforeach; ?>
-				</ul>
-			<?php endif; ?>
-		</nav>
-	</div>
-
-	<div class="type-label container-x flex items-center justify-between border-t border-white/15 py-6 text-white/55">
-		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
-		<p><?php esc_html_e( 'kasta.theme v', 'kastalabs' ); ?><?php echo esc_html( KASTA_VERSION ); ?></p>
-	</div>
-</footer>
 
 <?php wp_footer(); ?>
 </body>

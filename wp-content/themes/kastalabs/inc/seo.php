@@ -143,7 +143,7 @@ function kasta_seo_description(): string {
 		}
 	}
 
-	if ( is_post_type_archive( 'portfolio' ) ) {
+	if ( is_post_type_archive( 'work' ) ) {
 		return __( 'Portfolio Kastalabs: project digital, brand, website, dan sistem pengalaman yang dibangun dengan strategi dan intensi.', 'kastalabs' );
 	}
 
@@ -306,7 +306,7 @@ add_action(
 add_action(
 	'wp_head',
 	function (): void {
-		if ( ! is_singular( array( 'portfolio', 'work' ) ) ) {
+		if ( ! is_singular( array( 'work' ) ) ) {
 			return;
 		}
 
@@ -419,4 +419,20 @@ add_action(
 		<?php
 	},
 	40
+);
+
+/**
+ * Filter document title — ganti blog description dengan tagline yang lebih deskriptif.
+ */
+add_filter(
+	'pre_get_document_title',
+	function ( string $title ): string {
+		// Homepage: gunakan tagline yang lebih baik
+		if ( is_front_page() ) {
+			return get_bloginfo( 'name' ) . ' — ' . __( 'Studio Digital Strategis', 'kastalabs' );
+		}
+
+		return $title;
+	},
+	20
 );

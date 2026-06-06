@@ -17,6 +17,16 @@ get_header(); ?>
 
 	<?php get_template_part( 'template-parts/sections/marquee' ); ?>
 
+	<?php
+	get_template_part(
+		'template-parts/sections/client-logos',
+		null,
+		array(
+			'eyebrow' => kasta_site_option( 'home_client_eyebrow', __( 'Dipercaya oleh', 'kastalabs' ) ),
+		)
+	);
+	?>
+
 	<?php get_template_part( 'template-parts/sections/services' ); ?>
 
 	<?php get_template_part( 'template-parts/sections/statement' ); ?>

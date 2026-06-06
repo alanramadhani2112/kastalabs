@@ -1,7 +1,6 @@
 <?php
 /**
  * Archive (index) untuk CPT 'work'.
- * Filterable masonry grid with GSAP stagger animations.
  *
  * @package KastaLabs
  */
@@ -12,20 +11,17 @@ get_header(); ?>
 
 <main id="main" class="work-archive" role="main" data-page="work-archive">
 
-	<!-- Hero Section -->
-	<section class="zoom-page-hero py-24 md:py-32" data-work-hero>
-		<div class="container-x">
-		<div class="zoom-page-hero__content">
-			<p class="eyebrow" data-reveal><?php esc_html_e( 'Portfolio', 'kastalabs' ); ?></p>
-			<h1 class="type-display-lg mt-6" data-reveal data-reveal-delay="0.1">
-				<?php esc_html_e( 'Selected work', 'kastalabs' ); ?>
-			</h1>
-			<p class="type-body-lg measure-copy text-muted mt-8" data-reveal data-reveal-delay="0.2">
-				<?php esc_html_e( 'Koleksi proyek terpilih yang menunjukkan pendekatan kami dalam branding, desain digital, dan pengembangan web.', 'kastalabs' ); ?>
-			</p>
-		</div>
-		</div>
-	</section>
+	<?php
+	get_template_part(
+		'template-parts/hero/page-hero',
+		null,
+		array(
+			'eyebrow' => __( 'Portfolio', 'kastalabs' ),
+			'heading' => __( 'Project pilihan yang kami bangun dengan strategi dan niat.', 'kastalabs' ),
+			'body'    => __( 'Setiap project punya konteks dan tantangan berbeda. Karena itu pendekatan kami selalu dimulai dari memahami — bukan langsung mendesain.', 'kastalabs' ),
+		)
+	);
+	?>
 
 	<!-- Filter Chips -->
 	<?php
@@ -39,24 +35,29 @@ get_header(); ?>
 	<?php if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) : ?>
 		<section class="container-x py-12" data-work-filters>
 			<div class="flex flex-wrap gap-3" role="tablist" aria-label="<?php esc_attr_e( 'Filter projects', 'kastalabs' ); ?>">
-				<button
-					class="filter-chip is-active"
-					data-filter="*"
-					role="tab"
-					aria-selected="true"
-				>
-					<?php esc_html_e( 'Semua', 'kastalabs' ); ?>
-				</button>
+				<?php
+				get_template_part(
+					'template-parts/ui/filter-chip',
+					null,
+					array(
+						'label'     => __( 'Semua', 'kastalabs' ),
+						'filter'    => '*',
+						'is_active' => true,
+					)
+				);
+				?>
 				<?php foreach ( $categories as $cat ) : ?>
-					<button
-						class="filter-chip"
-						data-filter="<?php echo esc_attr( $cat->slug ); ?>"
-						role="tab"
-						aria-selected="false"
-					>
-						<?php echo esc_html( $cat->name ); ?>
-						<span class="filter-chip-count"><?php echo esc_html( $cat->count ); ?></span>
-					</button>
+					<?php
+					get_template_part(
+						'template-parts/ui/filter-chip',
+						null,
+						array(
+							'label'  => $cat->name,
+							'filter' => $cat->slug,
+							'count'  => $cat->count,
+						)
+					);
+					?>
 				<?php endforeach; ?>
 			</div>
 		</section>
@@ -70,57 +71,28 @@ get_header(); ?>
 				$index = 0;
 				while ( have_posts() ) :
 					the_post();
-					$client     = (string) get_post_meta( get_the_ID(), 'client_name', true );
-					$year       = (string) get_post_meta( get_the_ID(), 'project_year', true );
-					$terms      = get_the_terms( get_the_ID(), 'work_category' );
+					$terms = get_the_terms( get_the_ID(), 'work_category' );
 					$term_slugs = '';
 					$term_names = array();
 					if ( $terms && ! is_wp_error( $terms ) ) {
 						$term_slugs = implode( ' ', wp_list_pluck( $terms, 'slug' ) );
 						$term_names = wp_list_pluck( $terms, 'name' );
 					}
-					// Alternate sizes: large (span 2 cols) every 3rd item
-					$is_large = ( 0 === $index % 3 );
-					$size_class = $is_large ? 'work-card--large' : 'work-card--regular';
-					?>
-					<article
-						class="work-card <?php echo esc_attr( $size_class ); ?>"
-						data-work-card
-						data-category="<?php echo esc_attr( $term_slugs ); ?>"
-						data-index="<?php echo esc_attr( $index ); ?>"
-					>
-						<a href="<?php echo esc_url( get_permalink() ); ?>" class="work-card__link" data-cursor="grow">
-							<div class="work-card__media">
-								<?php if ( has_post_thumbnail() ) : ?>
-									<?php the_post_thumbnail( $is_large ? 'kasta-cover' : 'kasta-card', array( 'class' => 'work-card__img' ) ); ?>
-								<?php else : ?>
-									<div class="work-card__placeholder">
-										<span class="type-label text-muted"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
-									</div>
-								<?php endif; ?>
-								<div class="work-card__overlay"></div>
-							</div>
-							<div class="work-card__content">
-								<div class="work-card__meta">
-									<?php if ( $client ) : ?>
-										<span class="eyebrow"><?php echo esc_html( $client ); ?></span>
-									<?php endif; ?>
-									<?php if ( $year ) : ?>
-										<span class="eyebrow"><?php echo esc_html( $year ); ?></span>
-									<?php endif; ?>
-								</div>
-								<h2 class="work-card__title"><?php the_title(); ?></h2>
-								<?php if ( ! empty( $term_names ) ) : ?>
-									<div class="work-card__tags">
-										<?php foreach ( $term_names as $name ) : ?>
-											<span class="work-card__tag"><?php echo esc_html( $name ); ?></span>
-										<?php endforeach; ?>
-									</div>
-								<?php endif; ?>
-							</div>
-						</a>
-					</article>
-					<?php
+
+					get_template_part(
+						'template-parts/cards/work-card',
+						null,
+						array(
+							'variant'    => 'archive',
+							'post_id'    => get_the_ID(),
+							'client'     => (string) get_post_meta( get_the_ID(), 'client_name', true ),
+							'year'       => (string) get_post_meta( get_the_ID(), 'project_year', true ),
+							'terms'      => $term_names,
+							'term_slugs' => $term_slugs,
+							'index'      => $index,
+						)
+					);
+
 					$index++;
 				endwhile;
 				?>
@@ -139,14 +111,10 @@ get_header(); ?>
 	<?php else : ?>
 		<section class="container-x pb-32">
 			<div class="zoom-card py-20 text-center">
-				<p class="type-body-lg text-muted"><?php esc_html_e( 'Belum ada karya yang dipublikasi.', 'kastalabs' ); ?></p>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn-primary mt-8">
-					<?php esc_html_e( 'Kembali ke beranda', 'kastalabs' ); ?>
-				</a>
+				<p class="type-body-lg text-muted"><?php esc_html_e( 'Belum ada portfolio.', 'kastalabs' ); ?></p>
 			</div>
 		</section>
 	<?php endif; ?>
-
 </main>
 
 <?php get_footer();

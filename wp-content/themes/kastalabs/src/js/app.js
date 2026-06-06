@@ -1,42 +1,22 @@
 /**
  * KastaLabs theme - JS entrypoint.
- *
- * - Boot GSAP & always-on components (reveal).
- * - Lazy-load page-specific bundles berdasarkan body[data-page].
- * - Respect prefers-reduced-motion: disable scroll-driven animations.
  */
 
 import './../css/app.css';
-import { initGsap } from './lib/gsap-init.js';
-import { isReducedMotion } from './lib/reduced-motion.js';
-import { initReveal } from './components/reveal.js';
 import { initMobileMenu } from './components/mobile-menu.js';
-
-const PAGE_LOADERS = {
-  'home':         () => import('./pages/home.js'),
-  'work-archive': () => import('./pages/work-archive.js'),
-  // 'work-single':  () => import('./pages/work-single.js'),
-  // 'blog':         () => import('./pages/blog.js'),
-  'blog-single':  () => import('./pages/blog-single.js'),
-};
+import initMegaMenu from './components/mega-menu.js';
+import initWorkArchive from './pages/work-archive.js';
+import initAnimations from './animations.js';
 
 function bootstrap() {
-  initGsap();
-  initReveal();
   initMobileMenu();
+  initMegaMenu();
 
-  if (isReducedMotion()) {
-    document.documentElement.dataset.motion = 'reduced';
-    return;
+  if (document.querySelector('[data-work-filters]')) {
+    initWorkArchive();
   }
 
-  const page = document.body.dataset.page || document.querySelector('[data-page]')?.dataset.page;
-  const loader = PAGE_LOADERS[page];
-  if (typeof loader === 'function') {
-    loader().then((mod) => {
-      if (typeof mod.default === 'function') mod.default();
-    });
-  }
+  initAnimations();
 }
 
 if (document.readyState === 'loading') {

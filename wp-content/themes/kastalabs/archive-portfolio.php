@@ -7,20 +7,21 @@
 
 defined( 'ABSPATH' ) || exit;
 
-get_header(); ?>
+get_header();
+?>
 
-<main id="main" class="work-archive" role="main" data-page="work-archive">
+<main id="main" class="work-archive" role="main" data-page="portfolio-archive">
 	<section class="zoom-page-hero py-24 md:py-32">
 		<div class="container-x">
-		<div class="zoom-page-hero__content">
-			<p class="eyebrow" data-reveal><?php esc_html_e( 'Portfolio', 'kastalabs' ); ?></p>
-			<h1 class="type-display-lg mt-6" data-reveal data-reveal-delay="0.1">
-				<?php esc_html_e( 'Selected projects built with strategy and intention.', 'kastalabs' ); ?>
-			</h1>
-			<p class="type-body-lg measure-copy text-muted mt-8" data-reveal data-reveal-delay="0.2">
-				<?php esc_html_e( 'Kami percaya setiap project memiliki konteks dan tantangan yang berbeda. Karena itu setiap solusi dibangun melalui pendekatan yang terstruktur dan relevan.', 'kastalabs' ); ?>
-			</p>
-		</div>
+			<div class="zoom-page-hero__content">
+				<p class="eyebrow"><?php esc_html_e( 'Portfolio', 'kastalabs' ); ?></p>
+				<h1 class="type-display-lg mt-6">
+					<?php esc_html_e( 'Project pilihan yang kami bangun dengan strategi dan niat.', 'kastalabs' ); ?>
+				</h1>
+				<p class="type-body-lg measure-copy text-muted mt-8">
+					<?php esc_html_e( 'Setiap project punya konteks dan tantangan berbeda. Karena itu pendekatan kami selalu dimulai dari memahami, bukan langsung mendesain.', 'kastalabs' ); ?>
+				</p>
+			</div>
 		</div>
 	</section>
 
@@ -32,6 +33,7 @@ get_header(); ?>
 		)
 	);
 	?>
+
 	<?php if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) : ?>
 		<section class="container-x py-12" data-work-filters>
 			<div class="flex flex-wrap gap-3" role="tablist" aria-label="<?php esc_attr_e( 'Filter projects', 'kastalabs' ); ?>">
@@ -55,8 +57,7 @@ get_header(); ?>
 				$index = 0;
 				while ( have_posts() ) :
 					the_post();
-					$client     = (string) get_post_meta( get_the_ID(), 'client_name', true );
-					$year       = (string) get_post_meta( get_the_ID(), 'project_year', true );
+
 					$terms      = get_the_terms( get_the_ID(), 'portfolio_category' );
 					$term_slugs = '';
 					$term_names = array();
@@ -64,53 +65,37 @@ get_header(); ?>
 						$term_slugs = implode( ' ', wp_list_pluck( $terms, 'slug' ) );
 						$term_names = wp_list_pluck( $terms, 'name' );
 					}
-					$is_large   = ( 0 === $index % 3 );
-					$size_class = $is_large ? 'work-card--large' : 'work-card--regular';
-					?>
-					<article class="work-card <?php echo esc_attr( $size_class ); ?>" data-work-card data-category="<?php echo esc_attr( $term_slugs ); ?>" data-index="<?php echo esc_attr( $index ); ?>">
-						<a href="<?php echo esc_url( get_permalink() ); ?>" class="work-card__link">
-							<div class="work-card__media">
-								<?php if ( has_post_thumbnail() ) : ?>
-									<?php the_post_thumbnail( $is_large ? 'kasta-cover' : 'kasta-card', array( 'class' => 'work-card__img' ) ); ?>
-								<?php else : ?>
-									<div class="work-card__placeholder">
-										<span class="type-label text-muted"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
-									</div>
-								<?php endif; ?>
-								<div class="work-card__overlay"></div>
-							</div>
-							<div class="work-card__content">
-								<div class="work-card__meta">
-									<?php if ( $client ) : ?>
-										<span class="eyebrow"><?php echo esc_html( $client ); ?></span>
-									<?php endif; ?>
-									<?php if ( $year ) : ?>
-										<span class="eyebrow"><?php echo esc_html( $year ); ?></span>
-									<?php endif; ?>
-								</div>
-								<h2 class="work-card__title"><?php the_title(); ?></h2>
-								<?php if ( ! empty( $term_names ) ) : ?>
-									<div class="work-card__tags">
-										<?php foreach ( $term_names as $name ) : ?>
-											<span class="work-card__tag"><?php echo esc_html( $name ); ?></span>
-										<?php endforeach; ?>
-									</div>
-								<?php endif; ?>
-							</div>
-						</a>
-					</article>
-					<?php
+
+					get_template_part(
+						'template-parts/cards/work-card',
+						null,
+						array(
+							'variant'    => 'archive',
+							'post_id'    => get_the_ID(),
+							'client'     => (string) get_post_meta( get_the_ID(), 'client_name', true ),
+							'year'       => (string) get_post_meta( get_the_ID(), 'project_year', true ),
+							'terms'      => $term_names,
+							'term_slugs' => $term_slugs,
+							'index'      => $index,
+						)
+					);
+
 					$index++;
 				endwhile;
 				?>
 			</div>
+
 			<?php the_posts_pagination( array( 'class' => 'work-pagination mt-20' ) ); ?>
 		</section>
 	<?php else : ?>
 		<section class="container-x pb-32">
-			<p class="type-body-lg text-muted"><?php esc_html_e( 'Portfolio sedang disiapkan.', 'kastalabs' ); ?></p>
+			<div class="zoom-card zoom-card--soft p-8">
+				<h2 class="type-h4"><?php esc_html_e( 'Portfolio sedang disiapkan.', 'kastalabs' ); ?></h2>
+				<p class="type-body text-muted mt-3"><?php esc_html_e( 'Project pilihan akan muncul di sini setelah konten final dimuat.', 'kastalabs' ); ?></p>
+			</div>
 		</section>
 	<?php endif; ?>
 </main>
 
-<?php get_footer();
+<?php
+get_footer();
