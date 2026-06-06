@@ -2,7 +2,7 @@
 
 Status: Draft v1
 Date: 2026-06-03
-Latest implementation update: 2026-06-04
+Latest implementation update: 2026-06-07
 Source documents:
 - `C:\Users\LENOVO\Downloads\KASTALABS_PRD_FINAL.md`
 - `C:\Users\LENOVO\Downloads\Documents\Kastalabs Visual Direction.pdf`
@@ -333,6 +333,8 @@ Tasks:
 - Move CPT `work` logic out of theme. Done 2026-06-04; legacy `work` is temporarily registered by the core plugin.
 - Register new CPTs: `portfolio`, `service`, `insight`. Done 2026-06-04.
 - Register related taxonomies. Done 2026-06-04.
+- Remove inactive theme-owned backend artifacts. Done 2026-06-07; legacy theme files for contact handling, CPTs, taxonomies, and meta registration were removed after confirming runtime ownership lives in `kastalabs-core`.
+- Improve Portfolio admin review workflow. Done 2026-06-07; Portfolio list table now exposes Client, Year, Scope, Featured state, sortable admin columns, and a Featured filter.
 - Add migration helpers for existing `work` posts. Done 2026-06-04; first local migration copied 1 dummy Work item to Portfolio.
 - Add ACF field groups if ACF Pro exists. Done 2026-06-04; local ACF groups are conditionally registered when ACF is active.
 - Add safe fallbacks if ACF is not active. Done 2026-06-04; REST-exposed post meta and Custom Fields support remain available without ACF.
@@ -450,6 +452,8 @@ Completed on 2026-06-04:
 - `kastalabs-core` plugin scaffolded and activated locally.
 - New CMS post types available: Portfolio, Services, Insights.
 - Legacy Work retained temporarily to avoid breaking `/work/`.
+- Theme no longer carries inactive backend registration files; CPTs, taxonomies, structured meta, inquiry handling, and migration helpers are owned by `kastalabs-core`.
+- Portfolio admin list is easier to curate through project metadata columns and Featured filtering.
 - New templates added: `/services/`, `/portfolio/`, `/portfolio/{slug}`, `/insights/`, `/insights/{slug}`.
 - Header fallback navigation now follows PRD IA.
 - Homepage Services section can read from Service CPT with fallback content.

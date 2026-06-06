@@ -4,6 +4,40 @@ Purpose:
 - Record each meaningful development cycle.
 - Keep implementation, verification, and documentation traceable.
 
+## 2026-06-07 - Backend Ownership And Portfolio Admin Cleanup
+
+Scope:
+- Removed inactive theme backend files for legacy contact handling, Work CPT registration, Work taxonomies, and Work meta registration.
+- Confirmed active backend ownership remains in `wp-content/plugins/kastalabs-core`.
+- Added Portfolio admin columns for Client, Year, Scope, and Featured state.
+- Added sortable Portfolio Year and Featured columns.
+- Added a Featured status filter for the Portfolio admin list table.
+- Updated the restructure plan to record that CPTs, taxonomies, structured meta, inquiry handling, and migration helpers are plugin-owned.
+
+Why:
+- Backend-first development should keep CMS/business logic in the core plugin, not in the theme.
+- Removing unused legacy files reduces ambiguity before the next Portfolio/Inquiry backend work.
+- Portfolio content will be easier to review before frontend polish because admin users can quickly see which projects are featured.
+
+Files:
+- `wp-content/plugins/kastalabs-core/post-types/portfolio.php`
+- `wp-content/themes/kastalabs/inc/contact.php`
+- `wp-content/themes/kastalabs/inc/post-types.php`
+- `wp-content/themes/kastalabs/inc/taxonomies.php`
+- `wp-content/themes/kastalabs/inc/meta.php`
+- `docs/PROJECT-RESTRUCTURE-PLAN.md`
+- `docs/WORKLOG.md`
+
+Verification:
+- PHP lint passed for all plugin and theme PHP files.
+- Public smoke routes `/`, `/contact/`, `/portfolio/`, and `/work/` returned `200`.
+- Contact page still renders the `admin-post.php` form action, `kasta_contact` action, and nonce field handled by `kastalabs-core`.
+- Runtime search found no remaining references to the removed legacy theme backend files/functions.
+- WordPress bootstrap confirmed the `portfolio` CPT and Portfolio admin hooks are registered.
+
+Status:
+- Completed in this cycle.
+
 ## 2026-06-06 - Portfolio Route SEO Alignment
 
 Scope:
