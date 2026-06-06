@@ -32,8 +32,18 @@ debug.log
 
 # Local automation / generated review artifacts
 .playwright-cli/
+.playwright-mcp
+.playwright-mcp/
+.sisyphus
+.sisyphus/
 output/
 tmp/
+homepage.png
+services-section.png
+zoom-homepage.png
+wp-content/themes/kastalabs/.sisyphus
+wp-content/themes/kastalabs/.sisyphus/
+wp-content/themes/kastalabs/screenshot.png
 
 # Build artefacts
 *.zip

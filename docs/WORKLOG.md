@@ -58,3 +58,26 @@ Verification:
 
 Status:
 - Committed in `Document development workflow`.
+
+## 2026-06-06 - Local Artifact Cleanup
+
+Scope:
+- Added ignore rules for local Playwright/MCP output, Sisyphus output, and temporary screenshots.
+- Removed existing local generated artifacts from the workspace.
+- Updated the development workflow to explicitly keep root screenshots out of commits.
+
+Why:
+- The repo should stay focused on source code and project documentation.
+- Local visual QA artifacts are useful during development but should not appear in `git status` or be committed accidentally.
+
+Files:
+- `.gitignore`
+- `docs/DEVELOPMENT-WORKFLOW.md`
+- `docs/WORKLOG.md`
+
+Verification:
+- Removed generated local artifacts with path checks constrained to the workspace.
+- Checked `git status --short --untracked-files=normal` after cleanup.
+
+Status:
+- Committed in `Clean local development artifacts`.

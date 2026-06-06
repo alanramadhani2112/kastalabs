@@ -107,6 +107,7 @@ Before commit:
 - Stage only source files and intentional documentation.
 - Do not stage local artifacts or screenshots unless explicitly needed.
 - Keep `.playwright-mcp/`, `.sisyphus/`, temporary screenshots, and generated local evidence out of commits.
+- Keep root screenshots such as `homepage.png`, `services-section.png`, and `zoom-homepage.png` out of commits.
 
 Commit messages should describe the user-visible or project-visible outcome:
 - `Document frontend development workflow`
@@ -135,7 +136,7 @@ Current frontend source of truth:
 
 Current implementation priority:
 1. Keep documentation updated with every change.
-2. Clean local artifacts.
+2. Keep local artifacts ignored and outside commits.
 3. Continue sitemap-led frontend QA and polish.
 4. Resolve `/work/` legacy route strategy.
 5. Continue page-by-page frontend refinement.
