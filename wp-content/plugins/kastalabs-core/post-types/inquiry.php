@@ -12,6 +12,7 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'init', 'kastalabs_register_inquiry_post_type' );
 add_filter( 'manage_kasta_inquiry_posts_columns', 'kastalabs_inquiry_admin_columns' );
 add_action( 'manage_kasta_inquiry_posts_custom_column', 'kastalabs_render_inquiry_admin_column', 10, 2 );
+add_filter( 'manage_edit-kasta_inquiry_sortable_columns', 'kastalabs_inquiry_sortable_columns' );
 add_action( 'restrict_manage_posts', 'kastalabs_render_inquiry_status_filter' );
 add_filter( 'parse_query', 'kastalabs_filter_inquiries_by_status' );
 add_filter( 'bulk_actions-edit-kasta_inquiry', 'kastalabs_register_inquiry_bulk_actions' );
@@ -81,7 +82,7 @@ function kastalabs_render_inquiry_admin_column( string $column, int $post_id ): 
 		'project_type'   => get_post_meta( $post_id, 'project_type', true ),
 		'inquiry_status' => kastalabs_get_inquiry_status_label( (string) get_post_meta( $post_id, 'inquiry_status', true ) ),
 		'follow_up_date' => kastalabs_format_inquiry_follow_up_date( (string) get_post_meta( $post_id, 'follow_up_date', true ) ),
-		'email_status'   => get_post_meta( $post_id, 'email_status', true ),
+		'email_status'   => kastalabs_get_inquiry_email_status_label( (string) get_post_meta( $post_id, 'email_status', true ) ),
 		default          => '',
 	};
 
@@ -98,6 +99,17 @@ function kastalabs_render_inquiry_admin_column( string $column, int $post_id ): 
 }
 
 /**
+ * Mark useful Inquiry columns as sortable.
+ */
+function kastalabs_inquiry_sortable_columns( array $columns ): array {
+	$columns['inquiry_status'] = 'inquiry_status';
+	$columns['follow_up_date'] = 'follow_up_date';
+	$columns['email_status']   = 'email_status';
+
+	return $columns;
+}
+
+/**
  * Return allowed lead statuses for Inquiry records.
  *
  * @return array<string,string>
@@ -109,6 +121,28 @@ function kastalabs_inquiry_statuses(): array {
 		'qualified' => __( 'Qualified', 'kastalabs' ),
 		'closed'    => __( 'Closed', 'kastalabs' ),
 	);
+}
+
+/**
+ * Return known email delivery states for Inquiry records.
+ *
+ * @return array<string,string>
+ */
+function kastalabs_inquiry_email_statuses(): array {
+	return array(
+		'pending' => __( 'Pending', 'kastalabs' ),
+		'sent'    => __( 'Sent', 'kastalabs' ),
+		'failed'  => __( 'Failed', 'kastalabs' ),
+	);
+}
+
+/**
+ * Return a safe label for one Inquiry email delivery state.
+ */
+function kastalabs_get_inquiry_email_status_label( string $status ): string {
+	$statuses = kastalabs_inquiry_email_statuses();
+
+	return $statuses[ $status ] ?? $statuses['pending'];
 }
 
 /**
@@ -271,13 +305,17 @@ function kastalabs_render_inquiry_status_filter( string $post_type ): void {
 		return;
 	}
 
-	$current = isset( $_GET['inquiry_status'] ) ? sanitize_key( wp_unslash( $_GET['inquiry_status'] ) ) : '';
+	$current       = isset( $_GET['inquiry_status'] ) ? sanitize_key( wp_unslash( $_GET['inquiry_status'] ) ) : '';
+	$email_status  = isset( $_GET['email_status'] ) ? sanitize_key( wp_unslash( $_GET['email_status'] ) ) : '';
+	$follow_up     = isset( $_GET['follow_up'] ) ? sanitize_key( wp_unslash( $_GET['follow_up'] ) ) : '';
 	$export_url = wp_nonce_url(
 		add_query_arg(
 			array_filter(
 				array(
 					'action'         => 'kastalabs_export_inquiries',
 					'inquiry_status' => $current,
+					'email_status'   => $email_status,
+					'follow_up'      => $follow_up,
 				),
 				static fn( string $value ): bool => '' !== $value
 			),
@@ -296,6 +334,26 @@ function kastalabs_render_inquiry_status_filter( string $post_type ): void {
 				<?php echo esc_html( $label ); ?>
 			</option>
 		<?php endforeach; ?>
+	</select>
+	<label class="screen-reader-text" for="kastalabs_email_status_filter">
+		<?php esc_html_e( 'Filter by email status', 'kastalabs' ); ?>
+	</label>
+	<select id="kastalabs_email_status_filter" name="email_status">
+		<option value=""><?php esc_html_e( 'All email statuses', 'kastalabs' ); ?></option>
+		<?php foreach ( kastalabs_inquiry_email_statuses() as $value => $label ) : ?>
+			<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $email_status, $value ); ?>>
+				<?php echo esc_html( $label ); ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
+	<label class="screen-reader-text" for="kastalabs_follow_up_filter">
+		<?php esc_html_e( 'Filter by follow-up state', 'kastalabs' ); ?>
+	</label>
+	<select id="kastalabs_follow_up_filter" name="follow_up">
+		<option value=""><?php esc_html_e( 'All follow-up states', 'kastalabs' ); ?></option>
+		<option value="due" <?php selected( $follow_up, 'due' ); ?>><?php esc_html_e( 'Due today or earlier', 'kastalabs' ); ?></option>
+		<option value="upcoming" <?php selected( $follow_up, 'upcoming' ); ?>><?php esc_html_e( 'Upcoming', 'kastalabs' ); ?></option>
+		<option value="none" <?php selected( $follow_up, 'none' ); ?>><?php esc_html_e( 'No follow-up date', 'kastalabs' ); ?></option>
 	</select>
 	<a class="button" href="<?php echo esc_url( $export_url ); ?>">
 		<?php esc_html_e( 'Export CSV', 'kastalabs' ); ?>
@@ -316,20 +374,63 @@ function kastalabs_filter_inquiries_by_status( WP_Query $query ): void {
 		return;
 	}
 
+	$meta_query = array();
+
 	$status = isset( $_GET['inquiry_status'] ) ? sanitize_key( wp_unslash( $_GET['inquiry_status'] ) ) : '';
-	if ( '' === $status || ! array_key_exists( $status, kastalabs_inquiry_statuses() ) ) {
-		return;
+	if ( '' !== $status && array_key_exists( $status, kastalabs_inquiry_statuses() ) ) {
+		$meta_query[] = array(
+			'key'   => 'inquiry_status',
+			'value' => $status,
+		);
 	}
 
-	$query->set(
-		'meta_query',
-		array(
+	$email_status = isset( $_GET['email_status'] ) ? sanitize_key( wp_unslash( $_GET['email_status'] ) ) : '';
+	if ( '' !== $email_status && array_key_exists( $email_status, kastalabs_inquiry_email_statuses() ) ) {
+		$meta_query[] = array(
+			'key'   => 'email_status',
+			'value' => $email_status,
+		);
+	}
+
+	$follow_up = isset( $_GET['follow_up'] ) ? sanitize_key( wp_unslash( $_GET['follow_up'] ) ) : '';
+	if ( 'due' === $follow_up ) {
+		$meta_query[] = array(
+			'key'     => 'follow_up_date',
+			'value'   => wp_date( 'Y-m-d' ),
+			'compare' => '<=',
+			'type'    => 'DATE',
+		);
+	} elseif ( 'upcoming' === $follow_up ) {
+		$meta_query[] = array(
+			'key'     => 'follow_up_date',
+			'value'   => wp_date( 'Y-m-d' ),
+			'compare' => '>',
+			'type'    => 'DATE',
+		);
+	} elseif ( 'none' === $follow_up ) {
+		$meta_query[] = array(
+			'relation' => 'OR',
 			array(
-				'key'   => 'inquiry_status',
-				'value' => $status,
+				'key'     => 'follow_up_date',
+				'value'   => '',
+				'compare' => '=',
 			),
-		)
-	);
+			array(
+				'key'     => 'follow_up_date',
+				'compare' => 'NOT EXISTS',
+			),
+		);
+	}
+
+	if ( $meta_query ) {
+		$query->set( 'meta_query', $meta_query );
+	}
+
+	$orderby = $query->get( 'orderby' );
+	if ( in_array( $orderby, array( 'inquiry_status', 'follow_up_date', 'email_status' ), true ) ) {
+		$query->set( 'meta_key', $orderby );
+		$query->set( 'orderby', 'follow_up_date' === $orderby ? 'meta_value' : 'meta_value' );
+	}
 }
 
 /**
@@ -424,6 +525,14 @@ function kastalabs_export_inquiries_csv(): void {
 	if ( '' !== $status && ! array_key_exists( $status, kastalabs_inquiry_statuses() ) ) {
 		$status = '';
 	}
+	$email_status = isset( $_GET['email_status'] ) ? sanitize_key( wp_unslash( $_GET['email_status'] ) ) : '';
+	if ( '' !== $email_status && ! array_key_exists( $email_status, kastalabs_inquiry_email_statuses() ) ) {
+		$email_status = '';
+	}
+	$follow_up = isset( $_GET['follow_up'] ) ? sanitize_key( wp_unslash( $_GET['follow_up'] ) ) : '';
+	if ( ! in_array( $follow_up, array( 'due', 'upcoming', 'none' ), true ) ) {
+		$follow_up = '';
+	}
 
 	$filename = 'kastalabs-inquiries-' . wp_date( 'Y-m-d-His' ) . '.csv';
 	nocache_headers();
@@ -453,7 +562,7 @@ function kastalabs_export_inquiries_csv(): void {
 		)
 	);
 
-	foreach ( kastalabs_get_inquiries_for_export( $status ) as $post ) {
+	foreach ( kastalabs_get_inquiries_for_export( $status, $email_status, $follow_up ) as $post ) {
 		fputcsv(
 			$output,
 			array(
@@ -466,7 +575,7 @@ function kastalabs_export_inquiries_csv(): void {
 				kastalabs_get_inquiry_status_label( (string) get_post_meta( $post->ID, 'inquiry_status', true ) ),
 				(string) get_post_meta( $post->ID, 'follow_up_date', true ),
 				(string) get_post_meta( $post->ID, 'internal_notes', true ),
-				(string) get_post_meta( $post->ID, 'email_status', true ),
+				kastalabs_get_inquiry_email_status_label( (string) get_post_meta( $post->ID, 'email_status', true ) ),
 				(string) get_post_meta( $post->ID, 'source_url', true ),
 				wp_strip_all_tags( $post->post_content ),
 			)
@@ -482,7 +591,7 @@ function kastalabs_export_inquiries_csv(): void {
  *
  * @return WP_Post[]
  */
-function kastalabs_get_inquiries_for_export( string $status = '' ): array {
+function kastalabs_get_inquiries_for_export( string $status = '', string $email_status = '', string $follow_up = '' ): array {
 	$args = array(
 		'post_type'      => 'kasta_inquiry',
 		'post_status'    => 'private',
@@ -491,13 +600,50 @@ function kastalabs_get_inquiries_for_export( string $status = '' ): array {
 		'order'          => 'DESC',
 	);
 
+	$meta_query = array();
 	if ( '' !== $status && array_key_exists( $status, kastalabs_inquiry_statuses() ) ) {
-		$args['meta_query'] = array(
+		$meta_query[] = array(
+			'key'   => 'inquiry_status',
+			'value' => $status,
+		);
+	}
+	if ( '' !== $email_status && array_key_exists( $email_status, kastalabs_inquiry_email_statuses() ) ) {
+		$meta_query[] = array(
+			'key'   => 'email_status',
+			'value' => $email_status,
+		);
+	}
+	if ( 'due' === $follow_up ) {
+		$meta_query[] = array(
+			'key'     => 'follow_up_date',
+			'value'   => wp_date( 'Y-m-d' ),
+			'compare' => '<=',
+			'type'    => 'DATE',
+		);
+	} elseif ( 'upcoming' === $follow_up ) {
+		$meta_query[] = array(
+			'key'     => 'follow_up_date',
+			'value'   => wp_date( 'Y-m-d' ),
+			'compare' => '>',
+			'type'    => 'DATE',
+		);
+	} elseif ( 'none' === $follow_up ) {
+		$meta_query[] = array(
+			'relation' => 'OR',
 			array(
-				'key'   => 'inquiry_status',
-				'value' => $status,
+				'key'     => 'follow_up_date',
+				'value'   => '',
+				'compare' => '=',
+			),
+			array(
+				'key'     => 'follow_up_date',
+				'compare' => 'NOT EXISTS',
 			),
 		);
+	}
+
+	if ( $meta_query ) {
+		$args['meta_query'] = $meta_query;
 	}
 
 	return get_posts( $args );

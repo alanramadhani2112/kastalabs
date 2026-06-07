@@ -26,9 +26,12 @@ Use this before launch or deployment review.
 - Confirm every valid contact form submission creates a private Inquiry record.
 - Confirm Inquiry records show sender, email, project type, and email delivery status in wp-admin.
 - Confirm Inquiry records can be filtered by lead status.
+- Confirm Inquiry records can be filtered by email status and follow-up state.
+- Confirm Inquiry list columns can sort by lead status, follow-up date, and email status.
 - Confirm Inquiry lead status can be updated from the detail screen and bulk actions.
 - Confirm Inquiry follow-up date and internal notes can be saved from the detail screen.
 - Confirm Inquiry CSV export works for all leads and filtered lead statuses.
+- Confirm Inquiry CSV export preserves active lead status, email status, and follow-up filters.
 - Confirm Inquiry CSV export includes follow-up date and internal notes.
 - Verify security headers:
   - `X-Content-Type-Options`

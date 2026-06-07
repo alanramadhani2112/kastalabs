@@ -4,6 +4,33 @@ Purpose:
 - Record each meaningful development cycle.
 - Keep implementation, verification, and documentation traceable.
 
+## 2026-06-07 - Inquiry Admin Operations Polish
+
+Scope:
+- Added sortable Inquiry columns for Lead Status, Follow Up, and Email Status.
+- Added Email Status filtering to the Inquiry admin list table.
+- Added Follow-up state filtering for due, upcoming, and no-date inquiries.
+- Updated Inquiry CSV export to preserve the active Lead Status, Email Status, and Follow-up filters.
+- Displayed email delivery state as readable labels in admin columns and CSV output.
+
+Why:
+- Contact inquiries are the primary backend conversion workflow.
+- Admin users need to triage leads by follow-up timing and email delivery state, not only by lead status.
+
+Files:
+- `wp-content/plugins/kastalabs-core/post-types/inquiry.php`
+- `docs/WORKLOG.md`
+- `docs/PRODUCTION-QA-CHECKLIST.md`
+
+Verification:
+- PHP lint passed for all plugin and theme PHP files.
+- `/contact/` returned `200`, kept the `admin-post.php` form action, kept the `kasta_contact` action, rendered the nonce field, and exposed no PHP warnings.
+- WordPress bootstrap confirmed the private Inquiry CPT, sortable Inquiry columns hook, and Inquiry filtering hook are registered.
+- Temporary QA Inquiry was created, matched by combined Lead Status + Email Status + due Follow-up export helper filters, then deleted successfully.
+
+Status:
+- Completed in this cycle.
+
 ## 2026-06-07 - Service Admin CMS Polish
 
 Scope:
