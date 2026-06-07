@@ -72,6 +72,49 @@ add_filter(
 );
 
 /**
+ * Return the editable SEO route key for primary public pages.
+ */
+function kasta_seo_route_key(): string {
+	if ( is_front_page() ) {
+		return 'home';
+	}
+
+	if ( is_page( 'about' ) ) {
+		return 'about';
+	}
+
+	if ( is_page( 'services' ) ) {
+		return 'services';
+	}
+
+	if ( is_page( 'contact' ) ) {
+		return 'contact';
+	}
+
+	if ( is_post_type_archive( 'portfolio' ) ) {
+		return 'portfolio';
+	}
+
+	if ( is_post_type_archive( 'insight' ) ) {
+		return 'insights';
+	}
+
+	return '';
+}
+
+/**
+ * Return route-specific SEO option value for title or description.
+ */
+function kasta_seo_route_option( string $field ): string {
+	$route = kasta_seo_route_key();
+	if ( '' === $route || ! function_exists( 'kasta_site_option' ) ) {
+		return '';
+	}
+
+	return trim( kasta_site_option( 'seo_' . $route . '_' . $field ) );
+}
+
+/**
  * Return configured default SEO title.
  */
 function kasta_seo_title(): string {
@@ -83,6 +126,11 @@ function kasta_seo_title(): string {
 				return trim( $title );
 			}
 		}
+	}
+
+	$route_title = kasta_seo_route_option( 'title' );
+	if ( '' !== $route_title ) {
+		return $route_title;
 	}
 
 	if ( function_exists( 'kasta_site_option' ) ) {
@@ -113,11 +161,9 @@ add_filter(
 			}
 		}
 
-		if ( is_front_page() && function_exists( 'kasta_site_option' ) ) {
-			$seo_title = kasta_site_option( 'seo_title' );
-			if ( '' !== trim( $seo_title ) ) {
-				$title['title'] = trim( $seo_title );
-			}
+		$route_title = kasta_seo_route_option( 'title' );
+		if ( '' !== $route_title ) {
+			$title['title'] = $route_title;
 		}
 
 		return $title;
@@ -135,7 +181,17 @@ function kasta_seo_description(): string {
 			if ( '' !== trim( $meta_description ) ) {
 				return trim( $meta_description );
 			}
+		}
+	}
 
+	$route_description = kasta_seo_route_option( 'description' );
+	if ( '' !== $route_description ) {
+		return $route_description;
+	}
+
+	if ( is_singular() ) {
+		$post = get_queried_object();
+		if ( $post instanceof WP_Post ) {
 			$description = has_excerpt( $post ) ? get_the_excerpt( $post ) : wp_trim_words( wp_strip_all_tags( (string) $post->post_content ), 30 );
 			if ( '' !== trim( $description ) ) {
 				return trim( $description );
@@ -460,9 +516,9 @@ add_action(
 add_filter(
 	'pre_get_document_title',
 	function ( string $title ): string {
-		// Homepage: gunakan tagline yang lebih baik
-		if ( is_front_page() ) {
-			return get_bloginfo( 'name' ) . ' — ' . __( 'Studio Digital Strategis', 'kastalabs' );
+		$route_title = kasta_seo_route_option( 'title' );
+		if ( '' !== $route_title ) {
+			return $route_title;
 		}
 
 		return $title;

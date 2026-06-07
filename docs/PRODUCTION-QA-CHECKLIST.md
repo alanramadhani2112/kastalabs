@@ -6,6 +6,7 @@ Use this before launch or deployment review.
 
 - Confirm one SEO plugin decision: Rank Math or Yoast.
 - Confirm Kastalabs SEO Defaults are configured in Settings.
+- Confirm Kastalabs SEO Main Routes are configured for Home, About, Services, Portfolio, Insights, and Contact.
 - Verify meta title and meta description for Home, About, Services, Portfolio, Insights, and Contact.
 - Verify OG/Twitter title, description, URL, and image output.
 - Confirm `/sitemap.xml` redirects to the active sitemap URL.

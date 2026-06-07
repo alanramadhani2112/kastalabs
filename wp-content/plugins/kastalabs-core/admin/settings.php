@@ -114,6 +114,22 @@ function kastalabs_render_settings_page(): void {
 				<?php kastalabs_render_url_field( $options, 'og_image_url', __( 'Default OG Image URL', 'kastalabs' ) ); ?>
 			</table>
 
+			<h2><?php esc_html_e( 'SEO Main Routes', 'kastalabs' ); ?></h2>
+			<table class="form-table" role="presentation">
+				<?php kastalabs_render_text_field( $options, 'seo_home_title', __( 'Home SEO Title', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_textarea_field( $options, 'seo_home_description', __( 'Home Meta Description', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'seo_about_title', __( 'About SEO Title', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_textarea_field( $options, 'seo_about_description', __( 'About Meta Description', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'seo_services_title', __( 'Services SEO Title', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_textarea_field( $options, 'seo_services_description', __( 'Services Meta Description', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'seo_portfolio_title', __( 'Portfolio SEO Title', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_textarea_field( $options, 'seo_portfolio_description', __( 'Portfolio Meta Description', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'seo_insights_title', __( 'Insights SEO Title', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_textarea_field( $options, 'seo_insights_description', __( 'Insights Meta Description', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_text_field( $options, 'seo_contact_title', __( 'Contact SEO Title', 'kastalabs' ) ); ?>
+				<?php kastalabs_render_textarea_field( $options, 'seo_contact_description', __( 'Contact Meta Description', 'kastalabs' ) ); ?>
+			</table>
+
 			<h2><?php esc_html_e( 'Analytics', 'kastalabs' ); ?></h2>
 			<table class="form-table" role="presentation">
 				<?php kastalabs_render_text_field( $options, 'analytics_id', __( 'Google Analytics Measurement ID', 'kastalabs' ) ); ?>

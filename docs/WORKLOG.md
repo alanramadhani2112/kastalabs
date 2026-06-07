@@ -4,6 +4,34 @@ Purpose:
 - Record each meaningful development cycle.
 - Keep implementation, verification, and documentation traceable.
 
+## 2026-06-07 - Main Route SEO Settings
+
+Scope:
+- Added editable SEO title and meta description fields for Home, About, Services, Portfolio, Insights, and Contact.
+- Added the new fields to Settings > Kastalabs Settings under SEO Main Routes.
+- Updated theme SEO helpers so route-specific settings are used before global defaults and hardcoded archive fallback copy.
+- Kept per-post/page `seo_title` and `seo_description` meta as the highest priority for singular content.
+
+Why:
+- Primary landing page routes need predictable backend SEO control before frontend polish and production QA.
+- Admin users should not need to edit templates to tune meta title and description for core pages.
+
+Files:
+- `wp-content/plugins/kastalabs-core/includes/options.php`
+- `wp-content/plugins/kastalabs-core/admin/settings.php`
+- `wp-content/themes/kastalabs/inc/seo.php`
+- `docs/WORKLOG.md`
+- `docs/PRODUCTION-QA-CHECKLIST.md`
+
+Verification:
+- PHP lint passed for all plugin and theme PHP files.
+- WordPress bootstrap confirmed the new SEO route option keys are available through merged Kastalabs options.
+- Sanitization keeps route meta descriptions as textarea content and strips markup from route SEO titles.
+- `/`, `/about/`, `/services/`, `/portfolio/`, `/insights/`, and `/contact/` returned `200`, rendered the expected route-specific SEO title and description, and exposed no PHP warnings.
+
+Status:
+- Completed in this cycle.
+
 ## 2026-06-07 - Inquiry Admin Operations Polish
 
 Scope:

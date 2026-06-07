@@ -46,6 +46,18 @@ function kastalabs_default_options(): array {
 		'behance_url'         => '',
 		'seo_title'           => '',
 		'seo_description'     => '',
+		'seo_home_title'      => 'Kastalabs - Studio Digital Strategis',
+		'seo_home_description' => 'Kastalabs membantu bisnis menyusun strategi, identitas visual, website, dan sistem digital yang bekerja secara nyata.',
+		'seo_about_title'     => 'About Kastalabs - Studio Digital Strategis',
+		'seo_about_description' => 'Kenali Kastalabs, studio digital strategis yang bekerja dekat, teliti, dan fokus pada brand, visual system, website, dan produk digital.',
+		'seo_services_title'  => 'Services - Kastalabs',
+		'seo_services_description' => 'Layanan Kastalabs mencakup branding design, UI/UX design, web development, dan custom software development.',
+		'seo_portfolio_title' => 'Portfolio - Kastalabs',
+		'seo_portfolio_description' => 'Portfolio Kastalabs berisi project digital, brand, website, dan sistem pengalaman yang dibangun dengan strategi dan intensi.',
+		'seo_insights_title'  => 'Insights - Kastalabs',
+		'seo_insights_description' => 'Insights Kastalabs seputar desain, teknologi, strategi digital, dan proses kreatif di balik keputusan digital.',
+		'seo_contact_title'   => 'Contact - Kastalabs',
+		'seo_contact_description' => 'Ceritakan proyek Anda kepada Kastalabs dan mulai percakapan untuk branding, website, UI/UX, atau software custom.',
 		'og_image_url'        => '',
 		'analytics_id'        => '',
 	);
@@ -109,7 +121,7 @@ function kastalabs_sanitize_options( mixed $input ): array {
 			continue;
 		}
 
-		if ( str_contains( $key, 'body' ) || 'footer_copy' === $key || 'seo_description' === $key ) {
+		if ( str_contains( $key, 'body' ) || 'footer_copy' === $key || str_ends_with( $key, '_description' ) ) {
 			$output[ $key ] = sanitize_textarea_field( (string) $value );
 			continue;
 		}
