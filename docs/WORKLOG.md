@@ -313,3 +313,36 @@ Verification:
 
 Status:
 - Committed in `Improve contact page microcopy`.
+
+## 2026-06-07 - Backend Production QA Pass
+
+Scope:
+- Audited the public hardening layer for frontend and REST responses.
+- Removed the public shortlink HTTP header from frontend pages.
+- Added baseline security headers to public REST responses.
+- Verified contact form nonce, honeypot, rate-limit, and Inquiry persistence behavior.
+- Added backend QA evidence to the production QA checklist.
+
+Why:
+- The project is still in backend-first stabilization, so security/contact/SEO surfaces need evidence before the frontend rebuild phase.
+- The documentation workflow requires every meaningful change to be captured in the same development cycle.
+
+Files:
+- `wp-content/plugins/kastalabs-core/includes/security.php`
+- `docs/PRODUCTION-QA-CHECKLIST.md`
+- `docs/WORKLOG.md`
+
+Verification:
+- `php -l wp-content/plugins/kastalabs-core/includes/security.php` passed.
+- Homepage returned `200` with `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, and `Permissions-Policy`.
+- Homepage no longer exposes the WordPress shortlink HTTP header.
+- `/wp-json/wp/v2/users` returned `404` for anonymous requests and included baseline public headers.
+- `/robots.txt` returned the required wp-admin rules and sitemap URL.
+- `/sitemap.xml` returned `301` to `/wp-sitemap.xml`.
+- Contact POST without nonce redirected to `contact_status=error`.
+- Contact POST with honeypot redirected to `contact_status=sent` without creating an Inquiry.
+- Valid contact POST created a private Inquiry and the QA record was deleted afterward.
+- Contact rate limit allowed five attempts from the same IP and rejected the sixth.
+
+Status:
+- Committed in `Harden backend production QA`.

@@ -46,6 +46,19 @@ Use this before launch or deployment review.
 - Confirm frontend source does not expose WordPress generator, RSD, WLW, or shortlink metadata.
 - Confirm `wp-config.php`, uploads, build output, and local artifacts are ignored.
 
+### Backend QA Evidence - 2026-06-07
+
+- Homepage returned baseline headers: `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, and `Permissions-Policy`.
+- Homepage no longer exposes the WordPress shortlink HTTP header.
+- Public REST user endpoint `/wp-json/wp/v2/users` returned `404` for anonymous requests and included baseline public headers.
+- `/robots.txt` includes `Disallow: /wp-admin/`, `Allow: /wp-admin/admin-ajax.php`, and the sitemap URL.
+- `/sitemap.xml` redirects to `/wp-sitemap.xml` with `301`.
+- Contact POST without nonce redirects to `contact_status=error`.
+- Contact POST with honeypot redirects to `contact_status=sent` and does not create an Inquiry.
+- Valid contact POST creates a private `kasta_inquiry` record and records email delivery status.
+- Contact rate limit allows five attempts from the same IP and rejects the sixth.
+- Contact inquiry storage hashes IP addresses and truncates user agents to 255 characters.
+
 ## Performance
 
 - Run Lighthouse on desktop and mobile for:

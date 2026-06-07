@@ -10,6 +10,7 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'send_headers', 'kastalabs_send_security_headers' );
 add_action( 'init', 'kastalabs_harden_public_wordpress_surface' );
 add_filter( 'wp_headers', 'kastalabs_filter_public_headers' );
+add_filter( 'rest_pre_serve_request', 'kastalabs_send_rest_security_headers', 10, 4 );
 add_filter( 'xmlrpc_enabled', '__return_false' );
 add_filter( 'xmlrpc_methods', 'kastalabs_disable_xmlrpc_pingback_methods' );
 add_filter( 'rest_endpoints', 'kastalabs_filter_public_rest_endpoints' );
@@ -22,6 +23,27 @@ function kastalabs_send_security_headers(): void {
 		return;
 	}
 
+	kastalabs_send_public_security_headers();
+}
+
+/**
+ * Send baseline headers for public REST responses.
+ *
+ * @param bool $served Whether the REST request has already been served.
+ */
+function kastalabs_send_rest_security_headers( bool $served ): bool {
+	if ( ! headers_sent() ) {
+		kastalabs_send_public_security_headers();
+	}
+
+	return $served;
+}
+
+/**
+ * Send safe baseline headers for public responses.
+ */
+function kastalabs_send_public_security_headers(): void {
+	header_remove( 'X-Powered-By' );
 	header( 'X-Content-Type-Options: nosniff' );
 	header( 'X-Frame-Options: SAMEORIGIN' );
 	header( 'Referrer-Policy: strict-origin-when-cross-origin' );
@@ -38,6 +60,7 @@ function kastalabs_harden_public_wordpress_surface(): void {
 	remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 	remove_action( 'wp_head', 'rest_output_link_wp_head' );
 	remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+	remove_action( 'template_redirect', 'wp_shortlink_header', 11 );
 }
 
 /**
