@@ -4,6 +4,40 @@ Purpose:
 - Record each meaningful development cycle.
 - Keep implementation, verification, and documentation traceable.
 
+## 2026-06-07 - Legacy Work Redirect Control
+
+Scope:
+- Added a backend setting for legacy Work redirects in Settings > Kastalabs Settings.
+- Kept the redirect setting disabled by default.
+- Added guarded `/work/` archive redirect to `/portfolio/` only when the setting is enabled and migration status has zero pending legacy Work items.
+- Added guarded single Work redirect to the migrated Portfolio URL only when a matching migrated Portfolio record exists.
+- Added a dedicated legacy route handler in `kastalabs-core`.
+
+Why:
+- `/portfolio/` is the final route, but `/work/` should not be redirected automatically before admin approval.
+- The backend needs a controlled switch so redirect can be enabled after migration QA is complete.
+
+Files:
+- `wp-content/plugins/kastalabs-core/includes/options.php`
+- `wp-content/plugins/kastalabs-core/admin/settings.php`
+- `wp-content/plugins/kastalabs-core/includes/legacy-routes.php`
+- `wp-content/plugins/kastalabs-core/kastalabs-core.php`
+- `docs/WORKLOG.md`
+- `docs/PROJECT-RESTRUCTURE-PLAN.md`
+- `docs/PRODUCTION-QA-CHECKLIST.md`
+
+Verification:
+- PHP lint passed for all plugin and theme PHP files.
+- WordPress bootstrap confirmed the legacy redirect option default is `0`, redirect handler is registered, and migration safety returns true locally.
+- With the setting disabled, `/work/` returned `200` with no redirect and no PHP warnings.
+- With the setting temporarily enabled, `/work/` returned `301` to `/portfolio/`.
+- With the setting temporarily enabled, one migrated `/work/{slug}/` URL returned `301` to its matching `/portfolio/{slug}/`.
+- The local redirect setting was restored to disabled after verification.
+- Option sanitization stores checkbox values as `1` or `0`.
+
+Status:
+- Completed in this cycle.
+
 ## 2026-06-07 - Portfolio Migration Admin Status
 
 Scope:

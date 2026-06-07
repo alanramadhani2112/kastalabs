@@ -60,6 +60,7 @@ function kastalabs_default_options(): array {
 		'seo_contact_description' => 'Ceritakan proyek Anda kepada Kastalabs dan mulai percakapan untuk branding, website, UI/UX, atau software custom.',
 		'og_image_url'        => '',
 		'analytics_id'        => '',
+		'legacy_work_redirect_enabled' => '0',
 	);
 }
 
@@ -118,6 +119,11 @@ function kastalabs_sanitize_options( mixed $input ): array {
 
 		if ( 'analytics_id' === $key ) {
 			$output[ $key ] = preg_replace( '/[^A-Za-z0-9_-]/', '', (string) $value );
+			continue;
+		}
+
+		if ( str_starts_with( $key, 'legacy_' ) ) {
+			$output[ $key ] = ! empty( $value ) ? '1' : '0';
 			continue;
 		}
 

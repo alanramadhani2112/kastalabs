@@ -338,6 +338,7 @@ Tasks:
 - Improve Service admin review workflow. Done 2026-06-07; Service list table now exposes order, icon, overview, CTA state, sortable admin columns, and CTA completeness filtering.
 - Add migration helpers for existing `work` posts. Done 2026-06-04; first local migration copied 1 dummy Work item to Portfolio.
 - Add migration status visibility for existing `work` posts. Done 2026-06-07; Tools > Kastalabs Migration now shows legacy count, migrated count, and pending Work items before redirect decisions.
+- Add admin-controlled legacy Work redirect. Done 2026-06-07; redirect remains off by default and only redirects `/work/` when enabled plus migration status is safe.
 - Add ACF field groups if ACF Pro exists. Done 2026-06-04; local ACF groups are conditionally registered when ACF is active.
 - Add safe fallbacks if ACF is not active. Done 2026-06-04; REST-exposed post meta and Custom Fields support remain available without ACF.
 - Seed initial Services content. Done 2026-06-04; four core services were seeded locally when Service content was empty.
@@ -458,6 +459,7 @@ Completed on 2026-06-04:
 - Portfolio admin list is easier to curate through project metadata columns and Featured filtering.
 - Service admin list is easier to curate through order, icon, overview, and CTA completeness columns.
 - Migration admin now exposes whether any legacy Work content still needs migration before `/work/` redirect approval.
+- Legacy Work redirects are controlled from Kastalabs Settings instead of being forced automatically.
 - New templates added: `/services/`, `/portfolio/`, `/portfolio/{slug}`, `/insights/`, `/insights/{slug}`.
 - Header fallback navigation now follows PRD IA.
 - Homepage Services section can read from Service CPT with fallback content.

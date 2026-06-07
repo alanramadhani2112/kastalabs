@@ -38,6 +38,7 @@ require_once KASTALABS_CORE_PATH . '/acf/field-groups.php';
 require_once KASTALABS_CORE_PATH . '/admin/settings.php';
 require_once KASTALABS_CORE_PATH . '/admin/seed.php';
 require_once KASTALABS_CORE_PATH . '/admin/migration.php';
+require_once KASTALABS_CORE_PATH . '/includes/legacy-routes.php';
 
 register_activation_hook(
 	__FILE__,

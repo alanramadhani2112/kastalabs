@@ -135,6 +135,18 @@ function kastalabs_render_settings_page(): void {
 				<?php kastalabs_render_text_field( $options, 'analytics_id', __( 'Google Analytics Measurement ID', 'kastalabs' ) ); ?>
 			</table>
 
+			<h2><?php esc_html_e( 'Legacy Routes', 'kastalabs' ); ?></h2>
+			<table class="form-table" role="presentation">
+				<?php
+				kastalabs_render_checkbox_field(
+					$options,
+					'legacy_work_redirect_enabled',
+					__( 'Redirect legacy Work routes', 'kastalabs' ),
+					__( 'Redirect /work/ to /portfolio/ only after migration has no pending legacy items. Single Work URLs redirect only when a migrated Portfolio match exists.', 'kastalabs' )
+				);
+				?>
+			</table>
+
 			<?php submit_button(); ?>
 		</form>
 	</div>
@@ -160,6 +172,29 @@ function kastalabs_render_url_field( array $options, string $key, string $label 
  */
 function kastalabs_render_email_field( array $options, string $key, string $label ): void {
 	kastalabs_render_input_field( $options, $key, $label, 'email' );
+}
+
+/**
+ * Render a checkbox row.
+ */
+function kastalabs_render_checkbox_field( array $options, string $key, string $label, string $description = '' ): void {
+	?>
+	<tr>
+		<th scope="row"><?php echo esc_html( $label ); ?></th>
+		<td>
+			<label for="kastalabs_<?php echo esc_attr( $key ); ?>">
+				<input
+					id="kastalabs_<?php echo esc_attr( $key ); ?>"
+					type="checkbox"
+					name="kastalabs_options[<?php echo esc_attr( $key ); ?>]"
+					value="1"
+					<?php checked( $options[ $key ] ?? '', '1' ); ?>
+				>
+				<?php echo esc_html( $description ); ?>
+			</label>
+		</td>
+	</tr>
+	<?php
 }
 
 /**
