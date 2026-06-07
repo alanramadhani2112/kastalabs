@@ -4,6 +4,35 @@ Purpose:
 - Record each meaningful development cycle.
 - Keep implementation, verification, and documentation traceable.
 
+## 2026-06-07 - Portfolio Migration Admin Status
+
+Scope:
+- Added Legacy Work migration status summary to Tools > Kastalabs Migration.
+- Added pending legacy Work item listing with title and slug.
+- Added reusable helper to detect whether a legacy Work item already has a migrated Portfolio record.
+- Reused the helper inside the migration routine to avoid duplicate migration logic.
+- Normalized old `_kasta_is_featured` migration into the final `is_featured` Portfolio meta.
+
+Why:
+- `/portfolio/` is the final public route, but `/work/` remains active until legacy content migration is proven safe.
+- Admin users need visibility into migrated and pending legacy items before deciding whether `/work/` can be redirected.
+
+Files:
+- `wp-content/plugins/kastalabs-core/admin/migration.php`
+- `docs/WORKLOG.md`
+- `docs/PROJECT-RESTRUCTURE-PLAN.md`
+- `docs/PRODUCTION-QA-CHECKLIST.md`
+
+Verification:
+- PHP lint passed for all plugin and theme PHP files.
+- WordPress bootstrap confirmed the migration status and migrated Portfolio lookup helpers are available.
+- Temporary QA legacy Work item was detected as pending, migrated into Portfolio, copied featured state, category, and tag, then removed together with its migrated Portfolio record.
+- Local migration helper also migrated existing pending legacy Work content; local status now reports 7 legacy Work items, 7 migrated Portfolio records, and 0 pending items.
+- `/portfolio/` and `/work/` returned `200` with no PHP warnings.
+
+Status:
+- Completed in this cycle.
+
 ## 2026-06-07 - Main Route SEO Settings
 
 Scope:

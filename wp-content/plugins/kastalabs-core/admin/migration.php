@@ -73,6 +73,7 @@ function kastalabs_render_migration_page(): void {
 			: __( 'Starter insights were skipped because all starter articles already exist.', 'kastalabs' );
 	}
 
+	$migration_status = kastalabs_get_work_migration_status();
 	?>
 	<div class="wrap">
 		<h1><?php esc_html_e( 'Kastalabs Migration', 'kastalabs' ); ?></h1>
@@ -81,6 +82,35 @@ function kastalabs_render_migration_page(): void {
 		<?php endif; ?>
 		<h2><?php esc_html_e( 'Legacy Work Migration', 'kastalabs' ); ?></h2>
 		<p><?php esc_html_e( 'Use this utility to copy legacy Work posts into the new Portfolio post type. Existing migrated items are skipped.', 'kastalabs' ); ?></p>
+		<table class="widefat striped" style="max-width: 720px; margin: 1rem 0;">
+			<tbody>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Legacy Work items', 'kastalabs' ); ?></th>
+					<td><?php echo esc_html( (string) $migration_status['legacy_count'] ); ?></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Already migrated', 'kastalabs' ); ?></th>
+					<td><?php echo esc_html( (string) $migration_status['migrated_count'] ); ?></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Pending migration', 'kastalabs' ); ?></th>
+					<td><?php echo esc_html( (string) count( $migration_status['pending'] ) ); ?></td>
+				</tr>
+			</tbody>
+		</table>
+		<?php if ( $migration_status['pending'] ) : ?>
+			<p><strong><?php esc_html_e( 'Pending legacy items:', 'kastalabs' ); ?></strong></p>
+			<ul style="list-style: disc; padding-left: 1.5rem;">
+				<?php foreach ( $migration_status['pending'] as $pending_item ) : ?>
+					<li>
+						<?php echo esc_html( $pending_item['title'] ); ?>
+						<code><?php echo esc_html( $pending_item['slug'] ); ?></code>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php else : ?>
+			<p><?php esc_html_e( 'No pending legacy Work items were detected.', 'kastalabs' ); ?></p>
+		<?php endif; ?>
 		<form method="post">
 			<?php wp_nonce_field( 'kastalabs_migrate_work' ); ?>
 			<?php submit_button( __( 'Migrate Work to Portfolio', 'kastalabs' ), 'primary', 'kastalabs_migrate_work' ); ?>
@@ -117,6 +147,65 @@ function kastalabs_render_migration_page(): void {
 }
 
 /**
+ * Return legacy Work migration status for admin review.
+ *
+ * @return array{legacy_count:int,migrated_count:int,pending:array<int,array{ID:int,title:string,slug:string}>}
+ */
+function kastalabs_get_work_migration_status(): array {
+	$legacy_posts = get_posts(
+		array(
+			'post_type'      => 'work',
+			'post_status'    => 'any',
+			'posts_per_page' => -1,
+		)
+	);
+
+	$pending        = array();
+	$migrated_count = 0;
+
+	foreach ( $legacy_posts as $legacy ) {
+		if ( ! $legacy instanceof WP_Post ) {
+			continue;
+		}
+
+		if ( kastalabs_get_migrated_portfolio_id( (int) $legacy->ID ) ) {
+			$migrated_count++;
+			continue;
+		}
+
+		$pending[] = array(
+			'ID'    => (int) $legacy->ID,
+			'title' => get_the_title( $legacy ),
+			'slug'  => (string) $legacy->post_name,
+		);
+	}
+
+	return array(
+		'legacy_count'    => count( $legacy_posts ),
+		'migrated_count'  => $migrated_count,
+		'pending'         => $pending,
+	);
+}
+
+/**
+ * Return the Portfolio ID that was created from a legacy Work item.
+ */
+function kastalabs_get_migrated_portfolio_id( int $legacy_id ): int {
+	$existing = get_posts(
+		array(
+			'post_type'      => 'portfolio',
+			'post_status'    => 'any',
+			'posts_per_page' => 1,
+			'meta_key'       => '_kastalabs_legacy_work_id',
+			'meta_value'     => (string) $legacy_id,
+			'fields'         => 'ids',
+		)
+	);
+
+	return $existing ? (int) $existing[0] : 0;
+}
+
+/**
  * Copy legacy work posts into portfolio posts.
  */
 function kastalabs_migrate_work_to_portfolio(): int {
@@ -131,18 +220,7 @@ function kastalabs_migrate_work_to_portfolio(): int {
 
 	$count = 0;
 	foreach ( $legacy_posts as $legacy_id ) {
-		$existing = get_posts(
-			array(
-				'post_type'      => 'portfolio',
-				'post_status'    => 'any',
-				'posts_per_page' => 1,
-				'meta_key'       => '_kastalabs_legacy_work_id',
-				'meta_value'     => (string) $legacy_id,
-				'fields'         => 'ids',
-			)
-		);
-
-		if ( $existing ) {
+		if ( kastalabs_get_migrated_portfolio_id( (int) $legacy_id ) ) {
 			continue;
 		}
 
@@ -182,6 +260,11 @@ function kastalabs_migrate_work_to_portfolio(): int {
 			foreach ( $values as $value ) {
 				add_post_meta( $new_id, $meta_key, maybe_unserialize( $value ) );
 			}
+		}
+
+		$legacy_featured = get_post_meta( $legacy_id, '_kasta_is_featured', true );
+		if ( '' !== (string) $legacy_featured ) {
+			update_post_meta( $new_id, 'is_featured', (bool) $legacy_featured );
 		}
 
 		$category_names = wp_get_object_terms( $legacy_id, 'work_category', array( 'fields' => 'names' ) );
