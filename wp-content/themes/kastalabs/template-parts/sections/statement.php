@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<section class="py-28 md:py-36 bg-surface" data-statement>
+<section class="py-24 md:py-32 bg-surface" data-statement>
 	<div class="container-x">
 		<div class="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
 			<?php
@@ -16,8 +16,9 @@ defined( 'ABSPATH' ) || exit;
 				'template-parts/ui/heading',
 				null,
 				array(
-					'eyebrow'    => __( 'Yang kami percaya', 'kastalabs' ),
-					'title'      => __( 'Kami memilih kerja yang dekat, teliti, dan cukup berani untuk meninggalkan kesan.', 'kastalabs' ),
+					'eyebrow'    => kasta_site_option( 'statement_eyebrow', __( 'Yang kami percaya', 'kastalabs' ) ),
+					'title'      => kasta_site_option( 'statement_heading', __( 'Kami memilih kerja yang dekat, teliti, dan cukup berani untuk meninggalkan kesan.', 'kastalabs' ) ),
+					'body'       => kasta_site_option( 'statement_body', __( 'Desain yang baik bukan soal mengikuti tren. Ia lahir dari pemahaman masalah, keputusan yang strategis, dan eksekusi yang rapi.', 'kastalabs' ) ),
 					'class'      => 'zoom-section-heading',
 				)
 			);

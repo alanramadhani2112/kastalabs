@@ -47,7 +47,7 @@ $img_border = $args['image_border'] ? 'border border-[rgb(11_92_255_/_0.12)]' : 
 $img_radius = $args['image_radius'] ? 'rounded-[--img-radius]' : '';
 ?>
 
-<section class="py-28 md:py-36 <?php echo esc_attr( $args['bg'] ); ?>" data-feature-split>
+<section class="py-24 md:py-32 <?php echo esc_attr( $args['bg'] ); ?>" data-feature-split>
 	<div class="container-x">
 		<div class="grid gap-12 lg:gap-16 items-center <?php echo esc_attr( $grid_class ); ?>">
 			<?php if ( $args['reverse'] ) : ?>

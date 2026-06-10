@@ -41,14 +41,14 @@ if ( ! $portfolio_query->have_posts() ) {
 }
 
 $placeholders = array(
-	array( 'title' => 'Project Alpha', 'cat' => 'Branding' ),
-	array( 'title' => 'Project Beta', 'cat' => 'Web Development' ),
-	array( 'title' => 'Project Gamma', 'cat' => 'UI/UX Design' ),
-	array( 'title' => 'Project Delta', 'cat' => 'Custom Software' ),
+	array( 'title' => __( 'Brand Identity System', 'kastalabs' ), 'cat' => __( 'Branding', 'kastalabs' ) ),
+	array( 'title' => __( 'E-Commerce Platform', 'kastalabs' ), 'cat' => __( 'Web Development', 'kastalabs' ) ),
+	array( 'title' => __( 'SaaS Dashboard', 'kastalabs' ), 'cat' => __( 'UI/UX Design', 'kastalabs' ) ),
+	array( 'title' => __( 'Mobile App Design', 'kastalabs' ), 'cat' => __( 'Custom Software', 'kastalabs' ) ),
 );
 ?>
 
-<section class="py-28 md:py-36 bg-bg" data-work-grid>
+<section class="py-24 md:py-32 bg-bg" data-work-grid>
 	<div class="container-x">
 		<?php
 		get_template_part(

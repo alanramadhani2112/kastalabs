@@ -25,6 +25,30 @@ $args = wp_parse_args(
 );
 
 if ( empty( $args['logos'] ) ) {
+	// Fallback: text-based capability strip saat logo klien belum tersedia.
+	$capabilities = array(
+		__( 'Brand Strategy', 'kastalabs' ),
+		__( 'Visual Design', 'kastalabs' ),
+		__( 'Web Systems', 'kastalabs' ),
+		__( 'Digital Products', 'kastalabs' ),
+	);
+	?>
+	<section class="py-12 md:py-16 bg-surface border-y border-[rgb(0_12_26_/_0.06)]" data-client-logos>
+		<div class="container-x">
+			<?php if ( $args['eyebrow'] ) : ?>
+				<p class="type-label text-center mb-8"><?php echo esc_html( $args['eyebrow'] ); ?></p>
+			<?php endif; ?>
+			<div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 opacity-60">
+				<?php foreach ( $capabilities as $index => $cap ) : ?>
+					<span class="type-label whitespace-nowrap"><?php echo esc_html( $cap ); ?></span>
+					<?php if ( $index < count( $capabilities ) - 1 ) : ?>
+						<span class="inline-block h-1.5 w-1.5 rounded-full bg-primary-500" aria-hidden="true"></span>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+	<?php
 	return;
 }
 ?>

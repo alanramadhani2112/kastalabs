@@ -16,20 +16,28 @@ get_header(); ?>
 		<article data-reading-article>
 			<header class="zoom-page-hero py-28 md:py-36">
 				<div class="container-x">
-				<?php get_template_part( 'template-parts/ui/breadcrumb' ); ?>
-				<div class="zoom-page-hero__content max-w-4xl mt-10">
-					<p class="eyebrow">
-						<?php echo esc_html( get_the_date() ); ?> / <?php echo esc_html( kasta_reading_time() ); ?> <?php esc_html_e( 'menit baca', 'kastalabs' ); ?>
-					</p>
-					<h1 class="type-display-lg mt-6">
-						<?php the_title(); ?>
-					</h1>
-					<?php if ( has_excerpt() ) : ?>
-						<p class="type-body-lg measure-copy text-muted mt-8">
-							<?php echo esc_html( get_the_excerpt() ); ?>
+					<?php get_template_part( 'template-parts/ui/breadcrumb' ); ?>
+					<div class="zoom-page-hero__content max-w-4xl mt-10">
+						<p class="eyebrow">
+							<?php echo esc_html( get_the_date() ); ?>
+							<span aria-hidden="true"> · </span>
+							<?php
+							printf(
+								/* translators: %d = reading time in minutes */
+								esc_html__( '%d menit baca', 'kastalabs' ),
+								kasta_reading_time()
+							);
+							?>
 						</p>
-					<?php endif; ?>
-				</div>
+						<h1 class="type-display-lg mt-6">
+							<?php the_title(); ?>
+						</h1>
+						<?php if ( has_excerpt() ) : ?>
+							<p class="type-body-lg measure-copy text-muted mt-8">
+								<?php echo esc_html( get_the_excerpt() ); ?>
+							</p>
+						<?php endif; ?>
+					</div>
 				</div>
 			</header>
 
@@ -53,8 +61,8 @@ get_header(); ?>
 			<section class="container-x py-16 md:py-24">
 				<div class="grid gap-12 lg:grid-cols-[16rem_minmax(0,44rem)]">
 					<aside class="lg:sticky lg:top-28 self-start">
-						<a class="eyebrow inline-flex hover:text-primary-600" href="<?php echo esc_url( get_post_type_archive_link( 'insight' ) ); ?>">
-							<?php esc_html_e( 'Kembali ke insights', 'kastalabs' ); ?>
+						<a class="eyebrow inline-flex hover:text-primary-600 transition-colors" href="<?php echo esc_url( get_post_type_archive_link( 'insight' ) ); ?>">
+							&larr; <?php esc_html_e( 'Kembali ke insights', 'kastalabs' ); ?>
 						</a>
 
 						<div class="mt-10 space-y-6">
@@ -78,7 +86,7 @@ get_header(); ?>
 						</div>
 					</aside>
 
-					<div class="prose">
+					<div class="prose" data-reveal>
 						<?php the_content(); ?>
 					</div>
 				</div>
@@ -97,6 +105,7 @@ get_header(); ?>
 				</div>
 			</section>
 
+			<?php /* ---------- Related insights ---------- */ ?>
 			<?php
 			$related = new WP_Query(
 				array(
@@ -109,7 +118,7 @@ get_header(); ?>
 			);
 			if ( $related->have_posts() ) :
 				?>
-				<section class="container-x py-12 md:py-20">
+				<section class="container-x pb-24 md:pb-32">
 					<h2 class="type-h3 text-center"><?php esc_html_e( 'Insight lainnya', 'kastalabs' ); ?></h2>
 					<div class="mt-10 grid gap-6 md:grid-cols-3">
 						<?php
@@ -122,6 +131,30 @@ get_header(); ?>
 					</div>
 				</section>
 			<?php endif; ?>
+
+			<?php /* ---------- CTA ---------- */ ?>
+			<section class="container-x pb-24 md:pb-32">
+				<div class="zoom-card zoom-card--solid p-10 md:p-14 text-center" data-reveal>
+					<h2 class="type-h2"><?php esc_html_e( 'Punya project yang ingin dibahas?', 'kastalabs' ); ?></h2>
+					<p class="type-body mt-4 max-w-lg mx-auto">
+						<?php esc_html_e( 'Ceritakan konteksnya. Kami bantu baca kebutuhan dan arahkan langkah pertama yang masuk akal.', 'kastalabs' ); ?>
+					</p>
+					<div class="mt-8">
+						<?php
+						get_template_part(
+							'template-parts/ui/button',
+							null,
+							array(
+								'label'    => __( 'Mulai percakapan', 'kastalabs' ),
+								'url'      => home_url( '/contact/' ),
+								'variant'  => 'primary',
+								'magnetic' => true,
+							)
+						);
+						?>
+					</div>
+				</div>
+			</section>
 		</article>
 	<?php endwhile; ?>
 </main>

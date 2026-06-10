@@ -19,7 +19,9 @@ function kastalabs_register_structured_meta(): void {
 		'project_url'    => 'url',
 		'role'           => 'string',
 		'scope'          => 'string',
+		'context'        => 'textarea',
 		'challenge'      => 'textarea',
+		'approach'       => 'textarea',
 		'solution'       => 'textarea',
 		'results'        => 'textarea',
 		'technologies'   => 'string',
@@ -34,6 +36,7 @@ function kastalabs_register_structured_meta(): void {
 		'service',
 		array(
 			'overview'        => 'textarea',
+			'inclusions'      => 'textarea',
 			'benefits'        => 'textarea',
 			'workflow'        => 'textarea',
 			'expected_impact' => 'textarea',

@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<section class="py-28 md:py-36 bg-bg" data-about-teaser>
+<section class="py-24 md:py-32 bg-bg" data-about-teaser>
 	<div class="container-x">
 		<div class="zoom-card zoom-card--soft grid gap-12 p-8 md:grid-cols-12 md:items-center md:p-12">
 			<div class="md:col-span-7">
@@ -17,8 +17,8 @@ defined( 'ABSPATH' ) || exit;
 					'template-parts/ui/heading',
 					null,
 					array(
-						'eyebrow' => __( 'Siapa kami', 'kastalabs' ),
-						'title'   => __( 'Studio kecil yang bekerja seperti tim besar — fokus, disiplin, dan tidak berisik.', 'kastalabs' ),
+						'eyebrow' => kasta_site_option( 'about_teaser_eyebrow', __( 'Siapa kami', 'kastalabs' ) ),
+						'title'   => kasta_site_option( 'about_teaser_heading', __( 'Studio kecil yang bekerja seperti tim besar — fokus, disiplin, dan tidak berisik.', 'kastalabs' ) ),
 						'class'   => '',
 					)
 				);
@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) || exit;
 					null,
 					array(
 						'label'    => __( 'Kenali kami lebih dekat', 'kastalabs' ),
-						'url'      => home_url( '/about' ),
+						'url'      => home_url( '/about/' ),
 						'variant'  => 'ghost',
 						'class'    => 'mt-8',
 						'magnetic' => true,

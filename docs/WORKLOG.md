@@ -4,6 +4,60 @@ Purpose:
 - Record each meaningful development cycle.
 - Keep implementation, verification, and documentation traceable.
 
+## 2026-06-11 — Frontend Polish & M3 Motion
+
+Scope:
+- Homepage: wire semua section ke site options, client-logos fallback trust strip, testimonials enabled, spacing normalized
+- About: posture copy update matching FRONTEND-PLANNING
+- Services page: inclusion lists, guidance section, process summary
+- Portfolio single: structured case study (Konteks → Tantangan → Pendekatan → Solusi → Hasil) with sidebar navigation
+- Portfolio meta: added `context`, `approach` fields; service `inclusions` field
+- ACF: synced field groups with new meta keys
+- Insights: archive stagger reveal + empty state CTA, single reading time fix + CTA
+- Blog index: hero layout + empty state CTA
+- Contact: copy polish matching FRONTEND-PLANNING
+- 404: search form + alt nav + improved layout
+- M3 Motion: GSAP code-split (dynamic import per page), hero word reveal, cover parallax, View Transitions API crossfade, reduced-motion safe
+- M4 Perf: font preload with hash-aware Vite manifest scanning, theme-color meta, `size-adjust` on @font-face
+- Seed data: Service inclusions, Portfolio context/approach, Indonesian CTA labels
+- All spacing normalized: py-24 md:py-32 for sections, py-20 md:py-28 for CTA
+
+Files (30+ changed):
+- `wp-content/themes/kastalabs/front-page.php` — testimonials section call
+- `wp-content/themes/kastalabs/header.php` — font preload, theme-color, apple-touch-icon
+- `wp-content/themes/kastalabs/page-about.php` — posture copy
+- `wp-content/themes/kastalabs/page-services.php` — inclusions + guidance
+- `wp-content/themes/kastalabs/page-contact.php` — copy polish
+- `wp-content/themes/kastalabs/single-portfolio.php` — case study structure
+- `wp-content/themes/kastalabs/single-service.php` — sidebar inclusions
+- `wp-content/themes/kastalabs/single-insight.php` — CTA + reading time
+- `wp-content/themes/kastalabs/archive-insight.php` — empty state CTA
+- `wp-content/themes/kastalabs/home.php` — blog index layout
+- `wp-content/themes/kastalabs/404.php` — search + alt nav
+- `wp-content/themes/kastalabs/src/js/app.js` — code-split architecture
+- `wp-content/themes/kastalabs/src/js/pages/home.js` — hero word reveal
+- `wp-content/themes/kastalabs/src/js/pages/portfolio-single.js` — cover parallax + section stagger
+- `wp-content/themes/kastalabs/src/js/components/page-transition.js` — View Transitions API
+- `wp-content/themes/kastalabs/src/css/app.css` — font size-adjust, view-transition CSS, trust-strip, testimonial-card
+- `wp-content/themes/kastalabs/template-parts/sections/*` — 10 section files updated
+- `wp-content/themes/kastalabs/template-parts/cards/testimonial-card.php`
+- `wp-content/plugins/kastalabs-core/includes/meta.php` — context, approach, inclusions
+- `wp-content/plugins/kastalabs-core/acf/field-groups.php` — field sync
+- `wp-content/plugins/kastalabs-core/admin/seed.php` — inclusions + context/approach
+
+Verification:
+- PHP lint: tidak bisa dijalankan otomatis — perlu `php -l` manual untuk semua file PHP yang berubah
+- Build: perlu `npm run build` dari `wp-content/themes/kastalabs/`
+- Route smoke test: `/`, `/about/`, `/services/`, `/portfolio/`, `/portfolio/{slug}/`, `/insights/`, `/insights/{slug}/`, `/contact/`, `/404`, `/blog/`
+- Lighthouse target: ≥90 desktop, ≥85 mobile
+- axe-core: zero serious/critical violations
+- Mobile 390px: semua section tidak overflow
+
+Status:
+- Completed in this cycle.
+
+---
+
 ## 2026-06-07 - Legacy Work Redirect Control
 
 Scope:

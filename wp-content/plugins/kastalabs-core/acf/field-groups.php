@@ -27,7 +27,9 @@ function kastalabs_register_acf_field_groups(): void {
 				kastalabs_acf_url_field( 'project_url', __( 'Project URL', 'kastalabs' ) ),
 				kastalabs_acf_text_field( 'role', __( 'Role', 'kastalabs' ) ),
 				kastalabs_acf_textarea_field( 'scope', __( 'Scope', 'kastalabs' ) ),
+				kastalabs_acf_textarea_field( 'context', __( 'Context', 'kastalabs' ) ),
 				kastalabs_acf_textarea_field( 'challenge', __( 'Challenge', 'kastalabs' ) ),
+				kastalabs_acf_textarea_field( 'approach', __( 'Approach', 'kastalabs' ) ),
 				kastalabs_acf_textarea_field( 'solution', __( 'Solution', 'kastalabs' ) ),
 				kastalabs_acf_textarea_field( 'results', __( 'Results', 'kastalabs' ) ),
 				kastalabs_acf_text_field( 'technologies', __( 'Technologies', 'kastalabs' ) ),
@@ -59,6 +61,7 @@ function kastalabs_register_acf_field_groups(): void {
 			'title'    => __( 'Service Details', 'kastalabs' ),
 			'fields'   => array(
 				kastalabs_acf_textarea_field( 'overview', __( 'Overview', 'kastalabs' ) ),
+				kastalabs_acf_textarea_field( 'inclusions', __( 'Inclusions (one per line)', 'kastalabs' ) ),
 				kastalabs_acf_textarea_field( 'benefits', __( 'Benefits', 'kastalabs' ) ),
 				kastalabs_acf_textarea_field( 'workflow', __( 'Workflow', 'kastalabs' ) ),
 				kastalabs_acf_textarea_field( 'expected_impact', __( 'Expected Impact', 'kastalabs' ) ),

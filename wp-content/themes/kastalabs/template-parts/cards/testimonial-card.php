@@ -21,13 +21,14 @@ defined( 'ABSPATH' ) || exit;
 $args = wp_parse_args(
 	$args ?? array(),
 	array(
-		'quote'       => '',
-		'name'        => '',
-		'role'        => '',
-		'avatar_url'  => '',
-		'variant'     => 'default',
-		'class'       => '',
-		'data_reveal' => false,
+		'quote'        => '',
+		'name'         => '',
+		'role'         => '',
+		'avatar_url'   => '',
+		'variant'      => 'default',
+		'class'        => '',
+		'data_reveal'  => false,
+		'reveal_delay' => '0',
 	)
 );
 
@@ -39,10 +40,16 @@ if ( $args['class'] ) {
 	$class .= ' ' . $args['class'];
 }
 
-$reveal = $args['data_reveal'] ? ' data-reveal' : '';
+$reveal_attrs = '';
+if ( $args['data_reveal'] ) {
+	$reveal_attrs = ' data-reveal';
+	if ( $args['reveal_delay'] && '0' !== $args['reveal_delay'] ) {
+		$reveal_attrs .= ' data-reveal-delay="' . esc_attr( $args['reveal_delay'] ) . '"';
+	}
+}
 ?>
-<blockquote class="<?php echo esc_attr( trim( $class ) ); ?>"<?php echo $reveal; // phpcs:ignore ?>>
-	<div class="flex items-start gap-2 mb-4 text-primary-300" aria-hidden="true">
+<blockquote class="<?php echo esc_attr( trim( $class ) ); ?>"<?php echo $reveal_attrs; // phpcs:ignore ?>>
+	<div class="flex items-start gap-2 mb-4 text-primary/20" aria-hidden="true">
 		<svg class="h-6 w-6 flex-none" fill="currentColor" viewBox="0 0 24 24"><path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C9.591 11.69 11 13.264 11 15c0 1.933-1.567 3.5-3.5 3.5-1.301 0-2.398-.709-2.917-1.679ZM14.583 17.321C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C19.591 11.69 21 13.264 21 15c0 1.933-1.567 3.5-3.5 3.5-1.301 0-2.398-.709-2.917-1.679Z"/></svg>
 	</div>
 

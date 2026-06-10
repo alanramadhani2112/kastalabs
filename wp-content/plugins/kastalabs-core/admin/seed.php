@@ -32,6 +32,7 @@ function kastalabs_seed_default_services(): int {
 			'benefits'        => 'Brand terasa lebih profesional, mudah dikenali, dan memiliki sistem visual yang siap digunakan lintas media.',
 			'workflow'        => 'Discovery, brand direction, visual identity exploration, design system, dan final brand assets.',
 			'expected_impact' => 'Komunikasi brand menjadi lebih jelas, konsisten, dan mudah dikembangkan.',
+			'inclusions'      => "Logo & identity system\nBrand guidelines\nVisual language\nCollateral design",
 		),
 		array(
 			'title'           => 'UI/UX Design',
@@ -40,6 +41,7 @@ function kastalabs_seed_default_services(): int {
 			'benefits'        => 'Pengguna lebih mudah memahami alur, menemukan informasi, dan mengambil tindakan penting.',
 			'workflow'        => 'Research, information architecture, wireframe, interface design, prototype, dan design handoff.',
 			'expected_impact' => 'Produk digital terasa lebih nyaman digunakan dan lebih siap untuk dikembangkan.',
+			'inclusions'      => "User flow\nWireframe\nPrototype\nDesign system\nInteraction design",
 		),
 		array(
 			'title'           => 'Web Development',
@@ -48,6 +50,7 @@ function kastalabs_seed_default_services(): int {
 			'benefits'        => 'Website menjadi lebih kredibel, performatif, dan mudah diperbarui oleh tim internal.',
 			'workflow'        => 'Technical planning, frontend development, CMS integration, QA, optimization, dan launch support.',
 			'expected_impact' => 'Website dapat menjadi kanal utama untuk membangun kepercayaan dan menghasilkan konversi.',
+			'inclusions'      => "Custom WordPress\nCompany profile\nLanding page\nCMS setup\nPerformance basics",
 		),
 		array(
 			'title'           => 'Custom Software Development',
@@ -56,6 +59,7 @@ function kastalabs_seed_default_services(): int {
 			'benefits'        => 'Operasional lebih rapi, data lebih mudah dikelola, dan proses manual dapat dikurangi.',
 			'workflow'        => 'Requirement mapping, system architecture, development, testing, deployment, dan iteration.',
 			'expected_impact' => 'Bisnis memiliki sistem yang lebih sesuai dengan proses internal dan target pertumbuhan.',
+			'inclusions'      => "Web apps\nInternal tools\nAPI integration\nAutomation",
 		),
 	);
 
@@ -83,7 +87,8 @@ function kastalabs_seed_default_services(): int {
 		update_post_meta( $post_id, 'benefits', $service['benefits'] );
 		update_post_meta( $post_id, 'workflow', $service['workflow'] );
 		update_post_meta( $post_id, 'expected_impact', $service['expected_impact'] );
-		update_post_meta( $post_id, 'cta_label', 'Discuss this service' );
+		update_post_meta( $post_id, 'inclusions', $service['inclusions'] ?? '' );
+		update_post_meta( $post_id, 'cta_label', __( 'Ceritakan proyek Anda', 'kastalabs' ) );
 		update_post_meta( $post_id, 'cta_url', $contact_url );
 		update_post_meta( $post_id, 'icon_label', sprintf( '%02d', $index + 1 ) );
 
@@ -108,7 +113,9 @@ function kastalabs_seed_default_portfolio(): int {
 			'category'     => 'Brand Identity',
 			'tags'         => array( 'Strategy', 'Visual System', 'Guidelines' ),
 			'excerpt'      => 'Sistem identitas visual untuk memperjelas karakter brand, arah komunikasi, dan konsistensi aset digital.',
+			'context'      => 'Kastalabs sebagai studio baru membutuhkan sistem identitas yang bisa langsung dipakai di website, proposal, dan media sosial tanpa harus merancang ulang setiap kali.',
 			'challenge'    => 'Brand membutuhkan bahasa visual yang lebih jelas agar dapat digunakan lintas website, presentasi, dan komunikasi sosial tanpa kehilangan karakter.',
+			'approach'     => 'Kami memulai dari positioning dan audiens, lalu membangun prinsip visual, palet warna, sistem tipografi, dan komponen grafis yang bisa diterapkan konsisten.',
 			'solution'     => 'Kastalabs menyusun direction, prinsip visual, sistem warna, tipografi, komponen grafis, dan aturan penggunaan yang mudah diterapkan tim.',
 			'results'      => 'Brand memiliki fondasi visual yang lebih konsisten, mudah dikembangkan, dan siap dipakai untuk kebutuhan digital maupun komunikasi bisnis.',
 			'technologies' => 'Brand system, design direction, documentation',
@@ -123,7 +130,9 @@ function kastalabs_seed_default_portfolio(): int {
 			'category'     => 'Web Development',
 			'tags'         => array( 'WordPress', 'Landing Page', 'CMS' ),
 			'excerpt'      => 'Landing page berbasis WordPress untuk membantu founder menjelaskan layanan, kredibilitas, dan alur inquiry dengan lebih ringkas.',
+			'context'      => 'Growth Studio sedang tumbuh dan membutuhkan website yang mudah diperbarui sendiri oleh tim marketing tanpa bantuan developer.',
 			'challenge'    => 'Website lama terlalu generik dan sulit dikelola, sehingga tim marketing tidak punya ruang yang cukup untuk menyesuaikan pesan.',
+			'approach'     => 'Kami merancang struktur halaman modular, menyiapkan komponen konten yang bisa di-edit sendiri, dan menghubungkan CTA ke alur inquiry.',
 			'solution'     => 'Kami membangun struktur halaman yang lebih fokus, komponen konten yang editable, dan CTA yang tersambung ke alur inquiry.',
 			'results'      => 'Konten utama lebih mudah diperbarui dan pengunjung dapat memahami penawaran, bukti kerja, serta langkah kontak dengan lebih cepat.',
 			'technologies' => 'WordPress, Tailwind CSS, Vite',
@@ -138,7 +147,9 @@ function kastalabs_seed_default_portfolio(): int {
 			'category'     => 'UI/UX Design',
 			'tags'         => array( 'Dashboard', 'Product Design', 'Design System' ),
 			'excerpt'      => 'Perancangan dashboard operasional yang membantu tim membaca status, prioritas, dan tindakan penting secara cepat.',
+			'context'      => 'Tim operasional perusahaan teknologi membutuhkan antarmuka yang menyatukan berbagai metrik ke dalam satu tampilan yang mudah dipindai.',
 			'challenge'    => 'Data operasional tersebar di banyak tampilan dan membuat tim sulit menentukan prioritas harian.',
+			'approach'     => 'Kami melakukan riset alur kerja tim, menyusun ulang hierarki informasi, dan merancang pola scanning berbasis prioritas.',
 			'solution'     => 'Kami menyusun ulang hierarki informasi, merancang pola scanning, dan membangun komponen interface yang konsisten.',
 			'results'      => 'Alur pemantauan menjadi lebih ringkas, status penting lebih mudah ditemukan, dan interface siap diterjemahkan ke development.',
 			'technologies' => 'UX research, interface design, component system',
@@ -153,7 +164,9 @@ function kastalabs_seed_default_portfolio(): int {
 			'category'     => 'Content System',
 			'tags'         => array( 'Content Model', 'Editorial', 'Workflow' ),
 			'excerpt'      => 'Sistem konten untuk membantu tim menyusun halaman, insight, dan aset komunikasi tanpa bergantung pada developer setiap saat.',
+			'context'      => 'Tim marketing memiliki volume materi komunikasi yang tinggi tetapi tidak punya model konten yang memungkinkan mereka bergerak cepat.',
 			'challenge'    => 'Tim memiliki banyak materi komunikasi, tetapi belum memiliki model konten dan workflow editorial yang terstruktur.',
+			'approach'     => 'Kami memetakan jenis konten, merancang field CMS yang sesuai, dan menyusun workflow editorial dari draft hingga publikasi.',
 			'solution'     => 'Kami membuat struktur konten, field CMS, pola review, dan template komunikasi yang bisa dipakai berulang.',
 			'results'      => 'Tim dapat mengelola konten lebih mandiri, menjaga konsistensi pesan, dan mempercepat publikasi materi baru.',
 			'technologies' => 'CMS strategy, content modeling, editorial workflow',
@@ -188,7 +201,9 @@ function kastalabs_seed_default_portfolio(): int {
 		update_post_meta( $post_id, 'project_year', $project['year'] );
 		update_post_meta( $post_id, 'role', $project['role'] );
 		update_post_meta( $post_id, 'scope', $project['scope'] );
+		update_post_meta( $post_id, 'context', $project['context'] );
 		update_post_meta( $post_id, 'challenge', $project['challenge'] );
+		update_post_meta( $post_id, 'approach', $project['approach'] );
 		update_post_meta( $post_id, 'solution', $project['solution'] );
 		update_post_meta( $post_id, 'results', $project['results'] );
 		update_post_meta( $post_id, 'technologies', $project['technologies'] );
@@ -287,13 +302,18 @@ function kastalabs_seed_default_insights(): int {
  */
 function kastalabs_build_portfolio_content( array $project ): string {
 	$sections = array(
-		'Challenge' => $project['challenge'],
-		'Solution'  => $project['solution'],
-		'Results'   => $project['results'],
+		'Konteks'     => $project['context'] ?? '',
+		'Tantangan'   => $project['challenge'],
+		'Pendekatan'  => $project['approach'] ?? '',
+		'Solusi'      => $project['solution'],
+		'Hasil'       => $project['results'],
 	);
 
 	$content = '';
 	foreach ( $sections as $heading => $body ) {
+		if ( '' === trim( (string) $body ) ) {
+			continue;
+		}
 		$content .= '<!-- wp:heading {"level":2} --><h2>' . esc_html( $heading ) . '</h2><!-- /wp:heading -->';
 		$content .= '<!-- wp:paragraph --><p>' . esc_html( $body ) . '</p><!-- /wp:paragraph -->';
 	}

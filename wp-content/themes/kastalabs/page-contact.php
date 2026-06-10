@@ -20,8 +20,9 @@ get_header(); ?>
 		'template-parts/hero/page-hero',
 		null,
 		array(
-			'eyebrow' => __( 'Hubungi kami', 'kastalabs' ),
+			'eyebrow' => __( 'Contact', 'kastalabs' ),
 			'heading' => __( 'Ceritakan proyek yang ingin Anda bangun.', 'kastalabs' ),
+			'body'    => __( 'Mulai dari konteks singkat. Kami akan membaca kebutuhan Anda dan membalas dengan arah awal yang jujur.', 'kastalabs' ),
 			'pills'   => array(
 				__( 'Inquiry proyek', 'kastalabs' ),
 				__( 'Siap remote', 'kastalabs' ),
@@ -36,8 +37,8 @@ get_header(); ?>
 			<?php get_template_part( 'template-parts/forms/contact-form', null, array( 'status' => $status ) ); ?>
 
 			<aside class="zoom-card zoom-card--soft p-6 lg:sticky lg:top-28 self-start" data-reveal data-reveal-delay="0.12">
-				<h2 class="eyebrow"><?php esc_html_e( 'Informasi kontak', 'kastalabs' ); ?></h2>
-				<a class="type-h4 mt-4 block hover:text-primary-600" href="<?php echo esc_url( 'mailto:' . $contact_email ); ?>"><?php echo esc_html( antispambot( $contact_email ) ); ?></a>
+				<h2 class="eyebrow"><?php esc_html_e( 'Direct line', 'kastalabs' ); ?></h2>
+				<a class="type-h4 mt-4 block hover:text-primary-600 transition-colors" href="<?php echo esc_url( 'mailto:' . $contact_email ); ?>"><?php echo esc_html( antispambot( $contact_email ) ); ?></a>
 				<?php if ( $whatsapp_url ) : ?>
 					<a class="type-button mt-3 inline-flex text-primary-600 hover:text-primary-700" href="<?php echo esc_url( $whatsapp_url ); ?>" target="_blank" rel="noopener noreferrer">
 						<?php esc_html_e( 'Chat via WhatsApp', 'kastalabs' ); ?>
@@ -45,12 +46,12 @@ get_header(); ?>
 				<?php endif; ?>
 				<div class="mt-8 space-y-3 text-muted">
 					<p class="type-body-sm">
-						<span class="block type-label text-foreground"><?php esc_html_e( 'Lokasi', 'kastalabs' ); ?></span>
+						<span class="block type-label text-fg"><?php esc_html_e( 'Lokasi', 'kastalabs' ); ?></span>
 						<?php echo esc_html( $company_location ); ?>
 					</p>
 					<p class="type-body-sm">
-						<span class="block type-label text-foreground"><?php esc_html_e( 'Respon', 'kastalabs' ); ?></span>
-						<?php esc_html_e( 'Kami membalas dalam 1–2 hari kerja.', 'kastalabs' ); ?>
+						<span class="block type-label text-fg"><?php esc_html_e( 'Respon', 'kastalabs' ); ?></span>
+						<?php esc_html_e( 'Kami biasanya membalas dalam 1–2 hari kerja. Jika kebutuhan belum jelas, tulis saja tujuan besarnya.', 'kastalabs' ); ?>
 					</p>
 				</div>
 			</aside>

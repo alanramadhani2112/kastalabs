@@ -27,7 +27,7 @@ $steps = array(
 );
 ?>
 
-<section class="py-28 md:py-36 bg-surface" data-process>
+<section class="py-24 md:py-32 bg-surface" data-process>
 	<div class="container-x">
 		<?php
 		get_template_part(

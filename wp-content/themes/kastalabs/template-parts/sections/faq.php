@@ -27,7 +27,7 @@ $faqs = array(
 );
 ?>
 
-<section class="py-28 md:py-36 bg-bg" data-faq>
+<section class="py-24 md:py-32 bg-bg" data-faq>
 	<div class="container-x">
 		<div class="mx-auto max-w-4xl">
 			<?php
@@ -50,7 +50,7 @@ $faqs = array(
 						array(
 							'question' => $faq['q'],
 							'answer'   => $faq['a'],
-							'open'     => 0 === $index,
+							'open'     => false,
 							'index'    => $index,
 						)
 					);

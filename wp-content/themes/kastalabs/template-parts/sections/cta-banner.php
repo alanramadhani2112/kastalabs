@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 $contact_email = kasta_contact_email();
 ?>
 
-<section class="py-28 md:py-36 bg-bg" data-cta-banner>
+<section class="py-20 md:py-28 bg-bg" data-cta-banner>
 	<div class="container-x">
 		<div class="zoom-card relative overflow-hidden bg-navy p-10 text-center text-white md:p-16" data-cta-panel>
 			<div class="relative z-10">

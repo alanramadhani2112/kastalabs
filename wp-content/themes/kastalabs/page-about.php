@@ -37,8 +37,8 @@ get_header(); ?>
 					<?php if ( trim( get_the_content() ) ) : ?>
 						<?php the_content(); ?>
 					<?php else : ?>
-						<p><?php esc_html_e( 'Kastalabs dibangun dengan keyakinan bahwa kerja yang baik terjadi ketika fokus dan keahlian bertemu. Kami memilih untuk tetap kecil — bukan karena tidak bisa besar, tapi karena kami percaya kedekatan dengan klien dan kendali atas kualitas lebih penting daripada skala.', 'kastalabs' ); ?></p>
-						<p><?php esc_html_e( 'Kami bekerja dengan bisnis yang serius tentang brand mereka. Yang mengerti bahwa desain bukan sekadar "dibuat cantik", tapi keputusan strategis yang memengaruhi cara pelanggan melihat, merasakan, dan mengingat mereka.', 'kastalabs' ); ?></p>
+						<p><?php esc_html_e( 'Kastalabs dibangun untuk kerja yang fokus. Kami memilih tetap ramping supaya bisa dekat dengan konteks klien, menjaga kualitas, dan bergerak tanpa birokrasi yang tidak perlu.', 'kastalabs' ); ?></p>
+						<p><?php esc_html_e( 'Kami tidak mencoba menjadi semua untuk semua orang. Setiap project kami dekati dengan perhatian penuh — dari strategi, desain, sampai eksekusi — karena hanya dengan cara itu hasil yang tajam bisa lahir.', 'kastalabs' ); ?></p>
 					<?php endif; ?>
 				</div>
 			</div>

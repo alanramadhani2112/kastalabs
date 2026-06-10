@@ -14,6 +14,7 @@
   font-display: swap;
   font-weight: 400;
   src: url("../fonts/plus-jakarta-sans-latin-400-normal.woff2") format("woff2");
+  size-adjust: 100%;
 }
 
 @font-face {
@@ -22,6 +23,7 @@
   font-display: swap;
   font-weight: 500;
   src: url("../fonts/plus-jakarta-sans-latin-500-normal.woff2") format("woff2");
+  size-adjust: 100%;
 }
 
 @font-face {
@@ -30,6 +32,7 @@
   font-display: swap;
   font-weight: 600;
   src: url("../fonts/plus-jakarta-sans-latin-600-normal.woff2") format("woff2");
+  size-adjust: 100%;
 }
 
 @font-face {
@@ -38,6 +41,7 @@
   font-display: swap;
   font-weight: 700;
   src: url("../fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2");
+  size-adjust: 100%;
 }
 
 @font-face {
@@ -46,6 +50,7 @@
   font-display: swap;
   font-weight: 800;
   src: url("../fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2");
+  size-adjust: 100%;
 }
 
 /* ============================================================================
@@ -1475,14 +1480,14 @@
   color: rgb(255 255 255 / 0.8);
 }
 .site-footer .social-link {
-  color: var(--color-muted);
+  color: rgb(255 255 255 / 0.65);
   transition: color 0.2s ease;
 }
 .site-footer .social-link:hover {
-  color: var(--color-primary);
+  color: #FFFFFF;
 }
 .site-footer .social-link:active {
-  color: var(--color-primary-700);
+  color: rgb(255 255 255 / 0.8);
 }
 
 /* Newsletter form in footer — dark variant */
@@ -1587,9 +1592,88 @@
   color: var(--color-primary-800);
 }
 
-/* ---- reduced-motion disable animations ---- */
+/* ---- Trust strip ---- */
+.trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.trust-strip__item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.trust-strip__dot {
+  display: inline-block;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 999px;
+  background: var(--color-primary-500);
+}
+
+/* ---- Testimonial card ---- */
+.testimonial-card {
+  padding: 1.5rem;
+}
+.testimonial-card__quote {
+  position: relative;
+  color: var(--color-fg);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.testimonial-card__quote::before {
+  content: "\201C";
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary-300);
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  line-height: 1;
+}
+.testimonial-card__author {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-hairline);
+}
+.testimonial-card__name {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-fg);
+}
+.testimonial-card__role {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+/* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   .marquee-track:hover .marquee-content {
     animation-play-state: running;
+  }
+}
+
+/* ---- View Transitions API ---- */
+::view-transition-old(root) {
+  animation: fade-out 0.25s ease both;
+}
+::view-transition-new(root) {
+  animation: fade-in 0.35s ease 0.08s both;
+}
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
   }
 }

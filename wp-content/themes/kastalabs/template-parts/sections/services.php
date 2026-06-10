@@ -61,7 +61,7 @@ $service_icons = array(
 );
 ?>
 
-<section class="py-28 md:py-36 bg-bg" data-services>
+<section class="py-24 md:py-32 bg-bg" data-services>
 	<div class="container-x">
 		<?php
 		get_template_part(
